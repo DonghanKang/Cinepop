@@ -20,9 +20,29 @@ public class MainController {
 		logger.info("영화목록 페이지"); 
 	}
 
-	@RequestMapping("/store/giftCard")
+	@RequestMapping("/store/index")
 	public void store() {
 		logger.info("상품 페이지");
+	}
+	
+	@RequestMapping("/store/giftCard")
+	public void giftCard() {
+		logger.info("기프트카드 페이지");
+	}
+	
+	@RequestMapping("/store/giftCardDetail")
+	public void giftCardDetail() {
+		logger.info("상품디테일 페이지");
+	}
+	
+	@RequestMapping("/store/payment")
+	public void payment() {
+		logger.info("상품결제페이지");
+	}
+	
+	@RequestMapping("/ticketing/ticketing")
+	public void ticketing() {
+		logger.info("예매 페이지");
 	}
 	/*
 	 * @RequestMapping("/movie/movieChart") public void index() {

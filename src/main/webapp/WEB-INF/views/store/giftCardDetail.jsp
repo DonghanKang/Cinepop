@@ -8,7 +8,7 @@
     <h2>뭘 좋아할지 몰라서 / <span> 온라인 전용</span></h2>
     <script>
     	function pay(){
-    		location.href='payment.jsp';
+    		location.href='payment';
     	}
     </script>
     <div class="row detail_wrap">

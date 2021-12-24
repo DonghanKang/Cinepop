@@ -6,7 +6,7 @@
 <script>
 /*각 페이지로 이동*/
 function giftcard(){ //주문내역확인
-	location.href="giftCard.jsp";
+	location.href="giftCard";
 }
 
 function editInfo(){//내정보 수정

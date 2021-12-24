@@ -4,7 +4,6 @@
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 
-<script type="text/javascript" src="../titan-master/assets/js/jquery-3.6.0.min.js"></script>
 <script>
     $(function (){
       $(".movie_area .movie li").on('click', function(){
@@ -384,9 +383,9 @@
     </div>
   </div>
 </section>
-  <script src="../titan-master/ticketing/js/popper.js"></script>
-  <script src="../titan-master/ticketing/js/bootstrap.min.js"></script>
-  <script src="../titan-master/ticketing/js/main.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/ticketing/popper.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/ticketing/bootstrap.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/ticketing/main.js"></script>
 
 
 <%@ include file="../inc/bottom.jsp"%>

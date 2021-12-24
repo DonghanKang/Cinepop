@@ -65,16 +65,16 @@
    <nav class="navbar navbar-custom navbar-fixed-top navbar-transparent" role="navigation">
         <div class="container">
           <div class="navbar-header">
-            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#custom-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="../home/home.jsp">CinePop</a>
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#custom-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="<c:url value ='/home/home'/>">CinePop</a>
           </div>
           <div class="collapse navbar-collapse" id="custom-collapse">
             <ul class="nav navbar-nav navbar-right">
               <li class="dropdown"><a href="#" data-toggle="dropdown">영화</a>
                 <ul class="dropdown-menu">
-                  <li><a href="../movie/movieChart.jsp">무비 차트</a></li>
-                  <li><a href="../movie/movieChart.jsp">평점 차트</a></li>
-                  <li><a href="../movie/movieChart.jsp">최신 순위</a></li>
-                  <li><a href="../movie/movieChart.jsp">장르별 순위</a></li>
+                  <li><a href="<c:url value='/movie/movieChart'/>">무비 차트</a></li>
+                  <li><a href="<c:url value='/movie/movieChart'/>">평점 차트</a></li>
+                  <li><a href="<c:url value='/movie/movieChart'/>">최신 순위</a></li>
+                  <li><a href="<c:url value='/movie/movieChart'/>">장르별 순위</a></li>
                 </ul>
               </li>
               <!-- <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">예매</a>
@@ -86,10 +86,10 @@
                   <li><a href="../index/index.jsp">Gradient Overlay Header</a></li>
                 </ul>
               </li> -->
-              <li><a href="../ticketing/ticketing.jsp">예매</a></li>
-              <li class="dropdown"><a href="#" data-toggle="dropdown">스토어</a>
+              <li><a href="<c:url value='/ticketing/ticketing'/>">예매</a></li>
+              <li class="dropdown"><a data-toggle="dropdown" href="<c:url value='/store/index'/>">스토어</a>
                 <ul class="dropdown-menu">
-                  <li class="dropdown"><a href="../store/index.jsp">스토어</a></li>
+                  <li class="dropdown"><a href="<c:url value='/store/index'/>">스토어</a></li>
                   <!-- <li class="dropdown"><a href="../index/index.jsp">팝콘</a></li>
                   <li class="dropdown"><a href="../index/index.jsp">콤보</a></li>
                   <li class="dropdown"><a href="../index/index.jsp">음료</a></li>
@@ -192,8 +192,8 @@
                 </ul>
               </li>
               <li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
-              <li><a href="../login/login.jsp">로그인</a></li>
-              <li><a href="../register/register.jsp">회원가입</a></li>
+              <li><a href="<c:url value='/login/login'/>">로그인</a></li>
+              <li><a href="<c:url value='/register/register'/>">회원가입</a></li>
             </ul>
           </div>
         </div>

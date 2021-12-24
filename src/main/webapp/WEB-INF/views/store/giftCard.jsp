@@ -12,7 +12,7 @@
            <div class="team-item">
              <div class="team-image"><img src="https://www.cjone.com/cjmweb/cashimg/2018/12/20181217167ba99886528" alt="뭘좋아할지몰라서" width="300" height="180"/>
                <div class="team-detail">
-					<a href="giftCardDetail.jsp" class="btn_a">상세보기</a>              
+					<a class="btn_a" href="<c:url value='/store/giftCardDetail'/>">상세보기</a>              
                </div>
              </div>
              <div class="team-descr font-alt">
@@ -25,7 +25,7 @@
            <div class="team-item">
              <div class="team-image"><img src="https://www.cjone.com/cjmweb/cashimg/2018/12/20181217167baa1322e68" alt="쇼핑은내가 결제는 니가" width="300" height="180"/>
                <div class="team-detail">
-					<a href="giftCardDetail.jsp" class="btn_a">상세보기</a>              
+					<a class="btn_a" href="<c:url value='/store/giftCardDetail'/>">상세보기</a>              
                </div>
              </div>
              <div class="team-descr font-alt">
@@ -38,7 +38,7 @@
            <div class="team-item">
              <div class="team-image"><img src="https://www.cjone.com/cjmweb/cashimg/2018/09/20180904165a22e57f458" alt="나는 항상 니편" width="300" height="180"/>
                <div class="team-detail">
-					<a href="giftCardDetail.jsp" class="btn_a">상세보기</a>              
+					<a class="btn_a" href="<c:url value='/store/giftCardDetail'/>">상세보기</a>              
                </div>
              </div>
              <div class="team-descr font-alt">

@@ -85,7 +85,7 @@
     	</div>
     </div>
     <div class="chk_wrap">
-    	<form action="">
+    	<form action="<c:url value='/store/payment'/>">
     		<label for="allchk"><input type="checkbox" name="allchk" id="allchk" class="option-input checkbox"> 주문정보/결제 대행 섯비스 약관 모두 동의</label>
 			<dl class="gray_agree">
     			<dt>
@@ -100,7 +100,7 @@
 				
 			</dl>
 			<div class="t_center btn_wrap">
-				<a href="giftCardDetail.jsp" class="btn_prv">
+				<a class="btn_prv" href="<c:url value='giftCardDetail.jsp'/>">
 				<img alt="이전화면으로 이동" src="http://www.cgv.co.kr/CDN/R2014/images/giftstore/common/btn_prev.png">
 				이전화면</a>
 				<button type="" class="d_btn">결제하기</button>
