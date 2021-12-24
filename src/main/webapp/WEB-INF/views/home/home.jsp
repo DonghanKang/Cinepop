@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="../inc/top.jsp" %>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
@@ -7,13 +8,13 @@
     <main>
       <style>
         video[poster]{height:100%;width:100%;}
-        video::before{background: url('../titan-master/assets/images/video_btn.png') no-repeat;width:150px;height:150px;background-size:100%;display: block;content: '';position: absolute;top:50%;}
+        video::before{background: url('../../../../resources/images/video_btn.png') no-repeat;width:150px;height:150px;background-size:100%;display: block;content: '';position: absolute;top:50%;}
       </style>
       <!--메인 비디오 배너 -->
       <section class="home-section home-full-height bg-dark-30" id="home" >
         <div class="video_area">
-          <video controls width="100%" poster="../titan-master/assets/images/video_poster.jpg">
-            <source src="../titan-master/assets/video/main_video.mp4" type="video/mp4">
+          <video controls width="100%" poster="${pageContext.request.contextPath}/resources/images/video_poster.jpg">
+            <source src="${pageContext.request.contextPath}/resources/video/main_video.mp4" type="video/mp4">
           </video>
           <h1></h1>
         </div>
@@ -25,7 +26,7 @@
         <section class="module" id="team">
           <div class="container">
           	<div class="btn_area">
-          		<a href="../movie/movieChart.jsp" class="more_btn">더보기</a>
+          		<a class="more_btn" href="<c:url value='/movie/movieChart'/>">더보기</a>
           	</div>
             <div class="row">
               <div class="col-sm-6 col-sm-offset-3">
@@ -248,7 +249,7 @@
         				<div class="m_product_box h480">
 	        				<div class="prd_area">
 	        					<h3>기프트카드</h3>
-	        					<a href="../store/giftCard.jsp" class="more_btn">더보기</a>
+	        					<a class="more_btn" href="<c:url value='/store/giftCard'/>" >더보기</a>
 	        				</div>
 	        				<a href="#" class="prd_list">
 	        					<div class="img_wrap">

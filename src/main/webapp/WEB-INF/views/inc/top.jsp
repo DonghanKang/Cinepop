@@ -1,25 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-   <link rel="apple-touch-icon" sizes="57x57" href="../titan-master/images/favicons/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="../titan-master/assets/images/favicons/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="../titan-master/assets/images/favicons/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="../titan-master/assets/images/favicons/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="../titan-master/assets/images/favicons/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="../titan-master/assets/images/favicons/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="../titan-master/assets/images/favicons/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="../titan-master/assets/images/favicons/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="../titan-master/assets/images/favicons/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="../titan-master/assets/images/favicons/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../titan-master/assets/images/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="../titan-master/assets/images/favicons/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../titan-master/assets/images/favicons/favicon-16x16.png">
+ 
    
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="../titan-master/assets/images/favicons/ms-icon-144x144.png">
@@ -27,43 +15,44 @@
     <!--  
     Stylesheets
     =============================================
-    
+    as
     -->
     <!-- Default stylesheets-->
-    <link href="../titan-master/assets/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/resources/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Template specific stylesheets-->
-    <link href="../titan-master/assets/lib/animate.css/animate.css" rel="stylesheet">
-    <link href="../titan-master/assets/lib/components-font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="../titan-master/assets/lib/et-line-font/et-line-font.css" rel="stylesheet">
-    <link href="../titan-master/assets/lib/flexslider/flexslider.css" rel="stylesheet">
-    <link href="../titan-master/assets/lib/owl.carousel/dist/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="../titan-master/assets/lib/owl.carousel/dist/assets/owl.theme.default.min.css" rel="stylesheet">
-    <link href="../titan-master/assets/lib/magnific-popup/dist/magnific-popup.css" rel="stylesheet">
-    <link href="../titan-master/assets/lib/simple-text-rotator/simpletextrotator.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/lib/animate.css/animate.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/lib/components-font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/lib/et-line-font/et-line-font.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/lib/flexslider/flexslider.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/lib/owl.carousel/dist/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/lib/owl.carousel/dist/assets/owl.theme.default.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/lib/magnific-popup/dist/magnific-popup.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/lib/simple-text-rotator/simpletextrotator.css" rel="stylesheet">
     <!-- Main stylesheet and color file-->
-    <link href="../titan-master/assets/css/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
     <!-- New main/sub -->
-    <link href="../titan-master/assets/css/style_hl.css" rel="stylesheet">
-    <link href="../titan-master/ticketing/css/style1.css" rel="stylesheet">
-    <link id="color-scheme" href="../titan-master/assets/css/colors/default.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/style_hl.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/resources/css/style1.css" rel="stylesheet">
+    <link id="color-scheme" href="${pageContext.request.contextPath}/resources/css/colors/default.css" rel="stylesheet">
     
     
      <!--  
     JavaScripts
     =============================================
     -->
-    <script src="../titan-master/assets/lib/jquery/dist/jquery.js"></script>
-    <script src="../titan-master/assets/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="../titan-master/assets/lib/wow/dist/wow.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/lib/jquery/dist/jquery.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/lib/wow/dist/wow.js"></script>
     <!-- <script src="../titan-master/assets/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js"></script> -->
-    <script src="../titan-master/assets/lib/isotope/dist/isotope.pkgd.js"></script>
-    <script src="../titan-master/assets/lib/imagesloaded/imagesloaded.pkgd.js"></script>
-    <script src="../titan-master/assets/lib/flexslider/jquery.flexslider.js"></script>
-    <script src="../titan-master/assets/lib/owl.carousel/dist/owl.carousel.min.js"></script>
-    <script src="../titan-master/assets/lib/magnific-popup/dist/jquery.magnific-popup.js"></script>
-    <script src="../titan-master/assets/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
-    <script src="../titan-master/assets/js/plugins.js"></script>
-    <script src="../titan-master/assets/js/main.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/lib/isotope/dist/isotope.pkgd.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/lib/imagesloaded/imagesloaded.pkgd.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/lib/flexslider/jquery.flexslider.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/lib/owl.carousel/dist/owl.carousel.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/lib/magnific-popup/dist/jquery.magnific-popup.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/plugins.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
     
     
 <title>Insert title here</title>
