@@ -53,6 +53,7 @@
     <script src="${pageContext.request.contextPath}/resources/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/plugins.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
     
     
 <title>Insert title here</title>
@@ -105,7 +106,7 @@
               </li>
               <li class="dropdown"><a href="#" data-toggle="dropdown">고객센터</a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="../index/index.jsp">자주묻는질문</a></li>
+                  <li><a href="../questions/questions">자주묻는질문</a></li>
                   <li><a href="../index/index.jsp">1:1 문의 게시판</a></li>
                 </ul>
               </li>
