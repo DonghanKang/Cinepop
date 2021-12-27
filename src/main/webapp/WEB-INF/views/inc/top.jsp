@@ -88,29 +88,29 @@
                 </ul>
               </li> -->
               <li><a href="<c:url value='/ticketing/ticketing'/>">예매</a></li>
-              <li class="dropdown"><a data-toggle="dropdown" href="<c:url value='/store/index'/>">스토어</a>
-                <ul class="dropdown-menu">
-                  <li class="dropdown"><a href="<c:url value='/store/index'/>">스토어</a></li>
-                  <!-- <li class="dropdown"><a href="../index/index.jsp">팝콘</a></li>
+              <li ><a  href="<c:url value='/store/index'/>">스토어</a>
+                <!--<ul class="dropdown-menu">
+                  <li><a href="<c:url value='/store/index'/>">스토어</a></li>
+                  <li class="dropdown"><a href="../index/index.jsp">팝콘</a></li>
                   <li class="dropdown"><a href="../index/index.jsp">콤보</a></li>
                   <li class="dropdown"><a href="../index/index.jsp">음료</a></li>
                   <li class="dropdown"><a href="../index/index.jsp">스낵</a></li>
-                  <li class="dropdown"><a href="../index/index.jsp">씨네샵</a></li> -->
-                </ul>
+                  <li class="dropdown"><a href="../index/index.jsp">씨네샵</a></li>
+                </ul>-->
               </li>
-              <li class="dropdown"><a href="#" data-toggle="dropdown">이벤트</a>
-                <ul class="dropdown-menu" role="menu">
+              <li ><a href="<c:url value='/event/event_list'/>" >이벤트</a>
+                <!-- <ul class="dropdown-menu" role="menu">
                   <li class="dropdown"><a href="../index/index.jsp">진행중인 이벤트</a></li>
                   <li class="dropdown"><a href="../index/index.jsp">종료된 이벤트</a></li>
-                </ul>
+                </ul> -->
               </li>
               <li class="dropdown"><a href="#" data-toggle="dropdown">고객센터</a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="../questions/questions">자주묻는질문</a></li>
-                  <li><a href="../index/index.jsp">1:1 문의 게시판</a></li>
+                  <li><a href="<c:url value='/qna/qna_list'/>">1:1 문의 게시판</a></li>
                 </ul>
               </li>
-              <li><a href="#">마이페이지</a></li>
+              <li><a href="<c:url value='/mypage/mypageMain'/>">마이페이지</a></li>
               
               
              <!--  <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Features</a>

@@ -19,6 +19,10 @@ public class MainController {
 	public void movie() {
 		logger.info("영화목록 페이지"); 
 	}
+	@RequestMapping("/movie/movieDetail")
+	public void movieDetail() {
+		logger.info("영화목록 페이지"); 
+	}
 
 	@RequestMapping("/store/index")
 	public void store() {
@@ -72,6 +76,26 @@ public class MainController {
    public void questions() {
       logger.info("자주묻는 질문 페이지");
    }
+  @RequestMapping("/mypage/mypageMain")
+  public void mypageMain() {
+	  logger.info("mypageMain 페이지");
+  }
+  @RequestMapping("/mypage/paymentDetail")
+  public void paymentDetail() {
+	  logger.info("paymentDetail 페이지");
+  }
+  @RequestMapping("/mypage/editInfo")
+  public void editInfo() {
+	  logger.info("editInfo 페이지");
+  }
+  @RequestMapping("/mypage/coupon")
+  public void coupon() {
+	  logger.info("coupon 페이지");
+  }
+  @RequestMapping("/mypage/withdrawal")
+  public void withdrawal() {
+	  logger.info("withdrawal 페이지");
+  }
 	/*
 	 * @RequestMapping("/movie/movieChart") public void index() {
 	 * logger.info("메인 페이지"); }

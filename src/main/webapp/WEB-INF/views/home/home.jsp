@@ -199,11 +199,14 @@
         </section>-->
         <!--//슬라이드 배너 -->
         <!-- 이벤트 공지사항 / 상품 -->
-        <section class="module pb0" id="news">
+        <section class="module" id="news">
           <div class="container">
             <div class="row">
-              <div class="col-sm-6 col-sm-offset-3">
+              <div class="col-sm-12">
                 <h2 class="module-title font-alt">EVENT</h2>
+	            <div class="btn_area mb50">
+	          		<a class="more_btn" href="<c:url value='/event/event_list'/>">더보기</a>
+	          	</div>
               </div>
             </div>
             <div class="row multi-columns-row post-columns">

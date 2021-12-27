@@ -6,11 +6,7 @@
 <section class="module">
   <div class="container">
     <h2>영화상세</h2>
-    <script>
-    	function ticketing(){
-    		location.href='../ticketing/ticketing.jsp';
-    	}
-    </script>
+   
     <div class="row detail_wrap">
     	<div class="mb-sm-20 wow fadeInUp" onclick="wow fadeInUp">
            <div class="store_detail">
@@ -20,13 +16,20 @@
              <div class="col-lg-8 sm-8 detail_info_area">
              	<div>
 	             	<h3><strong>스파이더맨-노 웨이 홈</strong></h3>
-	             	<ul class="store_product">
+	             	<ul class="store_product store_product2">
 	             		<li><strong>감독 : </strong><span> 존 왓츠 / 배우 : 톰 홀랜드 ,  젠데이아 콜먼 ,  베네딕트 컴버배치 ,  존 파브로 ,  제이콥 배덜런 ,  마리사 토메이 ,  알프리드 몰리나</span></li>
 	             		<li><strong>장르 : </strong><span>액션, 어드벤처, SF / 기본 : 12세 이상, 148분, 미국</span></li>
 	             		<li><strong>개봉 : </strong><span>2021.12.15</span></li>
 	             	</ul>
+	             	<div class="movie_info">
+		             	<h3 class="font_bold">시놉시스</h3>
+		             	<p>
+		             		영화 <스파이더맨: 노 웨이 홈>은 정체가 탄로난 스파이더맨 '피터 파커'(톰 홀랜드)가 문제를 해결하기 위해 '닥터 스트레인지'(베네딕트 컴버배치)의 도움을 받던 중 뜻하지 않게 멀티버스가 열리게 되고,
+							이를 통해 '닥터 옥토퍼스'(알프리드 몰리나) 등 각기 다른 차원의 숙적들이 나타나며 사상 최악의 위기를 맞게 되는 이야기를 그린 마블 액션 블록버스터.
+		             	</p>
+	             	</div>
 					<div class="btn_area t_center">
-						<button type="button" class="d_btn" onclick="ticketing()">예매하기</button>
+						<a class="d_btn" href="<c:url value='/ticketing/ticketing'/>">예매하기</a>
 					</div>
 				</div>
              </div>
