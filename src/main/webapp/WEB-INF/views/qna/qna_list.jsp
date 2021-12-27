@@ -2,14 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="../inc/top.jsp" %>
-<style>
-.mr10{margin-right:10px;}
 
-/*qna list css*/
-.t_style1{width:100%; text-align:center;}
-.t_style1 th{border-bottom:1px solid #ccc; padding:15px 0; border-top:2px solid #000;}
-.t_style1 td{border-bottom:1px solid #dfdfdf; padding:15px 0;}
-</style>
 <section class="module">
 	<div class="container">
 		<h2>공지사항 글목록</h2>
