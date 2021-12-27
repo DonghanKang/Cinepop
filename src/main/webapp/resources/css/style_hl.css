@@ -6,7 +6,7 @@
 .t_center{text-align:center !important;}
 .font_bold{font-weight:600;}
 .mr10{margin-right:10px;}
-
+.mt20{margin-top:20px;}
 /*select*/ 
 .select select{padding:10px 20px; border-radius: 5px; outline: none; cursor: pointer;}
 .select option:checked{background:#aac3c3;}
@@ -264,6 +264,13 @@ ul.p_tabs li.p_on{color: #000; border-bottom:4px solid #000;}
 .list_style li{}
 .list_style li::before{display: inline-block; content: ''; width:5px; height:5px; border-radius: 3px; background: #ccc; vertical-align: middle; margin-right:10px;} 
 
+/*내정보 수정*/
+.input_area {border-top:1px solid #ccc; display: flex;flex-direction: row;justify-content: flex-start;align-items: center;  padding: 15px 0;}
+.input_area:first-child{border-top:none;}
+.input_area .p_title{width:20%;}
+.input_area .p_input{width:80%;}
+.input_area .p_input2{width:100%;}
+.pwd_area p{margin:10px 0;}  
 
 /*이벤트 게시판 리스트 형식*/
 .searchbox{background:#efefef; padding:30px 15px; display:flex; justify-content: center; margin-bottom:30px; border:1px solid #DDDDDD; border-radius: 5px;}
