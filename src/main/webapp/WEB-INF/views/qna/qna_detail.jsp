@@ -2,12 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="../inc/top.jsp" %>
-<style>
-.detail_area{width:100%; }
-.detail_area .detail_head{background:#efefef; border-top:1px solid #ccc; border-bottom:1px solid #f1f1f1; display:flex; padding:20px 30px;}
-.detail_area .detail_head div:first-child{margin-right:30px;}
-.detail_area .detail_cont{padding:30px;}
-</style>
 
 <section class="module">
    <div class="container">

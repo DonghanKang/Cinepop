@@ -5,6 +5,7 @@
 .w100{width:100%;}
 .t_center{text-align:center !important;}
 .font_bold{font-weight:600;}
+.mr10{margin-right:10px;}
 
 /*select*/ 
 .select select{padding:10px 20px; border-radius: 5px; outline: none; cursor: pointer;}
@@ -238,3 +239,16 @@ ul.tabs li.current{background: #ededed;color: #222;}
 /*이벤트 게시판 리스트 형식*/
 .searchbox{background:#efefef; padding:30px 15px; display:flex; justify-content: center; margin-bottom:30px; border:1px solid #DDDDDD; border-radius: 5px;}
 .searchbox select{margin-right:5px;}
+
+
+
+/*qna list css*/
+.t_style1{width:100%; text-align:center;}
+.t_style1 th{border-bottom:1px solid #ccc; padding:15px 0; border-top:2px solid #000;}
+.t_style1 td{border-bottom:1px solid #dfdfdf; padding:15px 0;}
+
+/*qna detail*/
+.detail_area{width:100%; }
+.detail_area .detail_head{background:#efefef; border-top:1px solid #ccc; border-bottom:1px solid #f1f1f1; display:flex; padding:20px 30px;}
+.detail_area .detail_head div:first-child{margin-right:30px;}
+.detail_area .detail_cont{padding:30px;}
