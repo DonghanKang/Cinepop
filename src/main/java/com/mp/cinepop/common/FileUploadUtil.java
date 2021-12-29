@@ -25,48 +25,6 @@ public class FileUploadUtil {
 		=LoggerFactory.getLogger(FileUploadUtil.class);
 	
 	//파일 업로드 처리 원본
-//	public List<Map<String, Object>> fileUpload(HttpServletRequest request, 
-//			int pathFlag) throws IllegalStateException, IOException {
-//		
-//		MultipartHttpServletRequest multiRequest 
-//			= (MultipartHttpServletRequest) request;
-//		
-//		Map<String, MultipartFile> fileMap=multiRequest.getFileMap();
-//		//List<MultipartFile> fileList=multiRequest.getFiles("upfile");
-//	
-//		List<Map<String, Object>> list = new ArrayList<>();
-//		
-//		Iterator<String> iter=fileMap.keySet().iterator();
-//		while(iter.hasNext()) {
-//			String key=iter.next();
-//			MultipartFile tempFile =fileMap.get(key);
-//			//=> 업로드된 파일을 임시파일 형태로 제공
-//			if(!tempFile.isEmpty()) {  //업로드 한 경우
-//				Map<String, Object> map = new HashMap<>();
-//				String originName=tempFile.getOriginalFilename();
-//				long fileSize=tempFile.getSize(); //업로드한 파일 크기
-//				logger.info("업로드 파일명={}, 파일 크기={}", originName, fileSize);
-//				
-//				//변경된 파일 이름 구하기
-//				String fileName=getUniqueFileName(originName);
-//				
-//				//업로드 처리
-//				String upPath = getUploadPath(pathFlag, request);
-//				File file = new File(upPath ,fileName);
-//				tempFile.transferTo(file);
-//				
-//				//map에 파일 정보 저장
-//				map.put("originalFileName", originName);
-//				map.put("fileName", fileName);
-//				map.put("fileSize", fileSize);
-//				
-//				list.add(map);
-//			}
-//		}//while
-//		
-//		return list;
-//	}
-	
 	public List<Map<String, Object>> fileUpload(HttpServletRequest request, 
 			int pathFlag) throws IllegalStateException, IOException {
 		
@@ -85,18 +43,28 @@ public class FileUploadUtil {
 			//=> 업로드된 파일을 임시파일 형태로 제공
 			if(!tempFile.isEmpty()) {  //업로드 한 경우
 				Map<String, Object> map = new HashMap<>();
-				String fileName=tempFile.getOriginalFilename();
-				long fileSize=tempFile.getSize(); //업로드한 파일 크기
-				logger.info("업로드 파일명={}, 파일 크기={}", fileName, fileSize);
 				
+				long fileSize=tempFile.getSize(); //업로드한 파일 크기
+				
+				String originName="", fileName="";
+				if(pathFlag==ConstUtil.UPLOAD_EVENT_IMAGE_FLAG) {
+					originName=tempFile.getOriginalFilename();
+					//변경된 파일 이름 구하기
+					fileName=getUniqueFileName(originName);
+				}else {
+					fileName=tempFile.getOriginalFilename();
+				}
+				
+				logger.info("업로드 파일명={}, 파일 크기={}", fileName, fileSize);
 				//업로드 처리
 				String upPath = getUploadPath(pathFlag, request);
 				File file = new File(upPath ,fileName);
 				tempFile.transferTo(file);
 				
 				//map에 파일 정보 저장
-				map.put("pdImagename", fileName);
-				map.put("pdImagefilesize", fileSize);
+				map.put("originalFileName", originName);
+				map.put("fileName", fileName);
+				map.put("fileSize", fileSize);
 				
 				list.add(map);
 			}
@@ -116,6 +84,8 @@ public class FileUploadUtil {
 			path=constUtil.getMOVIE_IMAGE_UPLOAD_PATH();
 		}else if(pathFlag==constUtil.UPLOAD_FILE_FLAG){
 			path=constUtil.getFILE_UPLOAD_PATH();
+		}else if(pathFlag==constUtil.UPLOAD_EVENT_IMAGE_FLAG) {
+			path=constUtil.getEVENT_IMAGE_UPLOAD_PATH();
 		}
 		
 		logger.info("업로드 경로 : {}", path);
