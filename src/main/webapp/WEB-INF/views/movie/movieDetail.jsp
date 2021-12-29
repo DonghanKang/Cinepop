@@ -6,7 +6,6 @@
 <section class="module">
   <div class="container">
     <h2>영화상세</h2>
-   
     <div class="row detail_wrap">
     	<div class="mb-sm-20 wow fadeInUp" onclick="wow fadeInUp">
            <div class="store_detail">
@@ -24,12 +23,12 @@
 	             	<div class="movie_info">
 		             	<h3 class="font_bold">시놉시스</h3>
 		             	<p>
-		             		영화 <스파이더맨: 노 웨이 홈>은 정체가 탄로난 스파이더맨 '피터 파커'(톰 홀랜드)가 문제를 해결하기 위해 '닥터 스트레인지'(베네딕트 컴버배치)의 도움을 받던 중 뜻하지 않게 멀티버스가 열리게 되고,
+		             		영화 &lt;스파이더맨: 노 웨이 홈 &gt; 은 정체가 탄로난 스파이더맨 '피터 파커'(톰 홀랜드)가 문제를 해결하기 위해 '닥터 스트레인지'(베네딕트 컴버배치)의 도움을 받던 중 뜻하지 않게 멀티버스가 열리게 되고,
 							이를 통해 '닥터 옥토퍼스'(알프리드 몰리나) 등 각기 다른 차원의 숙적들이 나타나며 사상 최악의 위기를 맞게 되는 이야기를 그린 마블 액션 블록버스터.
 		             	</p>
 	             	</div>
 					<div class="btn_area t_center">
-						<a class="d_btn" href="<c:url value='/ticketing/ticketing'/>">예매하기</a>
+						<a class="a_black_btn" href="<c:url value='/ticketing/ticketing'/>">예매하기</a>
 					</div>
 				</div>
              </div>

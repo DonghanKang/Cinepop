@@ -39,8 +39,8 @@
                 <div class="team-item">
                   <div class="team-image"><img src="https://caching.lottecinema.co.kr//Media/MovieFile/MovieImg/202112/17857_101_1.jpg" alt="스파이더맨: 노 웨이 홈"/>
                     <div class="team-detail">
-						<a href="../ticketing/ticketing.jsp" class="btn_a">예매하기</a>              
-						<a href="../movie/movieDetail.jsp" class="btn_a">상세보기</a>              
+						<a href="<c:url value='/ticketing/ticketing'/>" class="btn_a">예매하기</a>              
+						<a href="<c:url value='/movie/movieDetail'/>" class="btn_a">상세보기</a>              
                     </div>
                   </div>
                   <div class="team-descr font-alt">

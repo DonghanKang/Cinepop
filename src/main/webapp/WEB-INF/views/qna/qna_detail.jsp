@@ -9,6 +9,7 @@
    		<div class="col-sm-12">
 	   		<div class="detail_area mb50">
 	   			<div class="detail_head">
+	   				<div>제목 | 제목제목제목</div>
 	   				<div>등록일 | 2021-11-21</div>
 	   				<div>조회수 | 20</div>
 	   			</div>
@@ -27,8 +28,8 @@
   					(외부 채널에서 구매한 모바일 관람권, 이벤트 등을 통해 무료 수령한 관람권 제외)<br />
 					감사합니다.<br />
 	   			</div>
-	   			<div class="btn_area t_center">
-	   				<a href="#" class="a_black_btn">목록</a>
+	   			<div class="btn_area t_center mt50">
+	   				<a href="<c:url value='/qna/qna_list'/>" class="a_black_btn">목록</a>
 	   			</div>
 	   		</div>
    		</div>
