@@ -1,5 +1,7 @@
 package com.mp.cinepop.store.model;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +15,10 @@ public class StoreServiceImpl implements StoreService {
 		this.storeDao = storeDao;
 	}
 
-
 	@Override
 	public int insertPd(StoreVO vo) {
 		return storeDao.insertPd(vo);
 	}
-
 
 	@Override
 	public int updatePd(StoreVO vo) {
@@ -28,6 +28,12 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	public StoreVO selectByPdNo(int pdNo) {
 		return storeDao.selectByPdNo(pdNo);
+	}
+
+
+	@Override
+	public List<StoreVO> selectByCategory(String pctNo) {
+		return storeDao.selectByCategory(pctNo);
 	}
 	
 }
