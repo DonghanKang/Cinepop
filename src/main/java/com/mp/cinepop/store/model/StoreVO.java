@@ -7,8 +7,8 @@ public class StoreVO {
 	private String pctNo;
 	private String pdName;
 	private int pdPrice;
-	private String pdImageURL;
 	private String pdImagename;
+	private long pdImagefilesize;
 	private String pdDescription;
 	private Timestamp pdRegdate;
 
@@ -36,12 +36,6 @@ public class StoreVO {
 	public void setPdPrice(int pdPrice) {
 		this.pdPrice = pdPrice;
 	}
-	public String getPdImageURL() {
-		return pdImageURL;
-	}
-	public void setPdImageURL(String pdImageURL) {
-		this.pdImageURL = pdImageURL;
-	}
 	public String getPdDescription() {
 		return pdDescription;
 	}
@@ -61,11 +55,16 @@ public class StoreVO {
 	public void setPdImagename(String pdImagename) {
 		this.pdImagename = pdImagename;
 	}
-	
+	public long getPdImagefilesize() {
+		return pdImagefilesize;
+	}
+	public void setPdImagefilesize(long pdImagefilesize) {
+		this.pdImagefilesize = pdImagefilesize;
+	}
 	@Override
 	public String toString() {
 		return "StoreVO [pdNo=" + pdNo + ", pctNo=" + pctNo + ", pdName=" + pdName + ", pdPrice=" + pdPrice
-				+ ", pdImageURL=" + pdImageURL + ", pdImagename=" + pdImagename + ", pdDescription=" + pdDescription
-				+ ", pdRegdate=" + pdRegdate + "]";
+				+ ", pdImagename=" + pdImagename + ", pdImagefilesize=" + pdImagefilesize + ", pdDescription="
+				+ pdDescription + ", pdRegdate=" + pdRegdate + "]";
 	}
 }

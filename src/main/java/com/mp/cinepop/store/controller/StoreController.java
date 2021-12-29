@@ -1,6 +1,10 @@
 package com.mp.cinepop.store.controller;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.mp.cinepop.common.ConstUtil;
+import com.mp.cinepop.common.FileUploadUtil;
 import com.mp.cinepop.store.model.StoreService;
 import com.mp.cinepop.store.model.StoreVO;
 
@@ -20,67 +26,95 @@ import com.mp.cinepop.store.model.StoreVO;
 @RequestMapping("/store")
 public class StoreController {
 	Logger logger=LoggerFactory.getLogger(StoreController.class);
-	
-	private StoreService storeService;
-	
+	private final StoreService storeService;
+	private final FileUploadUtil fileUploadUtil;
+
 	@Autowired
-	public StoreController(StoreService storeService) {
+	public StoreController(StoreService storeService, FileUploadUtil fileUploadUtil) {
 		super();
 		this.storeService = storeService;
+		this.fileUploadUtil = fileUploadUtil;
 	}
-	
+
 	//등록, 수정
 	@GetMapping("/pdWrite")
 	public String pdWrite_get(@RequestParam(defaultValue = "0") int pdNo, Model model) {
 		logger.info("상품등록 페이지, 파라미터 pdNo={}",pdNo);
-		
+
 		if(pdNo!=0) {
 			StoreVO storeVo=storeService.selectByPdNo(pdNo);
 			model.addAttribute("storeVo",storeVo);
 		}
-		
+
 		return "store/pdWrite";
 	}
-	
+
 	@PostMapping("/pdWrite")
-	public String pdWrite_post(@ModelAttribute StoreVO storeVo) {
+	public String pdWrite_post(@ModelAttribute StoreVO storeVo, 
+			HttpServletRequest request) {
 		logger.info("상품등록 처리, 파라미터 StoreVO={}",storeVo );
-		
+
 		if(storeVo.getPdNo()==0) {
+			//파일 업로드 처리
+			String pdImagename="";
+			long pdImagefilesize=0;
+			int pathFlag=ConstUtil.UPLOAD_STORE_IMAGE_FLAG;
+			try {
+				List<Map<String, Object>> fileList 
+				= fileUploadUtil.fileUpload(request, pathFlag);
+
+				for(int i=0;i<fileList.size();i++) {
+					Map<String, Object> map=fileList.get(i);
+
+					pdImagename=(String) map.get("fileName");
+					pdImagefilesize=(long) map.get("fileSize");				 
+				}
+
+				logger.info("파일 업로드 성공, pdImagename={}", pdImagename);
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			//2
+			storeVo.setPdImagename(pdImagename);
+			storeVo.setPdImagefilesize(pdImagefilesize);
+
 			int cnt=storeService.insertPd(storeVo);
-			logger.info("등록함");
+			logger.info("등록함 cnt={}",cnt);
 		}else {
 			int cnt=storeService.updatePd(storeVo);
-			logger.info("수정함");
+			logger.info("수정함 cnt={}",cnt);
 		}
-		
+
 		return "store/pdList";
 	}
-	
-	
+
+
 	@RequestMapping("/pdList")
 	public String pdList(@RequestParam String pctNo, Model model) {
 		logger.info("카테고리별 상품리스트 페이지 파라미터 pctNo={}",pctNo);
-		
+
 		List<StoreVO> list=storeService.selectByCategory(pctNo);
-		
+
 		logger.info("list.size()={}",list.size());
 		model.addAttribute("list",list);
-		
+
 		return "store/pdList";
 	}
-	
+
 	@RequestMapping("/pdDetail")
 	public String giftCardDetail(@RequestParam (defaultValue = "0") int pdNo, Model model) {
 		logger.info("상품디테일 페이지 파라미터 pdNo={}",pdNo);
-		
+
 		StoreVO storeVo=storeService.selectByPdNo(pdNo);
-		
+
 		logger.info("storeVo={}",storeVo);
 		model.addAttribute("storeVo",storeVo);
-		
+
 		return "store/pdDetail";
 	}
-	
-	
+
+
 }
