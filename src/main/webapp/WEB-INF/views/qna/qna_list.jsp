@@ -30,7 +30,7 @@
           		</tr>
           		<tr>
           			<td>1</td>
-          			<td>제목제목제목제목제목제목제목</td>
+          			<td><a href="<c:url value='/qna/qna_detail'/>">제목제목제목제목제목제목제목</a></td>
           			<td>2021-11-21</td>
           		</tr>
           	</table>

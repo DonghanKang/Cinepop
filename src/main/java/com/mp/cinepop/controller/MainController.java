@@ -47,14 +47,13 @@ public class MainController {
 		logger.info("예매 페이지");
 	}
 	
-	@RequestMapping("/event/event_write")
-	public void event_write() {
-		logger.info("이벤트 글쓰기");
-	}
-	@RequestMapping("/event/event_list")
-	public void event_list() {
-		logger.info("이벤트 글쓰기");
-	}
+	/*
+	 * @RequestMapping("/event/event_write") public void event_write() {
+	 * logger.info("이벤트 글쓰기"); }
+	 * 
+	 * @RequestMapping("/event/event_list") public void event_list() {
+	 * logger.info("이벤트 글쓰기"); }
+	 */
 	
 	@RequestMapping("/qna/qna_list")
 	public void qna_list() {
