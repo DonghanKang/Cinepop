@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%@include file="../inc/top.jsp" %>
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
@@ -10,29 +12,43 @@
     	function pay(){
     		location.href='payment';
     	}
+    	
+    	
+    	$(function(){
+    		$('#pdQuantity').change(function(){
+    			var valSum=$(this).val()*${storeVo.pdPrice};
+    			$('#payVal').html(valSum);
+    			$('#payTotalVal').html(valSum);
+    		});
+    	});
+    	
+		function addComma(value){
+			value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			return value; 
+		}
     </script>
     <div class="row detail_wrap">
     	<div class="mb-sm-20 wow fadeInUp" onclick="wow fadeInUp">
            <div class="store_detail">
              <div class="col-lg-6 sm-6 dtail_img">
-             	<img src="https://www.cjone.com/cjmweb/cashimg/2018/12/20181217167ba99886528" alt="뭘좋아할지몰라서"/>
+             	<img src="<c:url value='/resources/images/store/${storeVo.pdImagename }'/>" alt="뭘좋아할지몰라서"/>
              </div>
              <div class="col-lg-6 sm-6 detail_info_area">
              	<div class="detail_info">
-	             	<h3><strong>금액충전형</strong></h3>
+	             	<h3><strong>${storeVo.pdName }</strong></h3>
 	             	<ul class="store_product">
 	             		<li><strong>상품구성</strong><span>충전형 선불 카드</span></li>
-	             		<li><strong>유효기간</strong><span>구매 또는 최종 충전일로부터 5년</span></li>
+	             		<li><strong>유효기간</strong><span>구매일로부터 5년</span></li>
 	             	</ul>
 					<div class="com_custom_selectbox select">
-						<select>
-							<option>10,000원</option>
-							<option>20,000원</option>
-							<option>30,000원</option>
+						<select id="pdQuantity">
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
 						</select>
-						<span><strong>10,000원</strong></span>
+						<span id="payVal"><fmt:formatNumber value="${storeVo.pdPrice}" pattern="#,###"/><strong>원</strong></span>
 					</div>
-					<h4 class="mb20">총 구매금액 <span>10,000원</span></h4>
+					<h4 class="mb20">총 구매금액 <span><span id="payTotalVal">&nbsp;<fmt:formatNumber value="${storeVo.pdPrice}" pattern="#,###"/> </span>원</span></h4>
 					<div class="btn_area t_right">
 						<button type="button" class="d_btn" onclick="pay()">구매하기</button>
 					</div>

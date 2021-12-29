@@ -1,5 +1,7 @@
 package com.mp.cinepop.store.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +55,31 @@ public class StoreController {
 		}
 		
 		return "store/pdList";
+	}
+	
+	
+	@RequestMapping("/pdList")
+	public String pdList(@RequestParam String pctNo, Model model) {
+		logger.info("카테고리별 상품리스트 페이지 파라미터 pctNo={}",pctNo);
+		
+		List<StoreVO> list=storeService.selectByCategory(pctNo);
+		
+		logger.info("list.size()={}",list.size());
+		model.addAttribute("list",list);
+		
+		return "store/pdList";
+	}
+	
+	@RequestMapping("/pdDetail")
+	public String giftCardDetail(@RequestParam (defaultValue = "0") int pdNo, Model model) {
+		logger.info("상품디테일 페이지 파라미터 pdNo={}",pdNo);
+		
+		StoreVO storeVo=storeService.selectByPdNo(pdNo);
+		
+		logger.info("storeVo={}",storeVo);
+		model.addAttribute("storeVo",storeVo);
+		
+		return "store/pdDetail";
 	}
 	
 	

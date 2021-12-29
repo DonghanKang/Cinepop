@@ -25,6 +25,11 @@
 		select * from products
 		where PD_NO=#{pdNo}
 	</select>
+	
+	<select id="selectByCategory" parameterType="string" resultType="storeVo">
+		select * from products
+		where PCT_NO=#{pctNo}
+	</select>
 </mapper>
 
 
