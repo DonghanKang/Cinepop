@@ -93,6 +93,14 @@ public class MainController {
   public void withdrawal() {
 	  logger.info("withdrawal 페이지");
   }
+  
+  @RequestMapping("/login/login")
+  public void login() {
+	  logger.info("login 페이지");
+  }
+ 
+  
+  
 	/*
 	 * @RequestMapping("/movie/movieChart") public void index() {
 	 * logger.info("메인 페이지"); }
