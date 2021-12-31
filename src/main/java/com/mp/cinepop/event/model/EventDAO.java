@@ -12,4 +12,5 @@ public interface EventDAO {
 	public List<EventVO>selectAll(SearchVO searchVo);
 	int selectTotalRecord(SearchVO searchVo);
 	public EventVO selectByNo(int no);
+	public int updateEvent(EventVO vo);
 }

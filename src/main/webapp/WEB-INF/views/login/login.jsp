@@ -4,7 +4,7 @@
 <section class="module">
 	<div class="container">
 		<div class = "row c_center">
-			<div class="col-sm-5 frm_login">
+			<div class="col-sm-8 frm_login">
 				<h2 class="font-alt">로그인</h2>
 				<hr class="divider-w mb-10">
 				<form class="form">

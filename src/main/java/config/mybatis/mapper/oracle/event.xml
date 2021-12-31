@@ -41,4 +41,12 @@
 		select * from event
 		where no=#{no}
 	</select>
+	<update id="updateEvent" parameterType="eventVo">
+		update event
+		set title=#{title},content=#{content}
+	<if test="fileName !=null and fileName !=''">
+		,fileName=#{fileName},fileSize=#{fileSize},originalFileName=#{originalFileName}
+	</if>
+	where no=#{no}
+	</update>
 </mapper>

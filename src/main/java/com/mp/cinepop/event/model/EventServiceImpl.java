@@ -34,4 +34,11 @@ public class EventServiceImpl implements EventService {
 	public EventVO selectByNo(int no) {
 		return eventdao.selectByNo(no);
 	}
+
+	@Override
+	public int updateEvent(EventVO vo) {
+		return eventdao.updateEvent(vo);
+	}
+
+	
 }
