@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@include file="../inc/top.jsp" %>
 
 <section class="module">
@@ -9,9 +10,8 @@
    		<div class="col-sm-12">
 	   		<div class="detail_area mb50">
 	   			<div class="detail_head">
-	   				<div>제목 | 제목제목제목</div>
-	   				<div>등록일 | 2021-11-21</div>
-	   				<div>조회수 | 20</div>
+	   				<div>등록일 | ${vo.regdate}</div>
+	   				<div>조회수 | ${vo.readcount}</div>
 	   			</div>
 	   			<div class="detail_cont">
 	   				안녕하십니까. 롯데시네마 입니다.<br />
@@ -28,8 +28,8 @@
   					(외부 채널에서 구매한 모바일 관람권, 이벤트 등을 통해 무료 수령한 관람권 제외)<br />
 					감사합니다.<br />
 	   			</div>
-	   			<div class="btn_area t_center mt50">
-	   				<a href="<c:url value='/qna/qna_list'/>" class="a_black_btn">목록</a>
+	   			<div class="btn_area t_center">
+	   				<a href='<c:url value="/qna/qna_list"/>' class="a_black_btn">목록</a>
 	   			</div>
 	   		</div>
    		</div>

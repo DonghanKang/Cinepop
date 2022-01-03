@@ -1,5 +1,6 @@
 package com.mp.cinepop.common;
 
+
 import java.io.File;
 
 public class ConstUtil {
@@ -7,6 +8,7 @@ public class ConstUtil {
 	int RECORD_COUNT=5;  //한페이지에 보여줄 레코드 개수
 	int BLOCK_SIZE=10;
 	
+
 	//자료실 - 파일 저장 경로
 	String STORE_IMAGE_UPLOAD_PATH;
 	String MOVIE_IMAGE_UPLOAD_PATH;
