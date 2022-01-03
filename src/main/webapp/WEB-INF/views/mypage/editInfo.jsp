@@ -11,7 +11,7 @@
 		                <label>이름</label>
 		            </div>
 		            <div class="p_input">
-		                <input id="name" type="text" name="name" placeholder="" class="t_input" required="required" disabled="disabled">
+		                <input id="name" type="text" name="name" placeholder="" class="t_input" required="required" disabled="disabled" value="홍길동">
 		            </div>
 		        </div>
 		        <div class="input_area">
@@ -19,7 +19,7 @@
 		                <label>이메일</label>
 		            </div>
 		            <div class="p_input">
-		                <input id="email" type="email" name="email" class="t_input" placeholder="" required="required" disabled="disabled"><span class="invalidText"></span>
+		                <input id="email" type="email" name="email" class="t_input" placeholder="" required="required" disabled="disabled" value="hong123@gmail.com"><span class="invalidText"></span>
 		            </div>
 		        </div>
 		        

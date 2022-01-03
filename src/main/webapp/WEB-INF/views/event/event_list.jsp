@@ -8,23 +8,24 @@
 <style>
 .mr10{margin-right:10px;}
 .post-thumbnail2{height:247px; overflow: hidden;}
+.h345{height:345px;}
 </style>
 <section class="module">
 	<div class="container">
 		<!-- 페이징 처리를 위한 form -->
 		<form id="frmPage" method="post" action="<c:url value='/event/event_list'/>">
-			<input type="text" name="currentPage" >
-			<input type="text" name="searchCondition" value="${param.searchCondition }">
-			<input type="text" name="searchKeyword" value="${param.searchKeyword }">
+			<input type="hidden" name="currentPage" >
+			<input type="hidden" name="searchCondition" value="${param.searchCondition }">
+			<input type="hidden" name="searchKeyword" value="${param.searchKeyword }">
 		</form>
-		<h2>이벤트 리스트</h2>
+		<h2>이벤트</h2>
 		<c:if test="${!empty param.searchKeyword }">
 			<p>검색어 : ${param.searchKeyword },  
 				${pagingInfo.totalRecord} 건 검색되었습니다. </p>
 		</c:if>
 	    <div class="searchbox">
 	    	<form name="frmsearch" method="post" action='<c:url value='/event/event_list'/>'>
-		    	<div class="select">
+		    	<div class="select display_inflex">
 			    	<select>
 			    		<option value="title"
 			    			<c:if test="${param.searchCondition=='title'}">
@@ -38,7 +39,7 @@
 			    		>내용</option>
 			    	</select>
 				</div>	    	
-		    	<input type="text"  name="searchKeyword" class="mr10" title="검색어 입력"
+		    	<input type="text"  name="searchKeyword" class="mr10 t_input" title="검색어 입력"
 		    	value="${param.searchKeyword}">
 		    	<input type="submit" class="black_btn" value="검색">
 	    	</form>
@@ -46,16 +47,16 @@
         <div class="row multi-columns-row post-columns">
 	          <!-- 이벤트 게시판 리스트 반복 시작 -->
 	          <c:forEach var="eventVo" items="${list}">
-		          <div class="col-sm-6 col-md-4 col-lg-4">
+		          <div class="col-sm-6 col-md-4 col-lg-4 h345">
 		            <div class="post mb-20">
 		              <div class="post-thumbnail post-thumbnail2">
 		              	  <input type="hidden" value="${eventVo.no}">
 			              <a href="<c:url value='/event/event_Detail?no=${eventVo.no}'/>">
-			              	<img alt="${eventVo.title }" src="<c:url value='/upload/event/${eventVo.fileName}'/>">
+			              	<img alt="${eventVo.title }" src="<c:url value='/resources/images/event/${eventVo.fileName}'/>">
 			              </a>
 		              </div>
 		              <div class="post-header font-alt">
-		                <h2 class="post-title"><a href="<c:url value='/event/event_Detail'/>">${eventVo.title}</a></h2>
+		                <h2 class="post-title"><a href="<c:url value='/event/event_Detail?no=${eventVo.no}'/>">${eventVo.title}</a></h2>
 		              </div>
 		            </div>
 		          </div>
