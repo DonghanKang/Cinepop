@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mp.cinepop.movieinsert.model.MovieinsertDAO">
+	<insert id="insertMovie" parameterType="movieinsertVo">
+		<selectKey keyProperty="M_NO" resultType="int" order="BEFORE">
+			select movie_seq.nextval from dual
+		</selectKey>
+		insert into movie(M_NO, M_NAME, DIRECTOR, ACTOR, STORY, 
+        	S_DATE, E_DATE, GE_NO, RUNTIME, IMAGE1, IMAGE2, IMAGE3,VIDEOURL)
+		values(#{M_NO},#{M_NAME}, #{DIRECTOR}, #{ACTOR}, #{STORY},
+        TO_DATE(#{S_DATE},'YYYY-MM-DD'),TO_DATE(#{E_DATE},'YYYY-MM-DD') ,#{GE_NO},#{RUNTIME},#{IMAGE1},#{IMAGE2},#{IMAGE3}, #{VIDEOURL})
+	</insert>
+</mapper>
