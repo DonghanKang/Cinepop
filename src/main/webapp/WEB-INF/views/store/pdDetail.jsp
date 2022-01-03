@@ -5,6 +5,12 @@
 <%@include file="../inc/top.jsp" %>
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+  <style>
+  	.pdImg {
+    	object-fit:scale-down ;
+    	height: 300px;
+	}
+  </style>
 <section class="module">
   <div class="container">
     <h2>뭘 좋아할지 몰라서 / <span> 온라인 전용</span></h2>
@@ -14,24 +20,29 @@
     	}
     	
 		function addComma(value){
-			value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			value = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 			return value; 
-		}
+		}	
     	
     	$(function(){
+     		var totalVal=${storeVo.pdPrice};
+    		$('#payTotalVal').html(addComma(totalVal)); 
+    		
+    		
     		$('#pdQuantity').change(function(){
-    			var valSum=$(this).val()*${storeVo.pdPrice};
-    			$('#payVal').html(valSum);
-    			$('#payTotalVal').html(valSum);
+    			totalVal=$(this).val()*${storeVo.pdPrice};
+    			$('#payTotalVal').html(addComma(totalVal));
     		});
     	});
+    	
     	
     </script>
     <div class="row detail_wrap">
     	<div class="mb-sm-20 wow fadeInUp" onclick="wow fadeInUp">
            <div class="store_detail">
              <div class="col-lg-6 sm-6 dtail_img">
-             	<img src="<c:url value='/resources/images/store/${storeVo.pdImagename }'/>" alt="뭘좋아할지몰라서"/>
+             	<img src="<c:url value='/resources/images/store/${storeVo.pdImagename }'/>" alt="뭘좋아할지몰라서"
+             	class ="pdImg"/>
              </div>
              <div class="col-lg-6 sm-6 detail_info_area">
              	<div class="detail_info">
@@ -48,7 +59,7 @@
 						</select>
 						<span id="payVal"><fmt:formatNumber value="${storeVo.pdPrice}" pattern="#,###"/><strong>원</strong></span>
 					</div>
-					<h4 class="mb20">총 구매금액 <span>&nbsp;<span id="payTotalVal"><fmt:formatNumber value="${storeVo.pdPrice}" pattern="#,###"/> </span>원</span></h4>
+					<h4 class="mb20">총 구매금액 <span>&nbsp;<span id="payTotalVal"> </span>원</span></h4>
 					<div class="btn_area t_right">
 						<button type="button" class="d_btn" onclick="pay()">구매하기</button>
 					</div>

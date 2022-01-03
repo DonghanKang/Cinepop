@@ -16,8 +16,12 @@
 	
 	<update id="updatePd" parameterType="storeVo">
 		update products
-		set PCT_NO=#{pctNo}, PD_NAME=#{pdName}, PD_PRICE=#{pdPrice},
-			PD_IMAGEFILESIZE=#{pdImagefilesize}, PD_IMAGENAME=#{pdImagename}, PD_DESCRIPTION=#{pdDescription}
+		set PCT_NO=#{pctNo}, PD_NAME=#{pdName}, PD_PRICE=#{pdPrice}
+			, PD_DESCRIPTION=#{pdDescription}
+			<if test="pdImagename!=null and pdImagename!=''">
+				, PD_IMAGEFILESIZE=#{pdImagefilesize}
+				, PD_IMAGENAME=#{pdImagename}
+			</if>		
 		where PD_NO=#{pdNo}
 	</update>
 	
@@ -30,6 +34,12 @@
 		select * from products
 		where PCT_NO=#{pctNo}
 	</select>
+	
+	<delete id="deleteByPdNo" parameterType="int">
+		delete from products
+		where PD_NO=#{pdNo}
+	</delete>
+	
 </mapper>
 
 

@@ -35,5 +35,11 @@ public class StoreServiceImpl implements StoreService {
 	public List<StoreVO> selectByCategory(String pctNo) {
 		return storeDao.selectByCategory(pctNo);
 	}
+
+	@Override
+	public int deleteByPdNo(int pdNo) {
+		return storeDao.deleteByPdNo(pdNo);
+	}
+	
 	
 }

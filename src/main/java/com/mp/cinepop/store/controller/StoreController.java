@@ -1,5 +1,6 @@
 package com.mp.cinepop.store.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -52,25 +53,28 @@ public class StoreController {
 	@PostMapping("/pdWrite")
 	public String pdWrite_post(@ModelAttribute StoreVO storeVo, 
 			HttpServletRequest request) {
-		logger.info("상품등록 처리, 파라미터 StoreVO={}",storeVo );
+		logger.info("상품 등록, 수정 처리, 파라미터 StoreVO={}",storeVo );
+
+		String pdImagename="";
+		long pdImagefilesize=0;
+		int pathFlag=ConstUtil.UPLOAD_STORE_IMAGE_FLAG;
 
 		if(storeVo.getPdNo()==0) {
 			//파일 업로드 처리
-			String pdImagename="";
-			long pdImagefilesize=0;
-			int pathFlag=ConstUtil.UPLOAD_STORE_IMAGE_FLAG;
 			try {
+				//Store의 상품이미지는 하나지만 영화게시판의 
+				//이미지는 여러개이므로 FileUpload 메서드의 반환형을 List로 함
 				List<Map<String, Object>> fileList 
 				= fileUploadUtil.fileUpload(request, pathFlag);
-
-				for(int i=0;i<fileList.size();i++) {
-					Map<String, Object> map=fileList.get(i);
-
+				
+				if(fileList.size()>0) {
+					Map<String, Object> map=fileList.get(0);
+					
 					pdImagename=(String) map.get("fileName");
 					pdImagefilesize=(long) map.get("fileSize");				 
+					
+					logger.info("파일 업로드 성공, pdImagename={}", pdImagename);
 				}
-
-				logger.info("파일 업로드 성공, pdImagename={}", pdImagename);
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -82,10 +86,45 @@ public class StoreController {
 			storeVo.setPdImagefilesize(pdImagefilesize);
 
 			int cnt=storeService.insertPd(storeVo);
-			logger.info("등록함 cnt={}",cnt);
+			logger.info("DB등록여부 cnt={}",cnt);
 		}else {
+			StoreVO oldVo=storeService.selectByPdNo(storeVo.getPdNo());
+			String upPath=fileUploadUtil.getUploadPath(pathFlag, request);
+
+			//새 파일 업로드
+			try {
+				//Store의 상품이미지는 하나지만 영화게시판의 
+				//이미지는 여러개이므로 FileUploadUtil의 반환형을 List로 함
+				List<Map<String,Object>> fileList=fileUploadUtil.fileUpload(request, pathFlag);
+				if(fileList.size()>0) {
+					Map<String,Object> map=fileList.get(0);
+
+					pdImagename=(String)map.get("fileName");
+					pdImagefilesize=(long)map.get("fileSize");
+
+					logger.info("새 파일 업로드 성공, pdImagename={}", pdImagename);
+					
+					if(oldVo.getPdImagename()!=null && !oldVo.getPdImagename().isEmpty()) {
+						File oldFile=new File(upPath, oldVo.getPdImagename());
+						
+						if(oldFile.exists()) {
+							boolean bool=oldFile.delete();
+							logger.info("기존 파일 삭제 여부={}",bool);
+						}
+					}
+				}
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}
+
+			//기존 파일 삭제
+
+			storeVo.setPdImagename(pdImagename);
+			storeVo.setPdImagefilesize(pdImagefilesize);
+
+
 			int cnt=storeService.updatePd(storeVo);
-			logger.info("수정함 cnt={}",cnt);
+			logger.info("DB수정여부 cnt={}",cnt);
 		}
 
 		return "store/pdList";
@@ -100,12 +139,13 @@ public class StoreController {
 
 		logger.info("list.size()={}",list.size());
 		model.addAttribute("list",list);
+		model.addAttribute("pctNo",pctNo);
 
 		return "store/pdList";
 	}
 
 	@RequestMapping("/pdDetail")
-	public String giftCardDetail(@RequestParam (defaultValue = "0") int pdNo, Model model) {
+	public String pdDetail(@RequestParam (defaultValue = "0") int pdNo, Model model) {
 		logger.info("상품디테일 페이지 파라미터 pdNo={}",pdNo);
 
 		StoreVO storeVo=storeService.selectByPdNo(pdNo);
@@ -116,5 +156,35 @@ public class StoreController {
 		return "store/pdDetail";
 	}
 
+	@GetMapping("/pdDelete")
+	public String pdDelete() {
+		logger.info("상품삭제 페이지");
 
+		return "store/pdDelete";
+	}
+
+	@PostMapping("/pdDelete")
+	public String pdDelete(@RequestParam (defaultValue = "0") int pdNo,
+			HttpServletRequest request) {
+		logger.info("상품삭제 처리 파라미터 pdNo={}",pdNo);
+
+		StoreVO storeVo=storeService.selectByPdNo(pdNo);
+		String fileName=storeVo.getPdImagename();
+
+		int cnt=storeService.deleteByPdNo(pdNo);
+		logger.info("파일삭제여부 cnt={}",cnt);
+
+		if(cnt>0 && fileName!=null && !fileName.isEmpty() ) {
+			String upPath
+			=fileUploadUtil.getUploadPath(ConstUtil.UPLOAD_STORE_IMAGE_FLAG, request);
+
+			File oldFile=new File(upPath,fileName);
+			if(oldFile.exists()) {
+				boolean bool=oldFile.delete();
+				logger.info("파일삭제 여부 :{}",bool);
+			}
+		}
+
+		return "redirect:/store/index";
+	}
 }
