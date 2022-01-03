@@ -4,10 +4,16 @@
 
 <mapper namespace="com.mp.cinepop.account.model.AccountDAO">
 	<insert id="insertAccount" parameterType="accountVo">
-		<selectKey keyProperty="a_no" resultType="int" order="BEFORE">
+		<selectKey keyProperty="aNo" resultType="int" order="BEFORE">
 			select account_seq.nextval from dual
 		</selectKey>
-		insert into account(a_no,a_name,id,postcode1,address_1,detailAddress1,tel)
-		values(#{a_no},#{a_name},#{id},#{postcode1},#{address_1},#{detailAddress1},#{tel})
+		insert into account(aName,id,postcode1,address,detailAddress1,tel,pwd)
+		values(#{aName},#{id},#{postcode1},#{address},#{detailAddress1},#{tel},#{pwd})
+	</insert>
+	
+	<insert id="insertPw" parameterType="hashVo">
+		
+		insert into hash(id,salt,digest)
+		values(#{id},#{salt},#{digest})
 	</insert>
 </mapper>
