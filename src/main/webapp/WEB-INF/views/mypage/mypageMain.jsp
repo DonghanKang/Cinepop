@@ -18,17 +18,7 @@
 		location.href="withdrawal";
 	}
 </script>
-<style>
-.page_area2{cursor: pointer;}
-.page_area2:last-of-type{margin-top:30px;}
-.page_area2:nth-of-type(3){margin-top:30px;}
-.page_area2 .page_cont2{}
-.line{width:10%; height:4px; background: #000;}
-.page_area2 .page_cont2 p{line-height:19px; margin:10px 0;}
-.page_area2 .page_cont2 p .m_txt{font-size:24px; font-weight: 600; color:#000;}
-.page_cont2{ padding:50px; border:1px solid #ccc;}
-.page_cont2:hover{border: 2px solid #000; /*transition: all 0.4s ease-out;*/}  
-</style>
+
 <section class="module">
 	<div class="container">
 		<!--마이페이지-->

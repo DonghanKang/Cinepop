@@ -9,15 +9,19 @@
 		</selectKey>
 		
 		insert into products(PD_NO, PCT_NO, PD_NAME, PD_PRICE,
-			<!--  PD_IMAGEURL, PD_IMAGENAME, --> PD_DESCRIPTION)
+			 PD_IMAGEFILESIZE, PD_IMAGENAME,  PD_DESCRIPTION)
 		values(#{pdNo}, #{pctNo}, #{pdName}, #{pdPrice}, 
-			<!-- #{pdImageURL}, #{pdImagename}, --> #{pdDescription})
+			 #{pdImagefilesize}, #{pdImagename}, #{pdDescription})
 	</insert>
 	
 	<update id="updatePd" parameterType="storeVo">
 		update products
-		set PCT_NO=#{pctNo}, PD_NAME=#{pdName}, PD_PRICE=#{pdPrice},
-			<!-- PD_IMAGEURL=#{pdImageURL}, PD_IMAGENAME=#{pdImagename}, --> PD_DESCRIPTION=#{pdDescription}
+		set PCT_NO=#{pctNo}, PD_NAME=#{pdName}, PD_PRICE=#{pdPrice}
+			, PD_DESCRIPTION=#{pdDescription}
+			<if test="pdImagename!=null and pdImagename!=''">
+				, PD_IMAGEFILESIZE=#{pdImagefilesize}
+				, PD_IMAGENAME=#{pdImagename}
+			</if>		
 		where PD_NO=#{pdNo}
 	</update>
 	
@@ -25,6 +29,17 @@
 		select * from products
 		where PD_NO=#{pdNo}
 	</select>
+	
+	<select id="selectByCategory" parameterType="string" resultType="storeVo">
+		select * from products
+		where PCT_NO=#{pctNo}
+	</select>
+	
+	<delete id="deleteByPdNo" parameterType="int">
+		delete from products
+		where PD_NO=#{pdNo}
+	</delete>
+	
 </mapper>
 
 

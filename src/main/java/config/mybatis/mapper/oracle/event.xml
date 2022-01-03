@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mp.cinepop.event.model.EventDAO">
+	<sql id="searchWhere">
+		<if test="searchKeyword!=null and searchKeyword!=''">
+	       	where ${searchCondition} like '%' || #{searchKeyword} || '%'
+		</if>		
+	</sql>
+	<insert id="insertEvent" parameterType="eventVo">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select event_seq.nextval from dual
+		</selectKey>
+		insert into event(no,title,content,fileName,fileSize,originalFileName)
+		values(#{no},#{title},#{content},#{fileName},#{fileSize},#{originalFileName})
+	</insert>
+	
+	<select id="selectAll" parameterType="searchVo" resultType="eventVo">
+		select *
+		from
+		(
+			select rownum as RNUM, A.*
+			from
+			(
+				select no,title,writer,content,regdate,fileName,fileSize,originalFilename,(sysdate-regdate)*24 as dateTerm
+				from event order by no desc
+				<include refid="searchWhere"></include>
+				
+			)A
+		)
+		<![CDATA[
+		where RNUM>#{firstRecordIndex} 
+			and RNUM<=#{firstRecordIndex}+ #{recordCountPerPage}]]>
+	</select>
+	<select id="selectTotalRecord" parameterType="eventVo" resultType="int">
+		select count(*) from event
+		<include refid="searchWhere"></include> 
+	</select>
+	<select id="selectByNo" parameterType="int" resultType="eventVo">
+		select * from event
+		where no=#{no}
+	</select>
+	<update id="updateEvent" parameterType="eventVo">
+		update event
+		set title=#{title},content=#{content}
+	<if test="fileName !=null and fileName !=''">
+		,fileName=#{fileName},fileSize=#{fileSize},originalFileName=#{originalFileName}
+	</if>
+	where no=#{no}
+	</update>
+</mapper>
