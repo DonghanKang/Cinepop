@@ -6,7 +6,7 @@
    <div class="container">
    <h2 class="mb50">공지사항</h2>
       <fieldset>
-         <form name="admin_notice" action="write_ok.jsp" method="post" enctype="multipart/form-data">
+         <form name="admin_notice" action="<c:url value='/qna/qna_write.do'/>" method="post" enctype="multipart/form-data">
             <input type="hidden" id="email" name="email" value=""> 
                <!-- <div class="input_area">
                	   <div class="p_title">비밀번호</div>
@@ -32,7 +32,7 @@
       </fieldset>
       <div class="btn_all t_center mt50">
            <input type="submit" class="black_btn" id="btList" value="글등록" />
-           <input type = "Button" value="글목록" class="black_btn" onclick="location.href='list.jsp'" value="취소"/>
+           <input type="Button" value="글목록" class="black_btn" onclick="location.href='qna_list'" value="취소"/>
        </div>
    </div>
 </section>

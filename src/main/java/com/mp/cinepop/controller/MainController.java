@@ -58,10 +58,7 @@ public class MainController {
 		logger.info("이벤트 글쓰기");
 	}
 	
-	@RequestMapping("/qna/qna_list")
-	public void qna_list() {
-		logger.info("q&a 리스트");
-	}
+	
 	@RequestMapping("/qna/qna_write")
 	public void qna_write() {
 		logger.info("q&a 글등록");
@@ -95,6 +92,10 @@ public class MainController {
   @RequestMapping("/mypage/withdrawal")
   public void withdrawal() {
 	  logger.info("withdrawal 페이지");
+  }
+  @RequestMapping("/login/login")
+	public void login() {
+		logger.info("login 페이지");
   }
 	/*
 	 * @RequestMapping("/movie/movieChart") public void index() {
