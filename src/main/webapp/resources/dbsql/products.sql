@@ -12,9 +12,9 @@ CREATE TABLE PRODUCTS
     PD_NO number primary key ,
     PCT_NO varchar2(20) 
         constraint FK_PCTNO references PD_CATEGORY(PCT_NO),
-    PD_NAME varchar2(20) not null,
+    PD_NAME varchar2(50) not null,
     PD_PRICE number not null,
-    PD_IMAGENAME varchar2(30),
+    PD_IMAGENAME varchar2(50),
     PD_IMAGEFILESIZE number,
     PD_DESCRIPTION CLOB,
     PD_REGDATE date default sysdate

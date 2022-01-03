@@ -47,9 +47,10 @@ public class FileUploadUtil {
 				long fileSize=tempFile.getSize(); //업로드한 파일 크기
 				
 				String originName="", fileName="";
+				
+				//이벤트 이미지 업로드 할 때만 변경된 파일 이름 구하기
 				if(pathFlag==ConstUtil.UPLOAD_EVENT_IMAGE_FLAG) {
 					originName=tempFile.getOriginalFilename();
-					//변경된 파일 이름 구하기
 					fileName=getUniqueFileName(originName);
 				}else {
 					fileName=tempFile.getOriginalFilename();

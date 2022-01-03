@@ -11,6 +11,12 @@ function toVoucher(){ //관람권리스트
 function toPopcorn(){ //팝콘리스트
 	location.href="pdList?pctNo=B01";
 }
+function toDrink(){ //팝콘리스트
+	location.href="pdList?pctNo=B02";
+}
+function toSnack(){ //팝콘리스트
+	location.href="pdList?pctNo=B03";
+}
 
 function editInfo(){//내정보 수정
 	location.href="editInfo.jsp";
@@ -39,13 +45,13 @@ function Withdrawal(){//회원탈퇴
                 	<div class="popcorn"></div>
                 </div>
             </div>
-            <div class="col-lg-6 sm-6 page_area">
+            <div class="col-lg-6 sm-6 page_area" onclick="toDrink()">
                 <div class="page_cont">
                     <p><strong class="m_txt">Drink / </strong> 음료</p>
                     <div class="drink"></div>
                 </div>
             </div>
-            <div class="col-lg-6 sm-6 page_area">
+            <div class="col-lg-6 sm-6 page_area" onclick="toSnack()">
                 <div class="page_cont">
                     <p><strong class="m_txt">Snack / </strong> 스낵</p>
 					<div class="snak"></div>                    
