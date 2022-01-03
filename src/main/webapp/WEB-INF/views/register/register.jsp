@@ -10,9 +10,18 @@
 <script type="text/javascript">
 	$(function() {
 		make_select();
+		
+		$('#email2').change(function(){
+			if($(this).val()=="etc"){
+				$('#email3').val('');
+				$('#email3').css('visibility',"visible");
+				$('#email3').focus();
+			}else{
+				$('#email3').css('visibility',"hidden");
+			}
+		});
+		
 		$('#joinform').click(function (){
-			
-			
 			$('#sample6_postcode').attr('disabled', false);
 			$('#sample6_address').attr('disabled', false);
 			console.log($('#sample6_postcode').attr('disabled'));
@@ -53,10 +62,10 @@
 			<form id="joinform" name="update" action="<c:url value='/register/register'/>" method="post">
 		        <div class="input_area">
 		            <div class="p_title">
-		                <label for="a_name">이름</label>
+		                <label for="aName">이름</label>
 		            </div>
 		            <div class="p_input">
-		                <input id="a_name" type="text" name="a_name" placeholder="" class="t_input">
+		                <input id="aName" type="text" name="aName" placeholder="" class="t_input">
 		            </div>
 		        </div>
 		        <div class="input_area">
@@ -84,7 +93,7 @@
 		                <label>비밀번호</label>
 		            </div>
 		            <div class="p_input">
-		                <input id="pw1" type="password" name="pw1" class="t_input" /><span class="invalidText"></span>
+		                <input id="pwd" type="password" name="pwd" class="t_input" /><span class="invalidText"></span>
 		            </div>
 		        </div>
 		        <div class="input_area">
@@ -92,7 +101,7 @@
 		                <label>비밀번호 확인</label>
 		            </div>
 		            <div class="p_input">
-		                <input id="pw2" type="password" name="pw2" class="t_input" /><span class="invalidText"></span>
+		                <input id="pwd2" type="password" name="pwd2" class="t_input" /><span class="invalidText"></span>
 		            </div>
 		        </div>
 		        
@@ -119,7 +128,7 @@
 		            <div class="p_input">
 		                <input id="sample6_postcode" type="text" name="postcode1" class="t_input"  value=""  disabled="disabled" />
 						<button type="button"  class="black_btn" onclick="sample6_execDaumPostcode()">우편번호찾기</button><br>
-						<input id="sample6_address" type="text" name="address_1" value="" required="required" disabled="disabled" class="t_input mt20"/>
+						<input id="sample6_address" type="text" name="address" value="" required="required" disabled="disabled" class="t_input mt20"/>
 						<input id="sample6_detailAddress" type="text" name="detailAddress1" placeholder="" class="t_input mt20"/>
 		            </div>
 		        </div>
