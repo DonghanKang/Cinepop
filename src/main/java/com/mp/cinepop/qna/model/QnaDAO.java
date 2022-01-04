@@ -11,6 +11,7 @@ public interface QnaDAO {
 	public int insertQna(QnaVO vo);
 	public List<QnaVO> selectAll(SearchVO searchVo);
 	int selectTotalRecord(SearchVO searchVo);
+	public QnaVO selectByNo(int no);
 	public int updateReadCount(int no);
 	public int updateQna(QnaVO vo);
 	public int deleteQna(int no);

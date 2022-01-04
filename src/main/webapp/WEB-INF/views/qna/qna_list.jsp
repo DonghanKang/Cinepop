@@ -9,15 +9,16 @@
 <section class="module">
 	<div class="container">
 		<h2>공지사항 글목록</h2>
-		<div class="searchbox">
-			<div class="select">
-				<select>
-					<option value="1">제목</option>
-				</select>
-			</div>
-			<input type="text" id="" name="" class="mr10"> <input
-				type="button" class="black_btn" id="" name="" value="검색">
-		</div>
+	    <div class="searchbox">
+	    	<div class="select">
+		    	<select>
+		    		<option value="1">제목</option>
+		    		<option value="2">제목</option>
+		    	</select>
+			</div>	    	
+	    	<input type="text" id="" name="" class="mr10">
+	    	<input type="button" class="black_btn" id="" name="" value="검색">
+	    </div>
 		<div class="col-sm-12">
 			<table class="t_style1 mb50">
 				<colgroup>
@@ -41,8 +42,8 @@
 					<!--게시판 내용 반복문 시작  -->
 					<c:forEach var="qnavo" items="${list }">
 						<tr>
-							<td>${qnavo.q_no}</td>
-							<td><a href="<c:url value='/board/countUpdate.do?q_no=${qnavo.q_no}'/>">
+							<td>${qnavo.qNo}</td>
+							<td><a href="<c:url value='/qna/countUpdate?qNo=${qnavo.qNo}'/>">
 									${qnavo.title} </a></td>
 							<td><fmt:formatDate value="${qnavo.regdate}"
 									pattern="yyyy-MM-dd" /></td>
@@ -58,7 +59,7 @@
 			<!-- 이전 블럭으로 이동 -->
 			<c:if test="${pagingInfo.firstPage>1 }">
 				<a
-					href="<c:url value='/board/list.do?currentPage=${pagingInfo.firstPage-1}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">
+					href="<c:url value='/qna/qna_list.do?currentPage=${pagingInfo.firstPage-1}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">
 					<img src="<c:url value='/resources/images/first.JPG'/>" alt="이전블럭">
 				</a>
 			</c:if>
@@ -72,7 +73,7 @@
 				</c:if>
 				<c:if test="${i!=pagingInfo.currentPage }">
 					<a
-						href="<c:url value='/board/list.do?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">
+						href="<c:url value='/qna/qna_list.do?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">
 						[${i }]</a>
 				</c:if>
 			</c:forEach>
@@ -85,7 +86,6 @@
 				</a>
 			</c:if>
 			<!--  페이지 번호 끝 -->
-      
 		</div>
 	</div>
 </section>
