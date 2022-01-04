@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mp.cinepop.questionAnswer.model.QuestionAnswerDAO">
+	<sql id="searchWhere">
+		<if test="searchKeyword!=null and searchKeyword!=''">
+	       	where ${searchCondition} like '%' || #{searchKeyword} || '%'
+		</if>		
+	</sql>
+	
+	<insert id="userinsertQuestion" parameterType="questionAnswerVo">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			select questionAnswer_seq from dual
+		</selectKey>
+		insert into questionAnswer(Qno,Qtitle,Qcontent,Qgroupno,Qstep,Qsortno,Qdelflag)
+		values(#{Qno},#{Qtitle},#{Qcontent},#{Qgroupno},#{Qstep},#{Qsortno},#{Qdelflag})
+	</insert>
+	
+	<select id="selectAll" parameterType="searchVo" resultType="questionAnswerVo">
+		select *
+		from
+		(
+		    select rownum as RNUM, A.*
+		    from
+		    (
+		        select * from questionAnswer 
+		        <include refid="searchWhere"></include>
+		        order by Qno desc
+		    )A
+		)
+		<![CDATA[
+		where RNUM>#{firstRecordIndex} 
+			and RNUM<=#{firstRecordIndex}+ #{recordCountPerPage}]]>
+	</select>
+	
+	<select id="selectTotalRecord" parameterType="searchVo" resultType="int">
+		select count(*) from questionAnswer
+		<include refid="searchWhere"></include>	
+	</select>
+	
+	<select id="selectByNo" parameterType="int" resultType="questionAnswerVo">
+		select * from questionAnswer 
+		where Qno=#{Qno}
+	</select>
+	
+	<update id="updatequestion" parameterType="questionAnswerVo">
+		update questionAnswer
+		set Qtitle = #{Qtitle},Qcontent = #{Qcontent}
+		where Qno=#{Qno}
+	</update>
+	
+	<delete id="deletequestion">
+		delete questionAnswer where Qno = #{Qno}
+	</delete>
+	
+	
+</mapper>

@@ -20,14 +20,6 @@ public class MainController {
 		logger.info("메인 페이지");
 	}
 
-	@RequestMapping("/movie/movieChart")
-	public void movie() {
-		logger.info("영화목록 페이지"); 
-	}
-	@RequestMapping("/movie/movieDetail")
-	public void movieDetail() {
-		logger.info("영화목록 페이지"); 
-	}
 
 	@RequestMapping("/store/index")
 	public void store() {
