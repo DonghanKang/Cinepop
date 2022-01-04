@@ -25,9 +25,12 @@ public class AccountServiceImpl implements AccountService{
 
 
 	@Override
-	public int insertPw(hashVO hashvo) {
-		return accountdao.insertPw(hashvo);
+	public int insertHash(hashVO hashvo) {
+		return accountdao.insertHash(hashvo);
 	}
+
+
+	
 	
 	
 }

@@ -2,6 +2,9 @@ package com.mp.cinepop.account.controller;
 
 import java.security.NoSuchAlgorithmException;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +48,10 @@ public class AccountController {
 		logger.info("회원가입 처리 , 파라미터 vo={}",vo);
 		
 	
-		 if(vo.getId()==null || vo.getId().isEmpty()) { email2=""; email3=""; }else
-		 if(email3!=null && !email3.isEmpty()) { email2=email3; }
+		 if(vo.getId()==null || vo.getId().isEmpty()) { 
+			 email2=""; email3=""; 
+		 }else if(email3!=null && !email3.isEmpty()) {
+			 email2=email3; }
 		 
 		int cnt=accountService.insertAccount(vo);
 		
@@ -57,12 +62,23 @@ public class AccountController {
 		
 		String digest =hash.hashing(pwd, salt);
 		hashvo.setDigest(digest);
-		logger.info("해시처리 : ",hashvo.toString());
 		logger.info("pwd : ",pwd);
 		
-		cnt=accountService.insertPw(hashvo);
+		cnt=accountService.insertHash(hashvo);
 		logger.info("회원가입 결과,cnt={}",cnt);
 	
 		return "redirect:/login/login";
+	} 
+	
+	@GetMapping("mypage/withdrawal")
+	public void withdrawal_get() {
+		logger.info("회원탈퇴 페이지");
+	}
+	
+	@PostMapping("mypage/withdrawal")
+	public String withdrawal_post(@RequestParam String pwd, HttpSession session,HttpServletResponse response, Model model) {
+		String id = (String)session.getAttribute("id");
+		logger.info("회원탈퇴 처리, 파라미터 id={},pwd={}",id,pwd);
+		
 	} 
 }
