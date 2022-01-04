@@ -11,8 +11,7 @@
 		values(#{aName},#{id},#{postcode1},#{address},#{detailAddress1},#{tel},#{pwd})
 	</insert>
 	
-	<insert id="insertPw" parameterType="hashVo">
-		
+	<insert id="insertHash" parameterType="hashVo">
 		insert into hash(id,salt,digest)
 		values(#{id},#{salt},#{digest})
 	</insert>
