@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mp.cinepop.movie.model.MovieDAO">
+	<sql id="searchWhere">
+		<if test="searchKeyword!=null and searchKeyword!=''">
+	       	where ${searchCondition} like '%' || #{searchKeyword} || '%'
+		</if>		
+	</sql>
+	
+	<select id="movieSelectAll" parameterType="searchVo" resultType="movieVo">
+		select *
+		from
+		(
+		    select rownum as RNUM, A.*
+		    from
+		    (
+		        select * from movie 
+		        <include refid="searchWhere"></include>
+		        order by M_NO desc
+		    )A
+		)
+		<![CDATA[
+		where RNUM>#{firstRecordIndex} 
+			and RNUM<=#{firstRecordIndex}+ #{recordCountPerPage}]]>
+	</select>
+	
+	<select id="selectTotalRecord" parameterType="searchVo" resultType="int">
+		select count(*) from movie
+		<include refid="searchWhere"></include>	
+	</select>
+	
+	<select id="selectByNo" parameterType="int" resultType="movieVo">
+		select a.m_no,a.m_name,a.director,a.actor,a.reviewgrade,a.story, 
+		TO_CHAR(a.s_date,'yyyy-mm-dd') s_date ,TO_CHAR(a.e_date,'yyyy-mm-dd') e_date,
+		a.ge_no,a.runtime,a.image1,a.image2,a.image3,a.videourl,
+		b.ge_name from 
+		movie a join genre b
+		on a.ge_no = b.ge_no
+		where m_no=#{MNO}
+	</select>
+</mapper>
