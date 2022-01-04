@@ -49,4 +49,8 @@
 	</if>
 	where no=#{no}
 	</update>
+	
+	<delete id="deleteEvent" parameterType="int">
+		delete event where no=#{no}
+	</delete>
 </mapper>
