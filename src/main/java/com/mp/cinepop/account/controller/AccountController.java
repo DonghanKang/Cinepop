@@ -75,10 +75,12 @@ public class AccountController {
 		logger.info("회원탈퇴 페이지");
 	}
 	
-	@PostMapping("mypage/withdrawal")
-	public String withdrawal_post(@RequestParam String pwd, HttpSession session,HttpServletResponse response, Model model) {
-		String id = (String)session.getAttribute("id");
-		logger.info("회원탈퇴 처리, 파라미터 id={},pwd={}",id,pwd);
-		
-	} 
+	/*
+	 * @PostMapping("mypage/withdrawal") public String withdrawal_post(@RequestParam
+	 * String pwd, HttpSession session,HttpServletResponse response, Model model) {
+	 * String id = (String)session.getAttribute("id");
+	 * logger.info("회원탈퇴 처리, 파라미터 id={},pwd={}",id,pwd);
+	 * 
+	 * }
+	 */
 }

@@ -7,7 +7,7 @@
 			<div class="col-sm-8 frm_login">
 				<h2 class="font-alt">로그인</h2>
 				<hr class="divider-w mb-10">
-				<form class="form">
+				<form class="form" method="post"	action="<c:url value='/login/login'/>">
 					<div class="form-group ">
 						<input class="t_input w100" id="email" type="text"
 							name="email" placeholder="Email" />
