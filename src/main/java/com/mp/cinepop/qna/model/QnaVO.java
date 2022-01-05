@@ -3,7 +3,7 @@ package com.mp.cinepop.qna.model;
 import java.sql.Timestamp;
 
 public class QnaVO {
-	private int q_no;
+	private int qNo;
 	private String title;
 	private String publisher;
 	private String content;
@@ -14,9 +14,9 @@ public class QnaVO {
 		super();
 	}
 	
-	public QnaVO(int q_no, String title, String publisher, String content, int readcount, Timestamp regdate) {
+	public QnaVO(int qNo, String title, String publisher, String content, int readcount, Timestamp regdate) {
 		super();
-		this.q_no = q_no;
+		this.qNo = qNo;
 		this.title = title;
 		this.publisher = publisher;
 		this.content = content;
@@ -24,11 +24,11 @@ public class QnaVO {
 		this.regdate = regdate;
 	}
 	
-	public int getQ_no() {
-		return q_no;
+	public int getqNo() {
+		return qNo;
 	}
-	public void setQ_no(int q_no) {
-		this.q_no = q_no;
+	public void setqNo(int qNo) {
+		this.qNo = qNo;
 	}
 	public String getTitle() {
 		return title;
@@ -63,7 +63,7 @@ public class QnaVO {
 	
 	@Override
 	public String toString() {
-		return "QnaVO [q_no=" + q_no + ", title=" + title + ", publisher=" + publisher + ", content=" + content
+		return "QnaVO [qNo=" + qNo + ", title=" + title + ", publisher=" + publisher + ", content=" + content
 				+ ", readcount=" + readcount + ", regdate=" + regdate + "]";
 	}
 	

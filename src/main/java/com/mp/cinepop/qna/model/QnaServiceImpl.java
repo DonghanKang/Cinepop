@@ -29,6 +29,11 @@ public class QnaServiceImpl implements QnaService{
 	}
 	
 	@Override
+	public QnaVO selectByNo(int no) {
+		return qnaDao.selectByNo(no);
+	}
+	
+	@Override
 	public int updateReadCount(int no) {
 		return qnaDao.updateReadCount(no);
 	}
@@ -42,6 +47,7 @@ public class QnaServiceImpl implements QnaService{
 	public int deleteQna(int no) {
 		return qnaDao.deleteQna(no);
 	}
+
 
 	
 

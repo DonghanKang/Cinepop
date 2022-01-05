@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mp.cinepop.common.PaginationInfo;
 import com.mp.cinepop.common.SearchVO;
@@ -30,14 +31,14 @@ public class QnaController {
 	}
 	
 	@RequestMapping(value="qna/qna_write", method = RequestMethod.GET)
-	public String write_get() {
+	public String qna_get() {
 		logger.info("공지사항 쓰기 화면");
 		
 		return "qna/qna_write";
 	}
 	
 	@RequestMapping(value="qna/qna_write", method = RequestMethod.POST)
-	public String write_post(@ModelAttribute QnaVO qnaVO) {
+	public String qna_post(@ModelAttribute QnaVO qnaVO) {
 		logger.info("공지사항 쓰기 처리, 파라미터 vo={}", qnaVO);
 		
 		int cnt = qnaService.insertQna(qnaVO);
@@ -69,6 +70,9 @@ public class QnaController {
 		List<QnaVO> list = qnaService.selectAll(searchVo);
 		logger.info("전체조회 결과 list.size={}", list.size());
 		
+		logger.info("test q_no => {}", list.get(0).getqNo());
+		logger.info("test title => {}", list.get(0).getTitle());
+		
 		//[3] totalRecord 구하기
 		int totalRecord = qnaService.selectTotalRecord(searchVo);
 		pagingInfo.setTotalRecord(totalRecord);
@@ -81,35 +85,41 @@ public class QnaController {
 		return "qna/qna_list";
 	}
 	
-	/*
-	 * @RequestMapping("/detail.do") public String detail(@RequestParam(defaultValue
-	 * = "0") int no, Model model) { logger.info("공지사항 상세보기 파라미터 no={}", no);
-	 * 
-	 * if(no==0) { model.addAttribute("msg", "잘못된 url입니다.");
-	 * model.addAttribute("url", "/qna/qna_list.do");
-	 * 
-	 * return "common/message"; }
-	 * 
-	 * QnaVO vo = qnaService.selectByNo(no); logger.info("상세보기 결과 vo={}", vo);
-	 * 
-	 * model.addAttribute("vo", vo);
-	 * 
-	 * return "board/detail"; }
-	 * 
-	 * @RequestMapping("/countUpdate.do") public String
-	 * countUpdate(@RequestParam(defaultValue = "0") int no, Model model) {
-	 * logger.info("조회수 증가 파라미터 no={}", no);
-	 * 
-	 * if(no==0) { model.addAttribute("msg", "잘못된 url입니다.");
-	 * model.addAttribute("url", "/board/list.do");
-	 * 
-	 * return "common/message"; }
-	 * 
-	 * int cnt=boardService.updateReadCount(no); logger.info("조회수 증가 결과 cnt={}",
-	 * cnt);
-	 * 
-	 * return "redirect:/board/detail.do?no="+no; }
-	 */
+	@RequestMapping("qna/qna_detail")
+	public String detail(@RequestParam(defaultValue = "0") int qNo, Model model) {
+		logger.info("공지사항 상세보기 파라미터 no={}", qNo);
+		
+		if(qNo==0) {
+			model.addAttribute("msg", "잘못된 url입니다.");
+			model.addAttribute("url", "/qna/qna_list");
+			
+			return "/qna/qna_list";
+		}
+		
+		QnaVO vo = qnaService.selectByNo(qNo);
+		logger.info("상세보기 결과 vo={}", vo);
+		
+		model.addAttribute("vo", vo);
+		
+		return "qna/qna_detail";
+	}
+	
+	@RequestMapping("qna/countUpdate")
+	public String countUpdate(@RequestParam(defaultValue = "0") int qNo, Model model) {
+		logger.info("조회수 증가 파라미터 no={}", qNo);
+		
+		if(qNo==0) {
+			model.addAttribute("msg", "잘못된 url입니다.");
+			model.addAttribute("url", "/qna/qna_list");
+			
+			return "qna/qna_list";
+		}
+		
+		int cnt = qnaService.updateReadCount(qNo);
+		logger.info("조회수 증가 결과 cnt={}", cnt);
+		
+		return "redirect:/qna/qna_detail?qNo="+qNo;		
+	}
 	
 	
 }

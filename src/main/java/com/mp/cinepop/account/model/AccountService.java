@@ -1,5 +1,8 @@
 package com.mp.cinepop.account.model;
 
+import java.security.NoSuchAlgorithmException;
+import java.util.Map;
+
 import com.mp.cinepop.hash.model.hashVO;
 
 public interface AccountService {
@@ -14,4 +17,10 @@ public interface AccountService {
 	
 	public int insertAccount(AccountVO vo);
 	public int insertHash(hashVO hashvo);
+	
+	public int duplicateId(Map<String, String> map);
+	public int loginCheck(String userid, String digest) throws NoSuchAlgorithmException;
+	public AccountVO selectByUserid(String userid);
+	public int updateAccount(AccountVO vo);
+	public int withdrawAccount(String userid);
 }
