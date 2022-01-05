@@ -42,15 +42,13 @@ public class EventController {
 	}
 	
 	
-	@GetMapping("/event/event_write")
-	public String event_get() {
+	@GetMapping("event/event_write")
+	public void event_get() {
 		logger.info("이벤트 글쓰기");
-		
-		return "event/event_write";
 	}
 	
 
-	@PostMapping("/event/event_write")
+	@PostMapping("event/event_write")
 	public String event_post(@ModelAttribute  EventVO vo, HttpServletRequest request) {
 		logger.info("이벤트 게시판 등록 처리, 파라미터 vo={}",vo);
 		
@@ -80,7 +78,7 @@ public class EventController {
 		
 		logger.info("글쓰기 결과 cnt={}",cnt);
 		logger.info("업로드 경로 : {}", pathFlag);
-		return "event/event_list";
+		return "redirect:/event/event_list";
 	}
 	
 	@RequestMapping("event/event_list")
@@ -109,7 +107,7 @@ public class EventController {
 		
 	}
 	
-	@RequestMapping("event/event_Detail")
+	@GetMapping("event/event_Detail")
 	public String event_detail(@RequestParam(defaultValue = "0")int no, Model model) {
 		logger.info("이벤트 상세보기 파라미터 no={}",no);
 		
@@ -120,6 +118,17 @@ public class EventController {
 		
 		return "event/event_Detail";
 	}
+	
+	@PostMapping("event/event_Detail")
+	public String event_detail_delete(@ModelAttribute EventVO vo, Model model) {
+		logger.info("이벤트 게시판 삭제");
+		int cnt=eventservice.deleteEvent(vo.getNo());
+		
+		model.addAttribute("삭제 처리 cnt={}",cnt);
+		
+		return"redirect:/event/event_list";
+	}
+	
 	@GetMapping("admin/event/event_edit")
 	public String event_edit_get(@RequestParam (defaultValue = "0") int no, HttpServletRequest request,Model model) {
 		logger.info("수정화면 no={}",no);

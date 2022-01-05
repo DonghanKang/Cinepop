@@ -10,4 +10,5 @@ public interface EventService {
 	int selectTotalRecord(SearchVO searchVo);
 	public EventVO selectByNo(int no);
 	public int updateEvent(EventVO vo);
+	public int deleteEvent(int no);
 }
