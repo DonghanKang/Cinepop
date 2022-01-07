@@ -1,20 +1,17 @@
 package com.mp.cinepop.account.model;
 
-import java.util.Map;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.mp.cinepop.hash.model.hashVO;
+import com.mp.cinepop.common.SearchVO;
 
 @Mapper
 public interface AccountDAO {
-	public int insertAccount(AccountVO vo);
-	public int insertHash(hashVO hashvo);
-	
-	public int duplicateId(Map<String, String> map);
-	public String selectPwd(String userid);
-	public AccountVO selectByUserid(String userid);
+	//public List<AccountVO> selectAll(SearchVO searchVO);
+	int selectTotalRecord(SearchVO searchVo);
+	public AccountVO selectByNo(int no);
 	public int updateAccount(AccountVO vo);
-	public int withdrawAccount(String userid);
+	
 	
 }
