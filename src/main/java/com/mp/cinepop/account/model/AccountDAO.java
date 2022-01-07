@@ -14,7 +14,8 @@ public interface AccountDAO {
 	public int duplicateId(Map<String, String> map);
 	public String selectPwd(String userid);
 	public AccountVO selectByUserid(String userid);
-	public int updateAccount(AccountVO vo);
-	public int withdrawAccount(String userid);
+	public hashVO hashCheck(String digest);
+	public String selectDigest(String userid);
 	
+	public int withdrawAccount(String userid);
 }

@@ -3,13 +3,18 @@ package com.mp.cinepop.account.model;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mp.cinepop.account.controller.LoginController;
 import com.mp.cinepop.hash.model.hashVO;
 
 @Service
 public class AccountServiceImpl implements AccountService{
+	private static final Logger logger
+	=LoggerFactory.getLogger(LoginController.class);
 	
 	private final AccountDAO accountdao;
 	
@@ -49,19 +54,28 @@ public class AccountServiceImpl implements AccountService{
 
 
 	@Override
-	public int loginCheck(String userid, String digest) throws NoSuchAlgorithmException{
+	public int loginCheck(String userid, String password) throws NoSuchAlgorithmException{
 		String dbPwd = accountdao.selectPwd(userid);
+		AccountVO accountVo = accountdao.selectByUserid(userid);
+		String digest = accountdao.selectDigest(userid);
+		hashVO hashVo = accountdao.hashCheck(accountVo.getId());
+		
 		int result=0;
 		if(dbPwd == null || dbPwd.isEmpty()) {
 			result=USERID_NONE;
 		}else {
-			if(dbPwd.equals(digest)) {
-				result=LOGIN_OK;
+			if(dbPwd.equals(password)) {
+				if(digest.equals(hashVo.getDigest())) {
+					logger.info("Impl, digest => {}", digest);
+					logger.info("Impl, hashVo => {}", hashVo);
+					logger.info("Impl, accountVo => {}", accountVo);
+					result=LOGIN_OK;
+				}
 			}else {
 				result=DISAGREE_PWD;
 			}
 		}
-		
+		logger.info("Impl, result => {}", result);
 		return result;
 	}
 
@@ -72,10 +86,6 @@ public class AccountServiceImpl implements AccountService{
 	}
 
 
-	@Override
-	public int updateAccount(AccountVO vo) {
-		return accountdao.updateAccount(vo);
-	}
 
 
 	@Override

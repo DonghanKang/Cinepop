@@ -19,8 +19,7 @@ public interface AccountService {
 	public int insertHash(hashVO hashvo);
 	
 	public int duplicateId(Map<String, String> map);
-	public int loginCheck(String userid, String digest) throws NoSuchAlgorithmException;
+	public int loginCheck(String userid, String password) throws NoSuchAlgorithmException;
 	public AccountVO selectByUserid(String userid);
-	public int updateAccount(AccountVO vo);
 	public int withdrawAccount(String userid);
 }

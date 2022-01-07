@@ -25,4 +25,14 @@
 		select * from account
 		where id=#{id}
 	</select>
+	
+	<select id="hashCheck" parameterType="string" resultType="hashVo">
+		select * from hash
+		where id=#{id}
+	</select>
+	
+	<select id="selectDigest" parameterType="string" resultType="string">
+		select digest from hash
+		where id=#{id}
+	</select>
 </mapper>

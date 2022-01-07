@@ -10,20 +10,6 @@ public class QnaVO {
 	private int readcount;
 	private Timestamp regdate;
 	
-	public QnaVO() {
-		super();
-	}
-	
-	public QnaVO(int qNo, String title, String publisher, String content, int readcount, Timestamp regdate) {
-		super();
-		this.qNo = qNo;
-		this.title = title;
-		this.publisher = publisher;
-		this.content = content;
-		this.readcount = readcount;
-		this.regdate = regdate;
-	}
-	
 	public int getqNo() {
 		return qNo;
 	}
