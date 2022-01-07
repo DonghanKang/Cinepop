@@ -64,7 +64,7 @@ create table orders
       -- pwd		VarChar2(20) Null		--주문비밀번호_비회원
     
       RECEIVER	    VarChar2(50) NULL,		--받는사람이름 (있으면 선물하기)
-      HP			VarChar2(20) NULL,	--휴대폰번호
+      HP			VarChar2(20) NULL	--휴대폰번호
 );
 
 create table orderDetails
