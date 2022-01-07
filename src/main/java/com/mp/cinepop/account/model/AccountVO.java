@@ -1,8 +1,7 @@
 package com.mp.cinepop.account.model;
 
 public class AccountVO {
-
-	 private int aNo;
+	private int aNo;
 	 private String aName;
 	 private String id;
 	 private String  postcode1;
@@ -13,6 +12,7 @@ public class AccountVO {
 	 private int point;
 	 private int gNo;
 	 private String pwd;
+	 private String gName;
 	public int getaNo() {
 		return aNo;
 	}
@@ -73,21 +73,24 @@ public class AccountVO {
 	public void setgNo(int gNo) {
 		this.gNo = gNo;
 	}
-	
 	public String getPwd() {
 		return pwd;
 	}
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	
+	public String getgName() {
+		return gName;
+	}
+	public void setgName(String gName) {
+		this.gName = gName;
+	}
 	@Override
 	public String toString() {
 		return "AccountVO [aNo=" + aNo + ", aName=" + aName + ", id=" + id + ", postcode1=" + postcode1 + ", address="
 				+ address + ", detailAddress1=" + detailAddress1 + ", tel=" + tel + ", aAmount=" + aAmount + ", point="
-				+ point + ", gNo=" + gNo + ", pwd=" + pwd + "]";
+				+ point + ", gNo=" + gNo + ", pwd=" + pwd + ", gName=" + gName + "]";
 	}
-	
-	
-	
+	 
+	 
 }

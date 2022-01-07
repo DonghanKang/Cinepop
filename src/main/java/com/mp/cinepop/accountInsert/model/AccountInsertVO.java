@@ -1,7 +1,8 @@
-package com.mp.cinepop.accountSE.model;
+package com.mp.cinepop.accountInsert.model;
 
-public class AccountSEVO {
-	private int aNo;
+public class AccountInsertVO {
+
+	 private int aNo;
 	 private String aName;
 	 private String id;
 	 private String  postcode1;
@@ -12,7 +13,6 @@ public class AccountSEVO {
 	 private int point;
 	 private int gNo;
 	 private String pwd;
-	 private String gName;
 	public int getaNo() {
 		return aNo;
 	}
@@ -73,24 +73,21 @@ public class AccountSEVO {
 	public void setgNo(int gNo) {
 		this.gNo = gNo;
 	}
+	
 	public String getPwd() {
 		return pwd;
 	}
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	public String getgName() {
-		return gName;
-	}
-	public void setgName(String gName) {
-		this.gName = gName;
-	}
+	
 	@Override
 	public String toString() {
-		return "AccountSEVO [aNo=" + aNo + ", aName=" + aName + ", id=" + id + ", postcode1=" + postcode1 + ", address="
+		return "AccountInsertVO [aNo=" + aNo + ", aName=" + aName + ", id=" + id + ", postcode1=" + postcode1 + ", address="
 				+ address + ", detailAddress1=" + detailAddress1 + ", tel=" + tel + ", aAmount=" + aAmount + ", point="
-				+ point + ", gNo=" + gNo + ", pwd=" + pwd + ", gName=" + gName + "]";
+				+ point + ", gNo=" + gNo + ", pwd=" + pwd + "]";
 	}
-	 
-	 
+	
+	
+	
 }
