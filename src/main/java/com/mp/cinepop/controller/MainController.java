@@ -25,14 +25,6 @@ public class MainController {
 	public void store() {
 		logger.info("상품 페이지");
 	}
-
-	
-
-	
-	@RequestMapping("/store/payment")
-	public void payment() {
-		logger.info("상품결제페이지");
-	}
 	
 	@RequestMapping("/ticketing/ticketing")
 	public void ticketing() {
@@ -88,6 +80,11 @@ public class MainController {
 	  logger.info("login 페이지");
   }
  
+  @RequestMapping("/test/inicis")
+  public void inicis() {
+	  logger.info("inicis테스트");
+  }
+  
 	/*
 	 * @RequestMapping("/movie/movieChart") public void index() {
 	 * logger.info("메인 페이지"); }

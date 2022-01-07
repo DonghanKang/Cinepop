@@ -40,6 +40,18 @@
 		where PD_NO=#{pdNo}
 	</delete>
 	
+	<insert id="insertCart" >
+		<selectKey keyProperty="cartNo" resultType="int" order="BEFORE">
+			select CART_SEQ.nextval from dual
+		</selectKey>
+		insert into Cart(CART_NO,<!-- ID, -->PD_NO,QUANTITY)
+		values(#{cartNo}, #{pdNo}, #{quantity})
+	</insert>
+	
+	<select id="getCategoryName" parameterType="string" resultType="string">
+		select pct_name from pd_category
+		where pct_no=#{pct_no}
+	</select>
 </mapper>
 
 
