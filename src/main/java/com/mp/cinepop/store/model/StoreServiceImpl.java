@@ -40,6 +40,11 @@ public class StoreServiceImpl implements StoreService {
 	public int deleteByPdNo(int pdNo) {
 		return storeDao.deleteByPdNo(pdNo);
 	}
+
+	@Override
+	public String getCategoryName(String pctNo) {
+		return storeDao.getCategoryName(pctNo);
+	}
 	
 	
 }

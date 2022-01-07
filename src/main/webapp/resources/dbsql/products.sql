@@ -1,5 +1,7 @@
-DROP TABLE PRODUCTS;
-DROP TABLE PD_CATEGORY;
+-------------------------상품---------------------------
+
+--DROP TABLE PRODUCTS;
+--DROP TABLE PD_CATEGORY;
 
 CREATE TABLE PD_CATEGORY
 (
@@ -7,7 +9,7 @@ CREATE TABLE PD_CATEGORY
     PCT_NAME varchar(30)
 );
 
-CREATE TABLE PRODUCTS
+CREATE TABLE PRODUCTS   
 (
     PD_NO number primary key ,
     PCT_NO varchar2(20) 
@@ -35,20 +37,64 @@ CREATE SEQUENCE PDNO_SEQ
 START WITH 201
 INCREMENT BY 1
 NOCACHE;
+-------------------------상품---------------------------
+-------------------------구매---------------------------
+drop table cart;
+create table CART
+(
+    CART_NO number primary key,
+    ID      varchar2(50)
+        references ACCOUNT(ID) 
+--        NOT NULL 
+        ,
+    PD_NO   number
+        references PRODUCTS(PD_NO) NOT NULL,
+    QUANTITY number
+);
 
-select pdno_seq.nextval from dual;
-select * from pd_category;
-select * from products;
+create table orders
+(
+      ORDER_NO		number	NOT NULL Primary Key,   --주문번호
+      ID	varchar2(50) 
+        references ACCOUNT(ID) NOT NULL ,		--고객고유번호(회원아이디)(FK)
+      TOTAL_PRICE		number Null,			--주문총금액
+      DELIVERY_STATUS	VarChar2(20) default '입금확인중',		--주문상황_배송상황(1:입금확인중, 2:결제완료, 3:배송중, (배송준비중) 4:배송완료)
+      ORDER_DATE		Date default sysdate ,		--주문일자
+      MESSAGE			varchar2(150),			--남기고싶은말
+      -- pwd		VarChar2(20) Null		--주문비밀번호_비회원
+    
+      RECEIVER	    VarChar2(50) NULL,		--받는사람이름 (있으면 선물하기)
+      HP			VarChar2(20) NULL,	--휴대폰번호
+);
 
+create table orderDetails
+(
+    ORDER_NO    number 
+        references ORDERS(ORDER_NO) NOT NULL, 
+    PD_NO   number
+        references PRODUCTS(PD_NO) NOT NULL,
+    QUANTITY    number NOT NULL
+);
 
-delete from products
-where pd_no=204;
+create sequence cart_seq
+start with 10001
+increment by 1
+nocache;
 
-commit;
+create sequence orders_seq
+start with 10001
+increment by 1
+nocache;
 
-update products
-set pd_imagename='originalPopcorn.png', pd_description='클래식 팝콘 NO.1'
-where pd_no='110';
+--결제 뷰
+create or replace view payment
+as
+select p.pd_name, pdc.pct_name,p.pd_price, c.quantity, p.pd_price*c.quantity as "SUM_PRICE"
+from cart c join products p
+on c.pd_no=p.pd_no
+join PD_CATEGORY pdc
+on p.pct_no=pdc.pct_no;
 
-select * from products
-where pct_no='A01';
+select * from payment;
+select * from account;
+-------------------------구매---------------------------
