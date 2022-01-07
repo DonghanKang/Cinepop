@@ -37,6 +37,7 @@
     		$('#pdQuantity').change(function(){
     			totalVal=$(this).val()*${storeVo.pdPrice};
     			$('#payTotalVal').html(addComma(totalVal));
+    			$('#payVal').html(addComma(totalVal)+"<strong>원</strong>");
     			
     			$('#pdNo').val(${storeVo.pdNo});
     			$('#quantity').val($('#pdQuantity').val());
