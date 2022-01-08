@@ -38,7 +38,7 @@
 	          buyer_postcode: "01181"
 	      }, function (rsp) { // callback
 	          if (rsp.success) {
-	        	  alert('결제가 완료되었습니다.');
+	        	  alert('결제가 완료되었습니다.\n [마이페이지]-[결제내역]에서 [QR코드]를 확인 하실 수 있습니다.');
 	        	  /* location.href="<c:url value='/store/index' />"; */
 	          } else {
 	        	  alert('결제가 완료되지 않았습니다.');

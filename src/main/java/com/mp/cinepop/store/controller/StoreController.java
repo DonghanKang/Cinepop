@@ -223,8 +223,8 @@ public class StoreController {
 		return "redirect:/store/index";
 	}
 	
-//	@GetMapping("/payment")
-//	public void payment_get( ) {
-//		
-//	}
+	@RequestMapping("/paymentSuccess")
+	public void paymentSuccess() {
+		
+	}
 }
