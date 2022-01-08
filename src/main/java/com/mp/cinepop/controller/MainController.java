@@ -2,9 +2,13 @@ package com.mp.cinepop.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -15,11 +19,10 @@ import com.mp.cinepop.store.model.StoreVO;
 public class MainController {
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 	
-	@RequestMapping("/home/home")
-	public void home() {
+	@GetMapping("/home/home")
+	public void main() {
 		logger.info("메인 페이지");
 	}
-
 
 	@RequestMapping("/store/index")
 	public void store() {
@@ -89,4 +92,10 @@ public class MainController {
 	 * @RequestMapping("/movie/movieChart") public void index() {
 	 * logger.info("메인 페이지"); }
 	 */
+  @PostMapping("/home/home")
+	public String accountlogout(HttpSession session) {
+	  logger.info("로그아웃");
+		session.invalidate();
+		return "home/home";
+	}
 }

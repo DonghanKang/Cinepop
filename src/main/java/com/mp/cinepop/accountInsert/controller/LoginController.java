@@ -51,7 +51,13 @@ public class LoginController {
 		int result=accountService.loginCheck(email, password);		
 		if(result==AccountInsertService.LOGIN_OK) {
 			AccountInsertVO accountVo=accountService.selectByUserid(email);
-			
+				if(accountVo.getgNo() == 10) {
+					logger.info("등급 번호 gno = {}",accountVo.getgNo());
+					HttpSession session=request.getSession();
+					session.setAttribute("adminUserid", email);
+					session.setAttribute("adminUserName", accountVo.getaName());
+					
+				}
 			//[1] 세션에 아이디 저장
 			HttpSession session=request.getSession();
 			session.setAttribute("userid", email);
