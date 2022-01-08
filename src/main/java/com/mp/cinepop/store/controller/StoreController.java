@@ -2,6 +2,8 @@ package com.mp.cinepop.store.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,8 +18,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.mp.cinepop.cart.model.CartService;
+import com.mp.cinepop.cart.model.CartVO;
 import com.mp.cinepop.common.ConstUtil;
 import com.mp.cinepop.common.FileUploadUtil;
 import com.mp.cinepop.store.model.StoreService;
@@ -28,12 +33,14 @@ import com.mp.cinepop.store.model.StoreVO;
 public class StoreController {
 	Logger logger=LoggerFactory.getLogger(StoreController.class);
 	private final StoreService storeService;
+	private final CartService cartService;
 	private final FileUploadUtil fileUploadUtil;
 
 	@Autowired
-	public StoreController(StoreService storeService, FileUploadUtil fileUploadUtil) {
+	public StoreController(StoreService storeService, CartService cartService,FileUploadUtil fileUploadUtil) {
 		super();
 		this.storeService = storeService;
+		this.cartService = cartService;
 		this.fileUploadUtil = fileUploadUtil;
 	}
 
@@ -144,16 +151,44 @@ public class StoreController {
 		return "store/pdList";
 	}
 
-	@RequestMapping("/pdDetail")
+	@GetMapping("/pdDetail")
 	public String pdDetail(@RequestParam (defaultValue = "0") int pdNo, Model model) {
 		logger.info("상품디테일 페이지 파라미터 pdNo={}",pdNo);
 
 		StoreVO storeVo=storeService.selectByPdNo(pdNo);
-
+		String pctName=storeService.getCategoryName(storeVo.getPctNo());
+		
 		logger.info("storeVo={}",storeVo);
+		
 		model.addAttribute("storeVo",storeVo);
+		model.addAttribute("pctName",pctName);
 
 		return "store/pdDetail";
+	}
+	
+	@PostMapping("/payment")
+	public String payment(@RequestParam int pdNo
+			,@RequestParam int quantity
+			,Model model) {
+		logger.info("pdNo={}, pdQuantity={}",pdNo,quantity);
+		
+		StoreVO storeVo=storeService.selectByPdNo(pdNo);
+		logger.info("storeVo={}",storeVo);
+		
+		Map<String, Object> map=new HashMap<String, Object>();
+		
+		map.put("PD_NO",pdNo);
+		map.put("QUANTITY",quantity);
+		map.put("PD_PRICE",storeVo.getPdPrice()); 
+		map.put("PD_NAME",storeVo.getPdName());
+		map.put("PD_IMAGENAME", storeVo.getPdImagename());
+		
+		List<Map<String, Object>> list=new ArrayList<>();
+		list.add(map);
+		
+		model.addAttribute("list",list);
+		
+		return "store/payment";
 	}
 
 	@GetMapping("/pdDelete")
@@ -186,5 +221,10 @@ public class StoreController {
 		}
 
 		return "redirect:/store/index";
+	}
+	
+	@RequestMapping("/paymentSuccess")
+	public void paymentSuccess() {
+		
 	}
 }

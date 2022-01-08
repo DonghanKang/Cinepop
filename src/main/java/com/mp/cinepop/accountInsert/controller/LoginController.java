@@ -1,4 +1,4 @@
-package com.mp.cinepop.account.controller;
+package com.mp.cinepop.accountInsert.controller;
 
 import java.security.NoSuchAlgorithmException;
 
@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.mp.cinepop.account.model.AccountService;
-import com.mp.cinepop.account.model.AccountVO;
+import com.mp.cinepop.accountInsert.model.AccountInsertService;
+import com.mp.cinepop.accountInsert.model.AccountInsertVO;
 
 @Controller
 @RequestMapping("/")
@@ -27,10 +27,10 @@ public class LoginController {
 	private static final Logger logger
 		=LoggerFactory.getLogger(LoginController.class);
 	
-	private final AccountService accountService;
+	private final AccountInsertService accountService;
 		
 	@Autowired
-	public LoginController(AccountService accountService) {		
+	public LoginController(AccountInsertService accountService) {		
 		this.accountService = accountService;
 	}
 
@@ -49,8 +49,8 @@ public class LoginController {
 		
 		String msg="로그인 처리 실패!", url="/login/login";
 		int result=accountService.loginCheck(email, password);		
-		if(result==AccountService.LOGIN_OK) {
-			AccountVO accountVo=accountService.selectByUserid(email);
+		if(result==AccountInsertService.LOGIN_OK) {
+			AccountInsertVO accountVo=accountService.selectByUserid(email);
 			
 			//[1] 세션에 아이디 저장
 			HttpSession session=request.getSession();
@@ -70,9 +70,9 @@ public class LoginController {
 			
 			msg=accountVo.getaName() + "님 로그인되었습니다.";
 			url="/index";
-		}else if(result==AccountService.DISAGREE_PWD) {
+		}else if(result==AccountInsertService.DISAGREE_PWD) {
 			msg="비밀번호가 일치하지 않습니다.";			
-		}else if(result==AccountService.USERID_NONE) {
+		}else if(result==AccountInsertService.USERID_NONE) {
 			msg="해당 아이디가 존재하지 않습니다.";			
 		}
 		

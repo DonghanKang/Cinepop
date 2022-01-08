@@ -11,4 +11,5 @@ public interface StoreDAO {
 	public StoreVO selectByPdNo(int pdNo);
 	public List<StoreVO> selectByCategory(String pctNo);
 	public int deleteByPdNo(int pdNo);
+	public String getCategoryName(String pctNo);
 }
