@@ -129,7 +129,7 @@
               	  </li>
               </c:if>
               <c:if test="${!empty sessionScope.adminUserid }">
-	              <li><a href="<c:url value='/login/login'/>">관리자 페이지</a></li>
+	              <li><a href="<c:url value='/admin/adminmenu'/>">관리자 페이지</a></li>
               </c:if>
             </ul>
           </div>
