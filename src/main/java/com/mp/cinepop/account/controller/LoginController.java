@@ -1,4 +1,4 @@
-package com.mp.cinepop.accountInsert.controller;
+package com.mp.cinepop.account.controller;
 
 import java.security.NoSuchAlgorithmException;
 
