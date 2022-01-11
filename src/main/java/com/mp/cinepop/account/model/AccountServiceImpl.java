@@ -1,7 +1,5 @@
 package com.mp.cinepop.account.model;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,13 +22,16 @@ public class AccountServiceImpl implements AccountService{
 	}
 
 	@Override
-	public AccountVO selectByNo(int no) {
-		return accountDao.selectByNo(no);
+	public AccountVO selectByUserid(String userid) {
+		return accountDao.selectByUserid(userid);
 	}
-
+	
 	@Override
 	public int updateAccount(AccountVO vo) {
 		return accountDao.updateAccount(vo);
 	}
+
+	
+	
 
 }
