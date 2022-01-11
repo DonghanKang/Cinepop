@@ -7,6 +7,7 @@ import com.mp.cinepop.common.SearchVO;
 public interface AccountService {
 	//public List<AccountVO> selectAll(SearchVO searchVO);
 	int selectTotalRecord(SearchVO searchVo);
-	public AccountVO selectByNo(int no);
+	
+	public AccountVO selectByUserid(String userid);
 	public int updateAccount(AccountVO vo);
 }

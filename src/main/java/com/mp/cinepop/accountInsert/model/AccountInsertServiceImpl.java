@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mp.cinepop.account.controller.LoginController;
+import com.mp.cinepop.accountInsert.controller.LoginController;
 import com.mp.cinepop.hash.model.hashVO;
 
 @Service
