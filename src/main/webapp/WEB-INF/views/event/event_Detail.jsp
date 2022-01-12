@@ -27,8 +27,10 @@
    			<form action="<c:url value='/event/event_Detail?no=${vo.no}'/>" method="post">
 	   			<div class="btn_area t_center">
 	   				<a class="a_black_btn" href="<c:url value='/event/event_list'/>">목록</a>
+	   				<c:if test="${!empty sessionScope.adminUserid }">
 	   				<a class="a_black_btn" href="<c:url value='/admin/event/event_edit?no=${vo.no}'/>">수정</a>
 	   				<button id="delete_btn" type="submit" class="black_btn">삭제</button>
+	   				</c:if>
 	   			</div>
    			</form>
 	   	</div>

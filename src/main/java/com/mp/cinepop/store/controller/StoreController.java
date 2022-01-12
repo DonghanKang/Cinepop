@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,13 +19,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mp.cinepop.cart.model.CartService;
-import com.mp.cinepop.cart.model.CartVO;
 import com.mp.cinepop.common.ConstUtil;
 import com.mp.cinepop.common.FileUploadUtil;
+import com.mp.cinepop.store.model.CartVO;
+import com.mp.cinepop.store.model.OrdersVO;
 import com.mp.cinepop.store.model.StoreService;
 import com.mp.cinepop.store.model.StoreVO;
 
@@ -33,14 +34,12 @@ import com.mp.cinepop.store.model.StoreVO;
 public class StoreController {
 	Logger logger=LoggerFactory.getLogger(StoreController.class);
 	private final StoreService storeService;
-	private final CartService cartService;
 	private final FileUploadUtil fileUploadUtil;
 
 	@Autowired
-	public StoreController(StoreService storeService, CartService cartService,FileUploadUtil fileUploadUtil) {
+	public StoreController(StoreService storeService, FileUploadUtil fileUploadUtil) {
 		super();
 		this.storeService = storeService;
-		this.cartService = cartService;
 		this.fileUploadUtil = fileUploadUtil;
 	}
 
@@ -73,13 +72,13 @@ public class StoreController {
 				//이미지는 여러개이므로 FileUpload 메서드의 반환형을 List로 함
 				List<Map<String, Object>> fileList 
 				= fileUploadUtil.fileUpload(request, pathFlag);
-				
+
 				if(fileList.size()>0) {
 					Map<String, Object> map=fileList.get(0);
-					
+
 					pdImagename=(String) map.get("fileName");
 					pdImagefilesize=(long) map.get("fileSize");				 
-					
+
 					logger.info("파일 업로드 성공, pdImagename={}", pdImagename);
 				}
 			} catch (IllegalStateException e) {
@@ -110,10 +109,10 @@ public class StoreController {
 					pdImagefilesize=(long)map.get("fileSize");
 
 					logger.info("새 파일 업로드 성공, pdImagename={}", pdImagename);
-					
+
 					if(oldVo.getPdImagename()!=null && !oldVo.getPdImagename().isEmpty()) {
 						File oldFile=new File(upPath, oldVo.getPdImagename());
-						
+
 						if(oldFile.exists()) {
 							boolean bool=oldFile.delete();
 							logger.info("기존 파일 삭제 여부={}",bool);
@@ -157,37 +156,43 @@ public class StoreController {
 
 		StoreVO storeVo=storeService.selectByPdNo(pdNo);
 		String pctName=storeService.getCategoryName(storeVo.getPctNo());
-		
+
 		logger.info("storeVo={}",storeVo);
-		
+
 		model.addAttribute("storeVo",storeVo);
 		model.addAttribute("pctName",pctName);
 
 		return "store/pdDetail";
 	}
-	
+
 	@PostMapping("/payment")
-	public String payment(@RequestParam int pdNo
-			,@RequestParam int quantity
-			,Model model) {
-		logger.info("pdNo={}, pdQuantity={}",pdNo,quantity);
-		
-		StoreVO storeVo=storeService.selectByPdNo(pdNo);
-		logger.info("storeVo={}",storeVo);
-		
-		Map<String, Object> map=new HashMap<String, Object>();
-		
-		map.put("PD_NO",pdNo);
-		map.put("QUANTITY",quantity);
-		map.put("PD_PRICE",storeVo.getPdPrice()); 
-		map.put("PD_NAME",storeVo.getPdName());
-		map.put("PD_IMAGENAME", storeVo.getPdImagename());
-		
+	public String payment(@ModelAttribute CartVO cartVo
+			,Model model, HttpServletRequest request) {
+		logger.info("결제처리 cartVo={}",cartVo);
+
 		List<Map<String, Object>> list=new ArrayList<>();
-		list.add(map);
-		
+		HttpSession session=request.getSession();
+
+		if(cartVo.getPdNo()==0) { //장바구니를 통해 들어오면
+			String id=(String)session.getAttribute("userid");
+			list=storeService.selectCartByID(id);
+		}else { //바로구매를 통해 들어오면
+			StoreVO storeVo=storeService.selectByPdNo(cartVo.getPdNo());
+			logger.info("storeVo={}",storeVo);
+
+			Map<String, Object> map=new HashMap<String, Object>();
+
+			map.put("PD_NO",cartVo.getPdNo());
+			map.put("QUANTITY",cartVo.getQuantity());
+			map.put("PD_PRICE",storeVo.getPdPrice()); 
+			map.put("PD_NAME",storeVo.getPdName());
+			map.put("PD_IMAGENAME", storeVo.getPdImagename());
+
+			list.add(map);
+		}
+
 		model.addAttribute("list",list);
-		
+
 		return "store/payment";
 	}
 
@@ -222,7 +227,39 @@ public class StoreController {
 
 		return "redirect:/store/index";
 	}
-	
+
+	@PostMapping("/paymentDataInput")
+	@ResponseBody
+	public String paymentDataInput(@RequestParam(value="totalPrice")int totalPrice
+			,@RequestParam(value="pdNoList")int[] pdNoList
+			,@RequestParam(value="quantityList") int[] quantityList
+			,HttpSession session) {
+		logger.info("결제정보 DB처리, totalPrice={}, pdNoList={}, quantityList={}",totalPrice, pdNoList,quantityList);
+		
+		OrdersVO ordersVo=new OrdersVO();
+		String id=(String)session.getAttribute("userid");
+		ordersVo.setId(id);
+		ordersVo.setTotalPrice(totalPrice);
+		
+		List<CartVO> list=new ArrayList<>();
+		CartVO cartVo=new CartVO();
+		
+		for(int i=0;i<pdNoList.length;i++) {
+			int pdNo=pdNoList[i];
+			int quantity=quantityList[i];
+			
+			cartVo.setPdNo(pdNo);
+			cartVo.setQuantity(quantity);
+			
+			list.add(cartVo);
+		}
+		
+		int cnt=storeService.insertOrders(ordersVo, list);
+		
+		String res="DB작업완료, 확인요망";
+		return res;
+	}
+
 	@RequestMapping("/paymentSuccess")
 	public void paymentSuccess() {
 		

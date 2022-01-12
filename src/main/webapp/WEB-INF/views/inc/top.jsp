@@ -59,18 +59,14 @@
     	function chk_accountlogout(frm1) {
 			document.getElementById('frm1').submit();
 			
-			if(confirm("로그아웃 하시겠습니까?")){
+			if(confirm("로그아웃 하시겠습니까?") == true){
 				location.herf = "/home/home";
-				return true;
 			}else{
-				return false;
+				return;
 			}
 			
 		}
     	
-    	function chk_login(idnone) {
-    		alert("로그인 후 이용가능합니다");
-		}
     </script>
     
     
@@ -110,12 +106,7 @@
                   <li><a href="<c:url value='/questionAnser/questionUser_List.jsp'/>">1:1 문의 게시판</a></li>
                 </ul>
               </li>
-              <c:if test="${!empty sessionScope.userid }">
               <li><a href="<c:url value='/mypage/mypageMain'/>">마이페이지</a></li>
-              </c:if>
-               <c:if test="${empty sessionScope.userid }">
-              <li><a href="#" onclick = "return chk_login()" id = "idnone">마이페이지</a></li>
-              </c:if>
               <li><a href="<c:url value='/qna/qna_list'/>">공지사항</a></li>
               <li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
               <c:if test="${empty sessionScope.userid }">
@@ -130,7 +121,7 @@
               	  </li>
               </c:if>
               <c:if test="${!empty sessionScope.adminUserid }">
-	              <li><a href="<c:url value='/login/login'/>">관리자 페이지</a></li>
+	              <li><a href="<c:url value='/admin/adminmenu'/>">관리자 페이지 </a></li>
               </c:if>
             </ul>
           </div>

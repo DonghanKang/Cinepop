@@ -110,7 +110,7 @@ $(function() {
               </div>
           </div>
         	 <div class="t_center">
-  				<a href="<c:url value='/mypage/mypageMain'/>" class="a_black_btn">마이페이지</a>
+  				<a href="<c:url value='/movie/movieChart'/>" class="a_black_btn">무비차트</a>
   			</div>
     	</div>
     

@@ -1,4 +1,4 @@
-package com.mp.cinepop.cart.model;
+package com.mp.cinepop.store.model;
 
 public class CartVO {
 	private int cartNo;

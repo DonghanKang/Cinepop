@@ -82,19 +82,24 @@ increment by 1
 nocache;
 
 create sequence orders_seq
-start with 10001
+start with 100001
 increment by 1
 nocache;
 
 --∞·¡¶ ∫‰
 create or replace view payment
 as
-select p.pd_name, pdc.pct_name,p.pd_price, c.quantity, p.pd_price*c.quantity as "SUM_PRICE"
+select p.pd_name, pdc.pct_name, p.pd_price, c.quantity, p.pd_price*c.quantity as "SUM_PRICE"
 from cart c join products p
 on c.pd_no=p.pd_no
 join PD_CATEGORY pdc
 on p.pct_no=pdc.pct_no;
 
-select * from payment;
 select * from account;
+select * from payment;
+select * from orders;
+select * from orderDetails;
+select * from cart;
+
+alter table account add detail_address2 varchar2(20);
 -------------------------±∏∏≈---------------------------
