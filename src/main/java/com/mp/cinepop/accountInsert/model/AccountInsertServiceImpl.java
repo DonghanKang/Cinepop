@@ -95,6 +95,13 @@ public class AccountInsertServiceImpl implements AccountInsertService{
 	}
 
 
+	 @Override
+	   public int deleteHash(String id) {
+	      return accountInsertDao.deleteHash(id);
+	   }
+
+
+
 	
 	
 	
