@@ -60,10 +60,6 @@ public class MainController {
   public void mypageMain() {
 	  logger.info("mypageMain 페이지");
   }
-  @RequestMapping("/mypage/paymentDetail")
-  public void paymentDetail() {
-	  logger.info("paymentDetail 페이지");
-  }
   @RequestMapping("/mypage/editInfo")
   public void editInfo() {
 	  logger.info("editInfo 페이지");

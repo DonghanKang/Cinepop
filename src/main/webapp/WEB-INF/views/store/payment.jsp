@@ -40,7 +40,7 @@ $(function(){
 			        	  	<c:set var="totalVal" value="${totalVal+map['PD_PRICE']*map['QUANTITY']}" />
 			        	  </c:forEach>
 			        	  
-			        	  /* ${totalVal } */100 ,
+			        	 	${totalVal } ,
 			          buyer_email: "gildong@gmail.com",
 			          buyer_name: "홍길동",
 			          buyer_tel: "010-4242-4242",

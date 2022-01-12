@@ -58,11 +58,14 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	@Transactional
 	public int insertOrders(OrdersVO ordersVo, List<CartVO> list) {
+		//공통되는 orderNo 추출
 		int orderNo=storeDao.getOrderNo();
 		ordersVo.setOrderNo(orderNo);
 		
+		//Orders 테이블 insert
 		int cnt=storeDao.insertOrders(ordersVo);
 		
+		//OrderDetails테이블 insert
 		CartVO cartVo=new CartVO();
 		for(int i=0;i<list.size();i++) {
 			cartVo=list.get(i);
@@ -73,4 +76,11 @@ public class StoreServiceImpl implements StoreService {
 		
 		return cnt;
 	}
+
+	@Override
+	public List<OrdersVO> selectOrdersByID(Map<String, String> map) {
+		return storeDao.selectOrdersByID(map);
+	}
+	
+	
 }
