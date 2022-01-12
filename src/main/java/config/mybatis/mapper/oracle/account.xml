@@ -25,7 +25,9 @@
 		where id=#{id}
 	</select>
 	
-	<!-- <update id="updateAccount" parameterType="accountVo">
-		아직 안됨
-	</update> -->
+	<update id="updateAccount" parameterType="accountVo">
+		update account
+		set pwd=#{pwd}, postcode1=#{postcode1}, address=#{address}, detailAddress1=#{detailAddress1}, tel=#{tel}
+		where id=#{id}
+	</update>
 </mapper>

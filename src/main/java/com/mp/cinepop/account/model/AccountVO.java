@@ -4,7 +4,7 @@ public class AccountVO {
 	private int aNo;
 	 private String aName;
 	 private String id;
-	 private String  postcode1;
+	 private String postcode1;
 	 private String address;
 	 private String detailAddress1;
 	 private String tel;
