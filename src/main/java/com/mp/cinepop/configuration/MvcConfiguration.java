@@ -6,21 +6,24 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.mp.cinepop.admin.controller.AdminLoginInterceptor;
+import com.mp.cinepop.admin.controller.UserLoginInterceptor;
+
 @Configuration
 public class MvcConfiguration implements WebMvcConfigurer{
 
-//	@Override
-//	public void addInterceptors(InterceptorRegistry registry) {
-//		
-//		registry.addInterceptor(new LoginInterceptor())
-//		.addPathPatterns("/shop/cart/*", "/shop/order/*","/member/memberEdit","/member/memberOut");
-//		
-//		registry.addInterceptor(new AdminLoginInterceptor())
-//		.excludePathPatterns("/admin/login/adminLogin.do")
-//		.addPathPatterns("/admin/*/*", "/admin/*");
-//		
-//		
-//	}
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		
+		registry.addInterceptor(new UserLoginInterceptor())
+		.addPathPatterns("/store/payment", "/mypage/*");
+	
+		registry.addInterceptor(new AdminLoginInterceptor())
+		.addPathPatterns("/admin/*/*", "/admin/*" , "/store/pdWrite", "/store/pdDelete"
+				+ "/qna/qna_write", "/qna/qna_edit","/qna/qna_edit");
+		
+		
+	}
 
 	@Bean
 	public CommonsMultipartResolver multipartResolver() {

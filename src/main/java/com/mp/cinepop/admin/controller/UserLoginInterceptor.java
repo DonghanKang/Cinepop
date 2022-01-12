@@ -21,16 +21,15 @@ public class UserLoginInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session = request.getSession();
-		String email = (String) session.getAttribute("email");
+		String userid = (String) session.getAttribute("userid");
 		
-		logger.info("preHandle , email 호출 email ={}",email);
+		logger.info("preHandle , userid 호출 userid ={}",userid);
 		
-		if(email == null || email.isEmpty()) {
-			response.setContentType("text/html;"
-					+ "	charset = utf-8");
+		if(userid == null || userid.isEmpty()) {
+			response.setContentType("text/html;	charset = utf-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
-			out.print("alter('로그인을 먼저 진행해 주세요')");
+			out.print("alert('로그인을 먼저 진행해 주세요');");
 			out.print("location.href = '"+request.getContextPath()+"/login/login';");
 			out.print("</script>");
 			

@@ -8,13 +8,13 @@
                <div class="row">
                   <div class="col-sm-3">
                      <div class="widget">
-                        <h5 class="widget-title font-alt">About Titan</h5>
-                        <p>The languages only differ in their grammar, their
-                           pronunciation and their most common words.</p>
-                        <p>Phone: +1 234 567 89 10</p>
-                        Fax: +1 234 567 89 10
+                        <h5 class="widget-title font-alt">CinePop</h5>
+                        <p>서울 강남구 테헤란로5길 24 404호</p>
+                        <p>Tel: +82 02-3481-1005</p>
+                        Fax: +82 02-3481-1005
                         <p>
-                           Email:<a href="#">somecompany@example.com</a>
+                           Email:<a href="#">CinePop@gangnam.com</a>
+                           ©CinePop
                         </p>
                      </div>
                   </div>
