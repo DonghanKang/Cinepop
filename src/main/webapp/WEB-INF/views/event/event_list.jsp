@@ -96,7 +96,9 @@
 				<!--  페이지 번호 끝 -->	
 			</div>
 			<div class="t_center mt50">
+				<c:if test="${!empty sessionScope.adminUserid }">
 				<a class="a_black_btn" href="<c:url value='event/event_write'/>">글등록</a>
+				</c:if>
 			</div>
 		</div>
 </section>

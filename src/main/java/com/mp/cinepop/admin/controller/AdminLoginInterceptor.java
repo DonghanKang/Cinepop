@@ -26,8 +26,8 @@ public class AdminLoginInterceptor implements HandlerInterceptor{
 					+ "	charset = utf-8");
 			PrintWriter out = response.getWriter();
 			out.print("<script>");
-			out.print("alter('관리자가 아니거나 관리가 로그인이 되어있지 않습니다')");
-			out.print("location.href = '"+request.getContextPath()+"/login/login';");
+			out.print("alert('관리자가 아니거나 관리가 로그인이 되어있지 않습니다');");
+			out.print("history.back(-1);");
 			out.print("</script>");
 			
 			return false;
