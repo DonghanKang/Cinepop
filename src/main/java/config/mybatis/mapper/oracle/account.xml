@@ -9,7 +9,9 @@
 	</select>
 	
 	<select id="selectByUserid" parameterType="string" resultType="accountVo">
-		select * from account
+		select a.*, g.g_name
+		from account a join grade g
+		on a.g_no = g.g_no
 		where id=#{id}
 	</select>
 	
@@ -22,4 +24,10 @@
 		select digest from hash
 		where id=#{id}
 	</select>
+	
+	<update id="updateAccount" parameterType="accountVo">
+		update account
+		set pwd=#{pwd}, postcode1=#{postcode1}, address=#{address}, detailAddress1=#{detailAddress1}, tel=#{tel}
+		where id=#{id}
+	</update>
 </mapper>

@@ -7,9 +7,8 @@
 	function order(){ //결제내역확인
 		location.href="<c:url value='/mypage/paymentHistory'/>";
 	}
-	
-	function editInfo(){//내정보 수정
-		location.href="editInfo";
+	function accountDetail(){//내정보 조회
+		location.href="accountDetail";
 	}
 	function coupon(){//쿠폰
 		location.href="coupon";
@@ -34,14 +33,14 @@
 					</p>
 				</div>
 			</div>
-			<div class="col-lg-6 sm-6 page_area2" onclick="editInfo()">
+			<div class="col-lg-6 sm-6 page_area2" onclick="accountDetail()">
 				<div class="page_cont2">
 					<div class="line"></div>
 					<p>
-						<strong class="m_txt"> info/ </strong> 내정보수정
+						<strong class="m_txt"> info/ </strong> 내정보조회
 					</p>
 					<p>
-						고객님의 정보를 수정하실 수 있습니다.
+						고객님의 정보를 조회하실 수 있습니다.
 					</p>
 				</div>
 			</div>
