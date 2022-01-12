@@ -7,6 +7,13 @@
 	$(function() {
 		make_select();
 		
+		$('#editform').click(function (){
+			$('#sample6_postcode').attr('disabled', false);
+			$('#sample6_address').attr('disabled', false);
+			console.log($('#sample6_postcode').attr('disabled'));
+			console.log($('#sample6_address').attr('disabled'));
+		});
+		
 		function make_select() {
 			var now = new Date(); 
 	 		var year = now.getFullYear(); 
@@ -35,7 +42,7 @@
 	<div class="container">
 		<h2>내정보 수정</h2>
 		<div>
-            <form id="editform" name="update" action="editInfo_ok.jsp" method="post">
+            <form id="editform" name="update" action="<c:url value='/mypage/editInfo'/>" method="post">
 		        <div class="input_area">
 		            <div class="p_title">
 		                <label>이름</label>
@@ -66,7 +73,7 @@
 		                <label>비밀번호</label>
 		            </div>
 		            <div class="p_input">
-		                <input id="pw1" type="password" name="pw1" class="t_input" /><span class="invalidText"></span>
+		                <input id="pw1" type="password" name="pw1" class="t_input" value="${vo.pwd }"/><span class="invalidText"></span>
 		            </div>
 		        </div>
 		        <div class="input_area">
@@ -74,7 +81,7 @@
 		                <label>비밀번호 확인</label>
 		            </div>
 		            <div class="p_input">
-		                <input id="pw2" type="password" name="pw2" class="t_input" /><span class="invalidText"></span>
+		                <input id="pw2" type="password" name="pw2" class="t_input" value="${vo.pwd }"/><span class="invalidText"></span>
 		            </div>
 		        </div>
 		        <div class="input_area">
@@ -92,10 +99,10 @@
 		                <label>주소</label>
 		            </div>
 		            <div class="p_input">
-		                <input id="sample6_postcode" type="text" name="postcode1" class="t_input"  value=""  disabled="disabled" />
+		                <input id="sample6_postcode" type="text" name="postcode1" class="t_input"  value="${vo.postcode1 }"  disabled="disabled" />
 						<button type="button"  class="black_btn" onclick="sample6_execDaumPostcode()">우편번호찾기</button><br>
-						<input id="sample6_address" type="text" name="address_1" value="" required="required" disabled="disabled" class="t_input mt20"/>
-						<input id="sample6_detailAddress" type="text" name="detailAddress1" placeholder="" class="t_input mt20"/>
+						<input id="sample6_address" type="text" name="address" value="${vo.address }" required="required" disabled="disabled" class="t_input mt20"/>
+						<input id="sample6_detailAddress" type="text" name="detailAddress1" value="${vo.detailAddress1 }" class="t_input mt20"/>
 		            </div>
 		        </div>
 		        <div class="input_area">
@@ -103,13 +110,13 @@
 		                <label>전화번호</label>
 		            </div>
 		            <div class="p_input">
-		                <input type="text" name="tel" value="" class="t_input" />
+		                <input type="text" name="tel" value="${vo.tel }" class="t_input" />
 		            </div>
 		        </div>
 		        
 		    
             <div class="btn_all t_center">
-                <button type="submit" class="black_btn" id="infoedit_btn">회원정보 수정</button>
+                <button type="submit" class="black_btn" id="infoedit_btn">수정</button>
                 <button type="button" class="black_btn" onclick="back()">취소</button>
             </div>
             </form>

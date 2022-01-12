@@ -52,10 +52,7 @@
 		                <label>주소</label>
 		            </div>
 		            <div class="p_input">
-		                <input id="sample6_postcode" type="text" name="postcode1" class="t_input"  value="${vo.postcode1 }"  disabled="disabled" />
-						<button type="button"  class="black_btn" onclick="sample6_execDaumPostcode()" style="visibility: hidden;">우편번호찾기</button><br>
-						<input id="sample6_address" type="text" name="address_1" value="${vo.address }" required="required" disabled="disabled" class="t_input mt20"/>
-						<input id="sample6_detailAddress" type="text" name="detailAddress1" placeholder="${vo.detailAddress1 }" disabled="disabled" class="t_input mt20"/>
+		            	<div><strong>${vo.postcode1 }</strong> ${vo.address } ${vo.detailAddress1 }</div>
 		            </div>
 		        </div>
 		        <div class="input_area">
