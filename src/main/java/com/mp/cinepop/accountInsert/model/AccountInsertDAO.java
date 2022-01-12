@@ -17,5 +17,6 @@ public interface AccountInsertDAO {
 	public hashVO hashCheck(String digest);
 	public String selectDigest(String userid);
 	
-	public int withdrawAccount(String userid);
+	public int withdrawAccount(String id);
+	public int deleteHash(String id);
 }

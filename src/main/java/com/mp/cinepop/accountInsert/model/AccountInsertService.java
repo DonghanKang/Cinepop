@@ -21,5 +21,7 @@ public interface AccountInsertService {
 	public int duplicateId(Map<String, String> map);
 	public int loginCheck(String userid, String password) throws NoSuchAlgorithmException;
 	public AccountInsertVO selectByUserid(String userid);
-	public int withdrawAccount(String userid);
+	
+	public int withdrawAccount(String id);
+	public int deleteHash(String id);
 }

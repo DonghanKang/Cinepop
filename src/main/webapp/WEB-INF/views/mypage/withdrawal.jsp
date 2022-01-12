@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="../inc/top.jsp" %>
 <section class="module">
 	<div class="container">
@@ -7,17 +8,17 @@
 			<div class="col-sm-8 frm_login">
 				<h2 class="font-alt t_center">회원 탈퇴</h2>
 				<hr class="divider-w mb-10">
-				<form class="form" action="withdrawalfin.jsp">
+				<form class="form" action="<c:url value='/mypage/withdrawal'/>" method="post">
 					<div class="form-group ">
-						<input class="t_input w100" id="email" type="text" name="email"
+						<input class="t_input w100" id="id" type="text" name="id"
 							placeholder="Email" />
 					</div>
 					<div class="form-group">
-						<input class="t_input w100" id="password" type="password"
-							name="password" placeholder="비밀번호 입력" />
+						<input class="t_input w100" id="pwd" type="password"
+							name="pwd" placeholder="비밀번호 입력" />
 					</div>
 					<div class="form-group frm_registerpwd">
-                    	<input class="t_input w100" id="re-password" type="password" name="re-password" placeholder="비밀번호 확인"/>
+                    	<input class="t_input w100" id="pwd2" type="password" name="pwd2" placeholder="비밀번호 확인"/>
                   	</div>
 					<hr class="divider-w mb-10">
 					<div class="t_left">
