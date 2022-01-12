@@ -74,7 +74,7 @@
 		            </div>
 		            <div class="p_input">
 		                <input id="id" type="email" name="id" class="t_input" placeholder=""><span class="invalidText"></span>
-		                <div class="select display_inflex">
+		                <!-- <div class="select display_inflex">
 			                <select name="email2" id="email2"  title="이메일주소 뒷자리">
 					            <option value="naver.com">naver.com</option>
 					            <option value="hanmail.net">hanmail.net</option>
@@ -84,7 +84,7 @@
 				        	</select>
 			        	</div>
 				        <input type="text" name="email3" id="email3" title="직접입력인 경우 이메일주소 뒷자리"
-				        	style="visibility:hidden" class="t_input">
+				        	style="visibility:hidden" class="t_input"> -->
 		            </div>
 		        </div>
 		        

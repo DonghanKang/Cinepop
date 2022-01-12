@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+
 <mapper namespace="com.mp.cinepop.accountInsert.model.AccountInsertDAO">
 	<insert id="insertAccount" parameterType="accountInsertVo">
 		<selectKey keyProperty="aNo" resultType="int" order="BEFORE">
@@ -35,4 +36,17 @@
 		select digest from hash
 		where id=#{id}
 	</select>
+	<delete  id="withdrawAccount" parameterType="string" >
+		<!-- select * from
+		hash h join account a
+		on h.id = a.id
+		where a.id=#{id} and h.digest=#{digest}; -->
+		delete from account where id=#{id}
+
+	</delete>
+	<delete id="deleteHash" parameterType="string">
+		delete from hash
+		where id=#{id}
+	</delete>
 </mapper>
+
