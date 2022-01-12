@@ -74,6 +74,16 @@
 		select * from payment
 		where id=#{id}
 	</select>
+	
+	<select id="selectOrdersByID" parameterType="hashMap" resultType="ordersVo">
+		select * from orders where id=#{id}
+		<if test="startDate!=null and startDate!='' 
+			and endDate!=null and endDate!=''">
+			AND ORDER_DATE BETWEEN TO_DATE(#{startDate}, 'YYYY-MM-DD') 
+			AND TO_DATE(#{endDate}, 'YYYY-MM-DD')+1
+		</if>
+		order by order_date desc
+	</select>
 </mapper>
 
 

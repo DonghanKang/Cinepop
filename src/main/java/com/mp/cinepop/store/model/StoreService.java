@@ -12,4 +12,5 @@ public interface StoreService {
 	public String getCategoryName(String pctNo);
 	public List<Map<String, Object>> selectCartByID(String id);
 	public int insertOrders(OrdersVO ordersVo, List<CartVO> cartVo);
+	public List<OrdersVO> selectOrdersByID(Map<String, String> map);
 }

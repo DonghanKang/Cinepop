@@ -17,4 +17,5 @@ public interface StoreDAO {
 	public int insertOrders(OrdersVO ordersVo);
 	public int insertOrderDetails(CartVO cartVo);
 	public int getOrderNo();
+	public List<OrdersVO> selectOrdersByID(Map<String, String> map);
 }

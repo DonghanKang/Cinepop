@@ -8,7 +8,7 @@
 		});
 		
 		$('#toPayHistory').click(function(){
-			location.href="<c:url value='/mypage/paymentDetail'/>";
+			location.href="<c:url value='/mypage/paymentHistory'/>";
 		});
 	});
 </script>

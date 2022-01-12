@@ -5,7 +5,7 @@
 <script>
 	/*각 페이지로 이동*/
 	function order(){ //결제내역확인
-		location.href="paymentDetail";
+		location.href="<c:url value='/mypage/paymentHistory'/>";
 	}
 	function accountDetail(){//내정보 조회
 		location.href="accountDetail";

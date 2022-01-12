@@ -19,7 +19,13 @@ public class SearchVO {
 	/** 현재 페이지 */
 	private int currentPage = 1;
 	
+	/* 날짜 검색시 시작날짜 */
+    private String startDate="";
     
+	/* 날짜 검색시 종료날짜 */
+    private String endDate="";
+    
+    private String id="";
     /**블럭당 보여질 페이지 수,  페이지 사이즈 */
     private int blockSize; // properties에서 설정
     
@@ -31,6 +37,7 @@ public class SearchVO {
     
     /**페이지 별 레코드 갯수 (pageSize) */
     private int recordCountPerPage; 
+    
     
    /**
      * 검색 조건을  설정한다.
@@ -110,6 +117,22 @@ public class SearchVO {
 
 	public void setRecordCountPerPage(int recordCountPerPage) {
 		this.recordCountPerPage = recordCountPerPage;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 
 	@Override

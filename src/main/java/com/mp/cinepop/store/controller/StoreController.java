@@ -235,7 +235,7 @@ public class StoreController {
 			,@RequestParam(value="quantityList") int[] quantityList
 			,HttpSession session) {
 		logger.info("결제정보 DB처리, totalPrice={}, pdNoList={}, quantityList={}",totalPrice, pdNoList,quantityList);
-		
+		//VO에 정보입력
 		OrdersVO ordersVo=new OrdersVO();
 		String id=(String)session.getAttribute("userid");
 		ordersVo.setId(id);
