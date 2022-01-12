@@ -55,26 +55,27 @@ public class AccountInsertServiceImpl implements AccountInsertService{
 
 	@Override
 	public int loginCheck(String userid, String password) throws NoSuchAlgorithmException{
-		String dbPwd = accountInsertDao.selectPwd(userid);
-		AccountInsertVO accountVo = accountInsertDao.selectByUserid(userid);
-		String digest = accountInsertDao.selectDigest(userid);
-		hashVO hashVo = accountInsertDao.hashCheck(accountVo.getId());
-		
+		AccountInsertVO accountVo;
 		int result=0;
-		if(dbPwd == null || dbPwd.isEmpty()) {
-			result=USERID_NONE;
-		}else {
-			if(dbPwd.equals(password)) {
-				if(digest.equals(hashVo.getDigest())) {
+		
+		if((accountVo = accountInsertDao.selectByUserid(userid))==null) {	// 아이디가 없다
+			result = USERID_NONE;
+		}else {	// 아이디가 있다
+			String dbPwd = accountInsertDao.selectPwd(userid);
+			String digest = accountInsertDao.selectDigest(userid);
+			hashVO hashVo = accountInsertDao.hashCheck(accountVo.getId());
+			if(dbPwd.equals(password)) {	// 비밀번호가 일치한다
+				if(digest.equals(hashVo.getDigest())) {	// 해시값이 일치한다
 					logger.info("Impl, digest => {}", digest);
 					logger.info("Impl, hashVo => {}", hashVo);
 					logger.info("Impl, accountVo => {}", accountVo);
 					result=LOGIN_OK;
 				}
-			}else {
+			}else {	// 비밀번호가 다르다
 				result=DISAGREE_PWD;
 			}
 		}
+		
 		logger.info("Impl, result => {}", result);
 		return result;
 	}
