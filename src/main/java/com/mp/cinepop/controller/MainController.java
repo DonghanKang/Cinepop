@@ -42,11 +42,10 @@ public class MainController {
 		logger.info("상품결제페이지");
 	}
 	
-	@RequestMapping("/ticketing/ticketing")
-	public void ticketing() {
-		logger.info("예매 페이지");
-	}
-	
+	/*
+	 * @RequestMapping("/ticketing/ticketing") public void ticketing() {
+	 * logger.info("예매 페이지"); }
+	 */
 	/*
 	 * @RequestMapping("/event/event_write") public void event_write() {
 	 * logger.info("이벤트 글쓰기"); }
