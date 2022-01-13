@@ -40,6 +40,50 @@
 		where PD_NO=#{pdNo}
 	</delete>
 	
+	<select id="getCategoryName" parameterType="string" resultType="string">
+		select pct_name from pd_category
+		where pct_no=#{pct_no}
+	</select>
+	
+	
+	<insert id="insertCart" parameterType="cartVo" >
+		<selectKey keyProperty="cartNo" resultType="int" order="BEFORE">
+			select CART_SEQ.nextval from dual
+		</selectKey>
+		insert into CART(CART_NO, ID, PD_NO, QUANTITY)
+		values(#{cartNo}, #{id} ,#{pdNo}, #{quantity})
+	</insert>
+	
+	<select id="getOrderNo" resultType="int">
+			select ORDERS_SEQ.nextval from dual
+	</select>
+
+	<insert id="insertOrders" parameterType="ordersVo" >
+		insert into ORDERS(ORDER_NO, ID, TOTAL_PRICE <!--, DELIVERY_STATUS, 
+		 MESSAGE, RECEIVER, HP -->)
+		values(#{orderNo}, #{id} , #{totalPrice}  <!--, #{deliveryStatus},
+		  #{message}, #{receiver}, #{hp} -->)
+	</insert>
+	
+	<insert id="insertOrderDetails" parameterType="cartVo">
+		insert into ORDERDETAILS(ORDER_NO, PD_NO, QUANTITY)
+		values(#{cartNo},#{pdNo}, #{quantity})
+	</insert>
+	
+	<select id="selectCartByID" parameterType="string" resultType="map">
+		select * from payment
+		where id=#{id}
+	</select>
+	
+	<select id="selectOrdersByID" parameterType="hashMap" resultType="ordersVo">
+		select * from orders where id=#{id}
+		<if test="startDate!=null and startDate!='' 
+			and endDate!=null and endDate!=''">
+			AND ORDER_DATE BETWEEN TO_DATE(#{startDate}, 'YYYY-MM-DD') 
+			AND TO_DATE(#{endDate}, 'YYYY-MM-DD')+1
+		</if>
+		order by order_date desc
+	</select>
 </mapper>
 
 

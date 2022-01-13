@@ -29,12 +29,15 @@
 						</div>
                       	<input type="file" id="upfile" name="upfile"  class="infobox">
                    </div>
-                   <div class="write_display">
-						<div class="p_title">
-							<label for="content">내용</label>
-						</div>
-                   		<textarea rows="20" cols="" name="content" id="content" class="infobox"></textarea>
-                   </div>
+                   <script src="../ckeditor5/ckeditor.js"></script>
+			            <textarea name="content" id="content"></textarea>
+			            <script>
+			            	ClassicEditor
+			            		.create(document.querySelector('#content'))
+			            		.catch(error => {
+			            			console.error(error)
+			            		});
+	            </script>
                </div>
 		      <div class="btn_all t_center mt50">
 		           <input type="submit" class="black_btn" id="btList" value="글등록" />

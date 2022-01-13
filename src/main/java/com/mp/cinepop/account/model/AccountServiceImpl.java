@@ -3,23 +3,35 @@ package com.mp.cinepop.account.model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mp.cinepop.common.SearchVO;
+
 @Service
 public class AccountServiceImpl implements AccountService{
-	
-	private final AccountDAO accountdao;
-	
-	@Autowired
-	public AccountServiceImpl(AccountDAO accountdao) {
-		super();
-		this.accountdao = accountdao;
-	}
 
+	@Autowired
+	private AccountDAO accountDao;
+	
+	/*
+	 * @Override public List<AccountVO> selectAll(SearchVO searchVO) { return
+	 * accountDao.selectAll(searchVO); }
+	 */
 
 	@Override
-	public int insertAccount(AccountVO vo) {
-		int cnt=accountdao.insertAccount(vo);
-		return cnt;
+	public int selectTotalRecord(SearchVO searchVo) {
+		return accountDao.selectTotalRecord(searchVo);
+	}
+
+	@Override
+	public AccountVO selectByUserid(String userid) {
+		return accountDao.selectByUserid(userid);
 	}
 	
+	@Override
+	public int updateAccount(AccountVO vo) {
+		return accountDao.updateAccount(vo);
+	}
+
 	
+	
+
 }

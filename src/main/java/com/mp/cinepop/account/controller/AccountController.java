@@ -1,5 +1,7 @@
 package com.mp.cinepop.account.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,44 +15,79 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mp.cinepop.account.model.AccountService;
 import com.mp.cinepop.account.model.AccountVO;
+import com.mp.cinepop.qna.controller.QnaController;
 
 @Controller
 @RequestMapping("/")
 public class AccountController {
-	private static final Logger logger
-	=LoggerFactory.getLogger(AccountController.class);
-	
+	private static final Logger logger = LoggerFactory.getLogger(QnaController.class);
+
 	private final AccountService accountService;
-	
+
 	@Autowired
 	public AccountController(AccountService accountService) {
-		super();
 		this.accountService = accountService;
+		logger.info("AccountController생성자 주입!!");
 	}
-	
-	@GetMapping("register/register")
-	public void register() {
-		logger.info("회원가입화면");
+
+	@GetMapping("mypage/accountDetail")
+	public String accountDetail(HttpSession session, Model model) {
+		String userid = (String) session.getAttribute("userid");
+		logger.info("회원정보 조회 화면, 파라미터 userid={}", userid);
+
+		AccountVO vo = accountService.selectByUserid(userid);
+		logger.info("회원 조회 결과 vo={}", vo);
+
+		model.addAttribute("vo", vo);
+		return "mypage/accountDetail";
 	}
-	
-	@PostMapping("register/register")
-	public String register_post(@ModelAttribute AccountVO vo, @RequestParam String email2,String email3,String pw1,String pw2, Model model) {
-		logger.info("회원가입 처리 , 파라미터 vo={},email2={},email3={}",vo,email2,email3);
+
+	@GetMapping("mypage/editInfo")
+	public String accountEdit_get(HttpSession session, Model model) {
+		String userid = (String) session.getAttribute("userid");
+		logger.info("회원정보 수정 화면, 파라미터 userid={}", userid);
+
+		AccountVO vo = accountService.selectByUserid(userid);
+		logger.info("회원수정 - 조회 결과 vo={}", vo);
+
+		model.addAttribute("vo", vo);
+		return "mypage/editInfo";
+	}
+
+	@PostMapping("mypage/editInfo")
+	public String edit_post(@ModelAttribute AccountVO vo, 
+			@RequestParam(value = "id", required = false) String id,
+			@RequestParam(value = "pw1", required = false) String pw1,
+			@RequestParam(value = "postcode1", required = false) String postcode1,
+			@RequestParam(value = "address", required = false) String address,
+			@RequestParam(value = "detailAddress1", required = false) String detailAddress1,
+			@RequestParam(value = "tel", required = false) String tel,
+			HttpSession session, Model model) {	
+		id = (String) session.getAttribute("userid");
+		vo = accountService.selectByUserid(id);
+		logger.info("회원수정 처리, 파라미터 vo={}", vo);
+
+		String msg = "회원정보 수정 실패!", url = "/mypage/editInfo";
 		
-		if(vo.getId()==null || vo.getId().isEmpty()) {
-			email2="";
-			email3="";			
-		}else if(email3!=null && !email3.isEmpty()) {
-				email2=email3;
+		vo.setPwd(pw1);
+		vo.setPostcode1(postcode1);
+		vo.setAddress(address);
+		vo.setDetailAddress1(detailAddress1);
+		vo.setTel(tel);
+		
+		int cnt = accountService.updateAccount(vo);
+		logger.info("회원수정 결과, cnt={}", cnt);
+
+		if (cnt > 0) {
+			msg = "회원정보 수정되었습니다.";
+		} else {
+			msg = "회원정보 수정 실패!";
 		}
-		
-		int cnt=accountService.insertAccount(vo);
-		logger.info("파라미터 vo.getId() = {}",vo.getId());
-		logger.info(" 파라미터 email2 = {}",email2);
-		vo.setId(vo.getId()+"@"+ email2);
-		logger.info("이메일 합산 결과 파라미터 vo = {}",vo);
-		logger.info("회원가입 결과,cnt={}",cnt);
-		
-		return "login/login";
-	} 
+
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+
+		return "redirect:/mypage/accountDetail";
+	}
+
 }

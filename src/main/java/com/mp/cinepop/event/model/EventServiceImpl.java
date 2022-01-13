@@ -40,5 +40,14 @@ public class EventServiceImpl implements EventService {
 		return eventdao.updateEvent(vo);
 	}
 
+	@Override
+	public int deleteEvent(int no) {
+		return eventdao.deleteEvent(no);
+	}
+
+	
+
+	
+
 	
 }

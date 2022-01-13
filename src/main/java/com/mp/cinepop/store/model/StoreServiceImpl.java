@@ -1,9 +1,11 @@
 package com.mp.cinepop.store.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class StoreServiceImpl implements StoreService {
@@ -39,6 +41,45 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	public int deleteByPdNo(int pdNo) {
 		return storeDao.deleteByPdNo(pdNo);
+	}
+
+	@Override
+	public String getCategoryName(String pctNo) {
+		return storeDao.getCategoryName(pctNo);
+	}
+
+	
+	
+	@Override
+	public List<Map<String, Object>> selectCartByID(String id) {
+		return storeDao.selectCartByID(id);
+	}
+
+	@Override
+	@Transactional
+	public int insertOrders(OrdersVO ordersVo, List<CartVO> list) {
+		//공통되는 orderNo 추출
+		int orderNo=storeDao.getOrderNo();
+		ordersVo.setOrderNo(orderNo);
+		
+		//Orders 테이블 insert
+		int cnt=storeDao.insertOrders(ordersVo);
+		
+		//OrderDetails테이블 insert
+		CartVO cartVo=new CartVO();
+		for(int i=0;i<list.size();i++) {
+			cartVo=list.get(i);
+			cartVo.setCartNo(orderNo);
+			
+			cnt=storeDao.insertOrderDetails(cartVo);
+		}
+		
+		return cnt;
+	}
+
+	@Override
+	public List<OrdersVO> selectOrdersByID(Map<String, String> map) {
+		return storeDao.selectOrdersByID(map);
 	}
 	
 	
