@@ -74,7 +74,8 @@ create table orderDetails
         references ORDERS(ORDER_NO) NOT NULL, 
     PD_NO   number
         references PRODUCTS(PD_NO) NOT NULL,
-    QUANTITY    number NOT NULL
+    QUANTITY    number NOT NULL,
+    PD_ORDER    number NOT NULL
 );
 
 create sequence cart_seq
@@ -97,19 +98,20 @@ join PD_CATEGORY pdc
 on p.pct_no=pdc.pct_no;
 
 --결제내역 뷰
-create or replace view orders_view
+create or replace view orderDetails_view
 as
-select *
-from 
+select od.order_no,p.pd_no,p.pd_name,pd_price,od.quantity, od.order_no
+from orderDetails od join products p
+on od.pd_no=p.pd_no
 ;
-
+select * from orderdetails_view;
 
 select * from account;
 select * from payment;
-select * from orders;
-select * from orders;
+select * from orders; 
 select * from orderDetails;
 select * from cart;
+
 
 alter table account add detail_address2 varchar2(20);
 -------------------------구매---------------------------

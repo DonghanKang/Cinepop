@@ -12,28 +12,43 @@
 		padding:8px 24px; width:104px !important;
 	}
 </style>
-<script>
+<script type="text/javascript" language="javascript">
+	/* function openDetail(){
+	    var pop_title = "paymentDetail" ;
+	     
+
+	    window.open("", pop_title, 
+	    		"scrollbars=no,toolbar=no,location=no,status=yes,menubar=no,resizable=no,width=1000px,height=500px")
+	     
+	    var frmData = document.paymentDetail ;
+	    frmData.target = pop_title ;
+	    frmData.action = "<c:url value='/mypage/paymentDetail'/>" ;
+	    
+	    frmData.submit() ;
+	} */
+
 	$(function(){
-		var todayStr=new Date().toISOString().slice(0, 10);
-		
-		<c:if test="${startDate==null}">
+		var d= new Date();
+		var todayStr=new Date(d.getTime() - (d.getTimezoneOffset() * 60000)).toISOString().slice(0, 10);
+		<c:if test="${empty param.startDate}">
 			$('#startDate').val(todayStr);
 			$('#endDate').val(todayStr);
 		</c:if>
-		<c:if test="${startDate!=null}">
-			$('#startDate').val('${startDate}');
-			$('#endDate').val('${endDate}');
+		<c:if test="${!empty param.startDate}">
+			$('#startDate').val('${param.startDate}');
+			$('#endDate').val('${param.endDate}');
 		</c:if>
+		
 	})
 </script>
 <section class="module">
 	<div class="container">
 		<h2>마이페이지 | 결제내역 조회</h2>
 		<div class="searchbox">
-			<form action="<c:url value='/mypage/paymentHistory'/>" method="POST">
+			<form action="<c:url value='/mypage/paymentHistory'/>" method="POST" >
 				<input type="date" name="startDate" id="startDate"> ~
 				<input type="date" name="endDate" id="endDate" >
-				<input type="submit" class="black_btn search_btn"  value="검색">
+				<input type="submit" class="black_btn search_btn"  value="검색" >
 			</form>
 	    </div>
           <div class="col-sm-12">
@@ -71,7 +86,11 @@
 									pattern="#,###"/>원
 							</td>
 		          			<td>${orderVo.deliveryStatus }</td>
-		          			<td><input class="black_btn" type="button" value="상세보기"></td>
+		          			<td>
+		          					<input class="black_btn" type="button" value="상세보기" 
+		          					onclick="window.open('<c:url value='/mypage/paymentDetail?orderNo=${orderVo.orderNo }&orderDate=${orderVo.orderDate }&totalPrice=${orderVo.totalPrice }'/>', '결제상세정보보기' 
+		          					,'scrollbars=no,toolbar=no,location=no,status=yes,menubar=no,resizable=no,width=1000px,height=500px');">
+		          			</td>
 		          		</tr>
 	          		</c:forEach>
 	          	</c:if>
@@ -81,7 +100,7 @@
 				<!-- 페이지 번호 추가 -->		
 				<!-- 이전 블럭으로 이동 -->
 				<c:if test="${pagingInfo.firstPage>1 }">
-					<a href="<c:url value='/board/list.do?currentPage=${pagingInfo.firstPage-1}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">
+					<a href="<c:url value='/mypage/paymentHistory?currentPage=${pagingInfo.firstPage-1}&startDate=${param.startDate}&endDate=${param.endDate}'/>">
 						<img src="<c:url value='/resources/images/first.JPG'/>" alt="이전블럭">
 					</a>	
 				</c:if>		
@@ -89,19 +108,18 @@
 				<!-- [1][2][3][4][5][6][7][8][9][10] -->
 				<c:forEach var="i" begin="${pagingInfo.firstPage}" end="${pagingInfo.lastPage }">
 					<c:if test="${i==pagingInfo.currentPage }">
-						<span style="color:blue;font-weight: bold;font-size: 1em">
+						<span style="font-weight: bold;font-size: 1em">
 							${i}</span>			
 					</c:if>	
 					<c:if test="${i!=pagingInfo.currentPage }">	
-							<a href="<c:url value='/mypage/paymentHistory?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">
+							<a href="<c:url value='/mypage/paymentHistory?currentPage=${i}&startDate=${param.startDate}&endDate=${param.endDate}'/>">
 							[${i }]</a>			
 					</c:if>
 				</c:forEach>
 				
 				<!-- 다음 블럭으로 이동 -->					
 				<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage }">	
-						<a href
-			="<c:url value='/board/list.do?currentPage=${pagingInfo.lastPage+1}&&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">
+						<a href="<c:url value='/board/list.do?currentPage=${pagingInfo.lastPage+1}&&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">
 							<img src="<c:url value='/resources/images/last.JPG'/>" alt="다음블럭">
 						</a>	
 				</c:if>					

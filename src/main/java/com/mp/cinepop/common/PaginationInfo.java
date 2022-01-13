@@ -1,6 +1,7 @@
 package com.mp.cinepop.common;
 
 public class PaginationInfo {
+
 	/**
 	 * Required Fields
 	  	currentPage : 현재 페이지
@@ -55,6 +56,7 @@ public class PaginationInfo {
 	private int firstRecordIndex; //페이지당 시작 인덱스 0, 5, 10, 15 ... curPos
 	private int lastRecordIndex;  //페이지당 마지막 인덱스	5,10,15,20....
 	  
+	//나머지 레코드들을 자동으로 계산
 	public int getTotalPage() {
 		totalPage=(int)Math.ceil((float)totalRecord/recordCountPerPage);
 		//totalPage = ((getTotalRecord()-1)/getRecordCountPerPage()) + 1;
@@ -88,4 +90,13 @@ public class PaginationInfo {
 		lastRecordIndex = getCurrentPage() * getRecordCountPerPage();
 		return lastRecordIndex;
 	}	
+	
+	@Override
+	public String toString() {
+		return "PaginationInfo [currentPage=" + currentPage + ", recordCountPerPage=" + recordCountPerPage
+				+ ", blockSize=" + blockSize + ", totalRecord=" + totalRecord + ", totalPage=" + totalPage
+				+ ", firstPage=" + firstPage + ", lastPage=" + lastPage + ", firstRecordIndex=" + firstRecordIndex
+				+ ", lastRecordIndex=" + lastRecordIndex + "]";
+	}
+
 }
