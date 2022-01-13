@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mp.cinepop.common.SearchVO;
+
 @Service
 public class StoreServiceImpl implements StoreService {
 	private StoreDAO storeDao;
@@ -59,7 +61,7 @@ public class StoreServiceImpl implements StoreService {
 	@Transactional
 	public int insertOrders(OrdersVO ordersVo, List<CartVO> list) {
 		//공통되는 orderNo 추출
-		int orderNo=storeDao.getOrderNo();
+		int orderNo=storeDao.createOrderNo();
 		ordersVo.setOrderNo(orderNo);
 		
 		//Orders 테이블 insert
@@ -70,16 +72,28 @@ public class StoreServiceImpl implements StoreService {
 		for(int i=0;i<list.size();i++) {
 			cartVo=list.get(i);
 			cartVo.setCartNo(orderNo);
+			cartVo.setPdOrder(i+1);
 			
 			cnt=storeDao.insertOrderDetails(cartVo);
 		}
 		
-		return cnt;
+		//추가한 오더번호를 리턴
+		return orderNo;
 	}
 
 	@Override
-	public List<OrdersVO> selectOrdersByID(Map<String, String> map) {
-		return storeDao.selectOrdersByID(map);
+	public List<OrdersVO> selectOrdersByID(SearchVO searchVo) {
+		return storeDao.selectOrdersByID(searchVo);
+	}
+
+	@Override
+	public int getTotalRecord(SearchVO searchVo) {
+		return storeDao.getTotalRecord(searchVo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectOrderDetail(int orderNo) {
+		return storeDao.selectOrderDetail(orderNo);
 	}
 	
 	

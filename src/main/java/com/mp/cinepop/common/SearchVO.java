@@ -135,14 +135,20 @@ public class SearchVO {
 		this.endDate = endDate;
 	}
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
-		return "SearchVO [searchCondition=" + searchCondition
-				+ ", searchKeyword=" + searchKeyword + ", searchUseYn="
-				+ searchUseYn + ", currentPage=" + currentPage
-				+ ", blockSize=" + blockSize + ", firstRecordIndex="
-				+ firstRecordIndex + ", lastRecordIndex=" + lastRecordIndex
-				+ ", recordCountPerPage=" + recordCountPerPage + "]";
+		return "SearchVO [searchCondition=" + searchCondition + ", searchKeyword=" + searchKeyword + ", searchUseYn="
+				+ searchUseYn + ", currentPage=" + currentPage + ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", id=" + id + ", blockSize=" + blockSize + ", firstRecordIndex=" + firstRecordIndex
+				+ ", lastRecordIndex=" + lastRecordIndex + ", recordCountPerPage=" + recordCountPerPage + "]";
 	}
 
 	

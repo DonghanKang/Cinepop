@@ -5,6 +5,10 @@ public class CartVO {
 	private String id;
 	private int	pdNo;
 	private int quantity;
+	
+	/* OrderDetails 테이블의 상품순서를 위한 변수 */
+	private int pdOrder;
+	
 	public int getCartNo() {
 		return cartNo;
 	}
@@ -30,6 +34,12 @@ public class CartVO {
 		this.quantity = quantity;
 	}
 	
+	public int getPdOrder() {
+		return pdOrder;
+	}
+	public void setPdOrder(int pdOrder) {
+		this.pdOrder = pdOrder;
+	}
 	@Override
 	public String toString() {
 		return "CartVO [cartNo=" + cartNo + ", id=" + id + ", pdNo=" + pdNo + ", quantity=" + quantity + "]";
