@@ -36,16 +36,10 @@ $(function(){
  });
 </script>
    <div class="container">
-   <h2 class="mb50">공지사항</h2>
+   <h2 class="mb50">공지사항 글작성</h2>
       <fieldset>
          <form name="admin_notice" action="<c:url value='/qna/qna_write'/>" method="post" enctype="multipart/form-data">
             <input type="hidden" id="email" name="email" value=""> 
-               <!-- <div class="input_area">
-               	   <div class="p_title">비밀번호</div>
-                   <div class="p_input">
-                       <input type="text" name="title"  class="t_input w100 infobox">
-                   </div>
-               </div>  -->   
                <div class="input_area">
                    <div class="p_input2">
                        <input type="text" name="title"  class=" w100">

@@ -50,4 +50,14 @@
 		where q_no=#{qNo}
 	</update>
 	
+	<update id="updateQna" parameterType="qnavo">
+		update notice
+		set title=#{title}, content=#{content}
+		where q_no=#{qNo}
+	</update>
+	
+	<delete id="deleteQna" parameterType="int">
+		delete notice where q_no=#{qNo}
+	</delete>
+	
 </mapper>

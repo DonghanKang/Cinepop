@@ -3,6 +3,9 @@
 <%@include file="../inc/top.jsp"%>
 <script src="<%=request.getContextPath() %>/js/jquery-3.6.0.js"></script>
 <script>
+	function back(){
+		history.back(-1);
+	}
 	function editInfo(){//내정보 수정
 		location.href="editInfo";
 	}

@@ -67,8 +67,6 @@ public class AccountController {
 		vo = accountService.selectByUserid(id);
 		logger.info("회원수정 처리, 파라미터 vo={}", vo);
 
-		String msg = "회원정보 수정 실패!", url = "/mypage/editInfo";
-		
 		vo.setPwd(pw1);
 		vo.setPostcode1(postcode1);
 		vo.setAddress(address);
@@ -77,15 +75,6 @@ public class AccountController {
 		
 		int cnt = accountService.updateAccount(vo);
 		logger.info("회원수정 결과, cnt={}", cnt);
-
-		if (cnt > 0) {
-			msg = "회원정보 수정되었습니다.";
-		} else {
-			msg = "회원정보 수정 실패!";
-		}
-
-		model.addAttribute("msg", msg);
-		model.addAttribute("url", url);
 
 		return "redirect:/mypage/accountDetail";
 	}
