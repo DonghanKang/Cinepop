@@ -29,11 +29,10 @@ public class MainController {
 		logger.info("상품 페이지");
 	}
 	
-	@RequestMapping("/ticketing/ticketing")
-	public void ticketing() {
-		logger.info("예매 페이지");
-	}
-	
+	/*
+	 * @RequestMapping("/ticketing/ticketing") public void ticketing() {
+	 * logger.info("예매 페이지"); }
+	 */
 	/*
 	 * @RequestMapping("/event/event_write") public void event_write() {
 	 * logger.info("이벤트 글쓰기"); }
@@ -59,10 +58,6 @@ public class MainController {
   @RequestMapping("/mypage/mypageMain")
   public void mypageMain() {
 	  logger.info("mypageMain 페이지");
-  }
-  @RequestMapping("/mypage/paymentDetail")
-  public void paymentDetail() {
-	  logger.info("paymentDetail 페이지");
   }
   @RequestMapping("/mypage/editInfo")
   public void editInfo() {

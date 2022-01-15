@@ -5,6 +5,7 @@
 <%@include file="../inc/top.jsp"%>
 <script type="text/javascript"
 	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+	
 <style>
 .product_info_img img {
 	object-fit: scale-down;
@@ -40,7 +41,7 @@ $(function(){
 			        	  	<c:set var="totalVal" value="${totalVal+map['PD_PRICE']*map['QUANTITY']}" />
 			        	  </c:forEach>
 			        	  
-			        	  /* ${totalVal } */100 ,
+			        	 	${totalVal } ,
 			          buyer_email: "gildong@gmail.com",
 			          buyer_name: "홍길동",
 			          buyer_tel: "010-4242-4242",

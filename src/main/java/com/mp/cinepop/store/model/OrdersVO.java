@@ -6,6 +6,7 @@ public class OrdersVO {
 	private int orderNo;
 	private String id;
 	private int totalPrice;
+	private int discPrice;
 	private String deliveryStatus;
 	private Timestamp orderDate;
 	private String message;
@@ -20,6 +21,9 @@ public class OrdersVO {
 	}
 	public int getTotalPrice() {
 		return totalPrice;
+	}
+	public int getDiscPrice() {
+		return discPrice;
 	}
 	public String getDeliveryStatus() {
 		return deliveryStatus;
@@ -36,6 +40,7 @@ public class OrdersVO {
 	public String getHp() {
 		return hp;
 	}
+	
 	public void setOrderNo(int orderNo) {
 		this.orderNo = orderNo;
 	}
@@ -44,6 +49,9 @@ public class OrdersVO {
 	}
 	public void setTotalPrice(int totalPrice) {
 		this.totalPrice = totalPrice;
+	}
+	public void setDiscPrice(int discPrice) {
+		this.discPrice = discPrice;
 	}
 	public void setDeliveryStatus(String deliveryStatus) {
 		this.deliveryStatus = deliveryStatus;
@@ -62,8 +70,8 @@ public class OrdersVO {
 	}
 	@Override
 	public String toString() {
-		return "OrdersVO [orderNo=" + orderNo + ", id=" + id + ", totalPrice=" + totalPrice + ", deliveryStatus="
-				+ deliveryStatus + ", orderDate=" + orderDate + ", message=" + message + ", receiver=" + receiver
-				+ ", hp=" + hp + "]";
+		return "OrdersVO [orderNo=" + orderNo + ", id=" + id + ", totalPrice=" + totalPrice + ", discPrice=" + discPrice
+				+ ", deliveryStatus=" + deliveryStatus + ", orderDate=" + orderDate + ", message=" + message
+				+ ", receiver=" + receiver + ", hp=" + hp + "]";
 	}
 }

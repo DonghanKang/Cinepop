@@ -54,7 +54,7 @@
 		values(#{cartNo}, #{id} ,#{pdNo}, #{quantity})
 	</insert>
 	
-	<select id="getOrderNo" resultType="int">
+	<select id="createOrderNo" resultType="int">
 			select ORDERS_SEQ.nextval from dual
 	</select>
 
@@ -66,13 +66,50 @@
 	</insert>
 	
 	<insert id="insertOrderDetails" parameterType="cartVo">
-		insert into ORDERDETAILS(ORDER_NO, PD_NO, QUANTITY)
-		values(#{cartNo},#{pdNo}, #{quantity})
+		insert into ORDERDETAILS(ORDER_NO, PD_NO, QUANTITY, PD_ORDER)
+		values(#{cartNo},#{pdNo}, #{quantity},#{pdOrder})
 	</insert>
 	
 	<select id="selectCartByID" parameterType="string" resultType="map">
 		select * from payment
 		where id=#{id}
+	</select>
+	
+	<select id="selectOrdersByID" parameterType="searchVo" resultType="ordersVo">
+		select *
+		from
+		(
+			select A.*, rownum as RNUM
+			from
+			(
+				select o.*, rownum from orders o where id=#{id}
+				<if test="startDate!=null and startDate!='' 
+					and endDate!=null and endDate!=''">
+					AND ORDER_DATE BETWEEN TO_DATE(#{startDate}, 'YYYY-MM-DD') 
+					AND TO_DATE(#{endDate}, 'YYYY-MM-DD')+1
+				</if>
+				order by order_date desc
+			) A
+		)
+		<![CDATA[
+		where RNUM>#{firstRecordIndex} and RNUM<=#{blockSize}*#{currentPage}
+		]]>
+	</select>
+	
+	<select id="getTotalRecord" parameterType="searchVo" resultType="int">
+		select count(*) from orders
+		where id=#{id}
+		<if test="startDate!=null and startDate!='' 
+					and endDate!=null and endDate!=''">
+					AND ORDER_DATE BETWEEN TO_DATE(#{startDate}, 'YYYY-MM-DD') 
+					AND TO_DATE(#{endDate}, 'YYYY-MM-DD')+1
+		</if>
+	</select>
+	
+	<select id="selectOrderDetail" parameterType="int" resultType="map">
+		select * from orderdetails_view
+		where order_no=#{orderNo}
+		order by pd_order asc
 	</select>
 </mapper>
 

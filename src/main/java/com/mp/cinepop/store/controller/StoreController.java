@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mp.cinepop.common.ConstUtil;
 import com.mp.cinepop.common.FileUploadUtil;
+import com.mp.cinepop.common.QRUtil;
 import com.mp.cinepop.store.model.CartVO;
 import com.mp.cinepop.store.model.OrdersVO;
 import com.mp.cinepop.store.model.StoreService;
@@ -235,7 +236,7 @@ public class StoreController {
 			,@RequestParam(value="quantityList") int[] quantityList
 			,HttpSession session) {
 		logger.info("결제정보 DB처리, totalPrice={}, pdNoList={}, quantityList={}",totalPrice, pdNoList,quantityList);
-		
+		//VO에 정보입력
 		OrdersVO ordersVo=new OrdersVO();
 		String id=(String)session.getAttribute("userid");
 		ordersVo.setId(id);
@@ -243,7 +244,6 @@ public class StoreController {
 		
 		List<CartVO> list=new ArrayList<>();
 		CartVO cartVo=new CartVO();
-		
 		for(int i=0;i<pdNoList.length;i++) {
 			int pdNo=pdNoList[i];
 			int quantity=quantityList[i];
@@ -254,9 +254,22 @@ public class StoreController {
 			list.add(cartVo);
 		}
 		
-		int cnt=storeService.insertOrders(ordersVo, list);
+		int orderNo=storeService.insertOrders(ordersVo, list);
+		QRUtil qrUtil=new QRUtil();
+		List<Map<String, Object>> insertedList=storeService.selectOrderDetail(orderNo);
 		
-		String res="DB작업완료, 확인요망";
+		for(int i=0;i<insertedList.size();i++) {
+			Map<String, Object> map=insertedList.get(i);
+			
+			String fileName=Integer.toString(orderNo)+"_"+(i+1);
+			String qrInfo1=(String)map.get("PD_NAME"); //상품명
+			int qrInfo2=Integer.parseInt(String.valueOf(map.get("QUANTITY"))); //수량
+		
+			String qrInfo="[주문번호 : "+orderNo+", 상품명 : "+qrInfo1+", 수량 : "+qrInfo2+"개]";
+			qrUtil.createPdQr(qrInfo, fileName);
+		}
+		
+		String res="DB작업완료";
 		return res;
 	}
 

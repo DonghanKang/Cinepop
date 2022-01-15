@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.mp.cinepop.common.SearchVO;
+
 @Mapper
 public interface StoreDAO {
 	public int insertPd(StoreVO vo);
@@ -16,5 +18,8 @@ public interface StoreDAO {
 	public List<Map<String, Object>> selectCartByID(String id);
 	public int insertOrders(OrdersVO ordersVo);
 	public int insertOrderDetails(CartVO cartVo);
-	public int getOrderNo();
+	public int createOrderNo();
+	public List<OrdersVO> selectOrdersByID(SearchVO searchVo);
+	public int getTotalRecord(SearchVO searchVo);
+	public List<Map<String, Object>> selectOrderDetail(int orderNo);
 }

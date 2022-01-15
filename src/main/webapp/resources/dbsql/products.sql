@@ -57,8 +57,9 @@ create table orders
       ORDER_NO		number	NOT NULL Primary Key,   --주문번호
       ID	varchar2(50) 
         references ACCOUNT(ID) NOT NULL ,		--고객고유번호(회원아이디)(FK)
-      TOTAL_PRICE		number Null,			--주문총금액
-      DELIVERY_STATUS	VarChar2(20) default '입금확인중',		--주문상황_배송상황(1:입금확인중, 2:결제완료, 3:배송중, (배송준비중) 4:배송완료)
+      TOTAL_PRICE		number not null,			--주문총금액
+      DISC_PRICE         number null,           --할인금액
+      DELIVERY_STATUS	VarChar2(20) default '결제완료',		--주문상황_배송상황(1:입금확인중, 2:결제완료, 3:배송중, (배송준비중) 4:배송완료)
       ORDER_DATE		Date default sysdate ,		--주문일자
       MESSAGE			varchar2(150),			--남기고싶은말
       -- pwd		VarChar2(20) Null		--주문비밀번호_비회원
@@ -73,7 +74,8 @@ create table orderDetails
         references ORDERS(ORDER_NO) NOT NULL, 
     PD_NO   number
         references PRODUCTS(PD_NO) NOT NULL,
-    QUANTITY    number NOT NULL
+    QUANTITY    number NOT NULL,
+    PD_ORDER    number NOT NULL
 );
 
 create sequence cart_seq
@@ -86,7 +88,7 @@ start with 100001
 increment by 1
 nocache;
 
---결제 뷰
+--결제창 뷰
 create or replace view payment
 as
 select p.pd_name, pdc.pct_name, p.pd_price, c.quantity, p.pd_price*c.quantity as "SUM_PRICE"
@@ -95,11 +97,21 @@ on c.pd_no=p.pd_no
 join PD_CATEGORY pdc
 on p.pct_no=pdc.pct_no;
 
+--결제내역 뷰
+create or replace view orderDetails_view
+as
+select od.order_no,p.pd_no,p.pd_name,pd_price,od.quantity, od.order_no
+from orderDetails od join products p
+on od.pd_no=p.pd_no
+;
+select * from orderdetails_view;
+
 select * from account;
 select * from payment;
-select * from orders;
+select * from orders; 
 select * from orderDetails;
 select * from cart;
+
 
 alter table account add detail_address2 varchar2(20);
 -------------------------구매---------------------------
