@@ -26,13 +26,15 @@
 	</update>
 	
 	<select id="selectByPdNo" parameterType="int" resultType="storeVo">
-		select * from products
-		where PD_NO=#{pdNo}
+		select * from products p join pd_category pdc
+		on p.pct_no=pdc.pct_no
+		where p.PD_NO=#{pdNo}
 	</select>
 	
 	<select id="selectByCategory" parameterType="string" resultType="storeVo">
-		select * from products
-		where PCT_NO=#{pctNo}
+		select p.*, pdc.pct_name from products p join pd_category pdc
+		on p.pct_no=pdc.pct_no
+		where p.PCT_NO=#{pctNo}
 	</select>
 	
 	<delete id="deleteByPdNo" parameterType="int">
@@ -108,8 +110,25 @@
 	
 	<select id="selectOrderDetail" parameterType="int" resultType="map">
 		select * from orderdetails_view
-		where order_no=#{orderNo}
-		order by pd_order asc
+		where ORDER_NO=#{orderNo}
+		order by PD_ORDER asc
+	</select>
+	
+	<insert id="insertPdReview" parameterType="map">
+		insert into pd_review(ORDER_NO, PD_NO, REVIEW, REGDATE)
+		values(#{orderNo}, #{pdNo}, #{review}, sysdate)
+	</insert>
+	
+	<update id="updateReviewFlag" parameterType="map">
+		update orderDetails
+		set review_flag='Y'
+		where ORDER_NO=#{orderNo} AND PD_ORDER=#{pdOrder}
+	</update>
+	
+	<select id="selectPdReviewView" parameterType="int" resultType="pdReviewVo">
+		select * from pd_review_view
+		where PD_NO=#{pdNo}
+		order by regdate desc
 	</select>
 </mapper>
 

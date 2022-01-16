@@ -11,6 +11,7 @@ public class StoreVO {
 	private long pdImagefilesize;
 	private String pdDescription;
 	private Timestamp pdRegdate;
+	private String pctName;
 
 	public int getPdNo() {
 		return pdNo;
@@ -60,6 +61,13 @@ public class StoreVO {
 	}
 	public void setPdImagefilesize(long pdImagefilesize) {
 		this.pdImagefilesize = pdImagefilesize;
+	}
+	
+	public String getPctName() {
+		return pctName;
+	}
+	public void setPctName(String pctName) {
+		this.pctName = pctName;
 	}
 	@Override
 	public String toString() {

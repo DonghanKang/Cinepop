@@ -75,7 +75,17 @@ create table orderDetails
     PD_NO   number
         references PRODUCTS(PD_NO) NOT NULL,
     QUANTITY    number NOT NULL,
-    PD_ORDER    number NOT NULL
+    PD_ORDER    number NOT NULL,
+    REVIEW_FLAG varchar2(1) default 'N'
+);
+create table PD_REVIEW
+(
+    ORDER_NO NUMBER 
+        references ORDERS(ORDER_NO) NOT NULL, 
+    PD_NO NUMBER
+        references PRODUCTS(PD_NO) NOT NULL,
+    REVIEW CLOB,
+    REGDATE DATE DEFAULT SYSDATE
 );
 
 create sequence cart_seq
@@ -100,18 +110,29 @@ on p.pct_no=pdc.pct_no;
 --결제내역 뷰
 create or replace view orderDetails_view
 as
-select od.order_no,p.pd_no,p.pd_name,pd_price,od.quantity, od.order_no
+select od.order_no,p.pd_no,p.pd_name,pd_price,od.quantity, p.PD_IMAGENAME, od.pd_order, od.review_flag
 from orderDetails od join products p
 on od.pd_no=p.pd_no
 ;
 select * from orderdetails_view;
 
+select * from products;
 select * from account;
 select * from payment;
 select * from orders; 
 select * from orderDetails;
 select * from cart;
+select * from pd_category;
 
+
+create view pd_review_view
+as
+select pr.*, a.id
+from pd_review pr join orders o
+on pr.order_no=o.order_no
+join account a
+on o.id=a.id;
+select * from pd_review_view;
 
 alter table account add detail_address2 varchar2(20);
 -------------------------구매---------------------------

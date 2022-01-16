@@ -17,4 +17,6 @@ public interface StoreService {
 	public List<OrdersVO> selectOrdersByID(SearchVO searchVo);
 	public int getTotalRecord(SearchVO searchVo);
 	public List<Map<String, Object>> selectOrderDetail(int orderNo);
+	public int insertPdReview(Map<String, Object> map);
+	public List<PdReviewVO> selectPdReviewView(int pdNo);
 }

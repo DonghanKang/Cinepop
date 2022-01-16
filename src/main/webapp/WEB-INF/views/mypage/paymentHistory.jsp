@@ -11,21 +11,13 @@
 		background: url(<c:url value='/resources/images/search.png'/>)no-repeat #111111 right 74px;
 		padding:8px 24px; width:104px !important;
 	}
+	
+	input{
+		font-family: "Roboto Condensed", sans-serif;
+		text-align: center;
+	}
 </style>
-<script type="text/javascript" language="javascript">
-	/* function openDetail(){
-	    var pop_title = "paymentDetail" ;
-	     
-
-	    window.open("", pop_title, 
-	    		"scrollbars=no,toolbar=no,location=no,status=yes,menubar=no,resizable=no,width=1000px,height=500px")
-	     
-	    var frmData = document.paymentDetail ;
-	    frmData.target = pop_title ;
-	    frmData.action = "<c:url value='/mypage/paymentDetail'/>" ;
-	    
-	    frmData.submit() ;
-	} */
+<script type="text/javascript" >
 
 	$(function(){
 		var d= new Date();
@@ -88,16 +80,17 @@
 		          			<td>${orderVo.deliveryStatus }</td>
 		          			<td>
 		          					<input class="black_btn" type="button" value="상세보기" 
-		          					onclick="window.open('<c:url value='/mypage/paymentDetail?orderNo=${orderVo.orderNo }&orderDate=${orderVo.orderDate }&totalPrice=${orderVo.totalPrice }'/>', '결제상세정보보기' 
+		          					onclick="window.open('<c:url value='/mypage/paymentDetail?orderNo=${orderVo.orderNo }'/>', '결제상세정보보기' 
 		          					,'scrollbars=no,toolbar=no,location=no,status=yes,menubar=no,resizable=no,width=1000px,height=500px');">
 		          			</td>
+		          			
 		          		</tr>
 	          		</c:forEach>
 	          	</c:if>
           	</table>
           </div>
-          <div class="divPage t_center mt50">
-				<!-- 페이지 번호 추가 -->		
+           <%-- <div class="divPage t_center mt50">
+			 <!-- 페이지 번호 추가 -->		
 				<!-- 이전 블럭으로 이동 -->
 				<c:if test="${pagingInfo.firstPage>1 }">
 					<a href="<c:url value='/mypage/paymentHistory?currentPage=${pagingInfo.firstPage-1}&startDate=${param.startDate}&endDate=${param.endDate}'/>">
@@ -119,12 +112,42 @@
 				
 				<!-- 다음 블럭으로 이동 -->					
 				<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage }">	
-						<a href="<c:url value='/board/list.do?currentPage=${pagingInfo.lastPage+1}&&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">
+						<a href="<c:url value='/board/list.do?currentPage=${pagingInfo.lastPage+1}&startDate=${param.startDate}&endDate=${param.endDate}'/>">
 							<img src="<c:url value='/resources/images/last.JPG'/>" alt="다음블럭">
 						</a>	
-				</c:if>					
-				<!--  페이지 번호 끝 -->	
+				</c:if>		 
+			</div> --%>
+			<!--  페이지 번호 끝 -->
+			<div class="pagination font-alt" style="clear:both;">
+				<div style="margin:0 auto;">
+					<c:if test="${pagingInfo.currentPage>1 }">
+						<a href="<c:url value='/mypage/paymentHistory?currentPage=${pagingInfo.currentPage-1}&startDate=${param.startDate}&endDate=${param.endDate}'/>">
+					</c:if>
+					<c:if test="${pagingInfo.currentPage==1 }">
+						<a href="<c:url value='/mypage/paymentHistory?currentPage=${pagingInfo.currentPage}&startDate=${param.startDate}&endDate=${param.endDate}'/>">
+					</c:if>
+					<i class="fa fa-angle-left"></i> </a>
+					
+					<c:forEach var="i" begin="${pagingInfo.firstPage}"
+						end="${pagingInfo.lastPage }">
+						<c:if test="${i==pagingInfo.currentPage }">
+							<a class="active" href="#">${i }</a>
+						</c:if>
+						<c:if test="${i!=pagingInfo.currentPage }">
+							<a href="<c:url value='/mypage/paymentHistory?currentPage=${i}&startDate=${param.startDate}&endDate=${param.endDate}'/>">${i }</a>
+						</c:if>
+					</c:forEach>
+	
+					<c:if test="${pagingInfo.currentPage < pagingInfo.totalPage }">
+						<a href="<c:url value='/mypage/paymentHistory?currentPage=${pagingInfo.currentPage+1}&startDate=${param.startDate}&endDate=${param.endDate}'/>">
+					</c:if>
+					<c:if test="${pagingInfo.currentPage == pagingInfo.totalPage }">
+						<a
+							href="<c:url value='/mypage/paymentHistory?currentPage=${pagingInfo.currentPage}&startDate=${param.startDate}&endDate=${param.endDate}'/>">
+					</c:if>
+					<i class="fa fa-angle-right"> </i> </a>
+				</div>
+			</div>
 		</div>
-	</div>
 </section>
 <%@include file="../inc/bottom.jsp"%>
