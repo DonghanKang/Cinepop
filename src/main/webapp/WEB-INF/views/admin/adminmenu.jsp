@@ -9,7 +9,7 @@
    }
    
    function pdWrite(){//상품 등록
-      location.href="../store/pdWrite";
+      location.href="pdWrite";
    }
    function qna(){//공지사항 등록
       location.href="../qna/qna_write";
