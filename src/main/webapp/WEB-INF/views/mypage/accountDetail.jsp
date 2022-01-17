@@ -66,6 +66,14 @@
 		                ${vo.tel}
 		            </div>
 		        </div>
+		        <div class="input_area">
+		            <div class="p_title">
+		                <label>포인트</label>
+		            </div>
+		            <div class="p_input">
+		                ${vo.point}
+		            </div>
+		        </div>
             <div class="btn_all t_center">
                 <button type="button" class="black_btn" id="infoedit_btn" onclick="editInfo()">회원정보 수정</button>
                 <button type="button" class="black_btn" onclick="back()">취소</button>
