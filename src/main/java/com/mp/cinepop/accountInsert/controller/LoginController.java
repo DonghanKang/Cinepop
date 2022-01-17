@@ -85,15 +85,11 @@ public class LoginController {
 		
 	}
 	
-	@RequestMapping("inc/top")
-	public String logout(HttpSession session) {
-		logger.info("로그아웃 처리");
-		
-		//session.invalidate();
-		session.removeAttribute("userid");
-		session.removeAttribute("userName");
-		
-		return "redirect:/index";
+	@RequestMapping("/logout")
+		public String accountlogout(HttpSession session) {
+		  logger.info("로그아웃");
+			session.invalidate();
+			return "redirect:/home/home";
 	}
 	
 }
