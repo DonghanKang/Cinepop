@@ -9,16 +9,26 @@
 <section class="module">
 	<div class="container">
 		<h2>공지사항 글목록</h2>
-	    <div class="searchbox">
-	    	<div class="select">
-		    	<select>
-		    		<option value="1">제목</option>
-		    		<option value="2">제목</option>
-		    	</select>
-			</div>	    	
-	    	<input type="text" id="" name="" class="mr10">
-	    	<input type="button" class="black_btn" id="" name="" value="검색">
-	    </div>
+		<div class="searchbox">
+			<form name="frmSearch" method="post" action='<c:url value="/qna/qna_list"/>'>
+				<select class="select" name="searchCondition">
+					<option value="title"
+						<c:if test="${param.searchCondition=='title' }"> selected="selected"
+            			</c:if>>제목
+            		</option>
+					<option value="content"
+						<c:if test="${param.searchCondition=='content' }"> selected="selected"
+            			</c:if>>내용
+            		</option>
+					<option value="name"
+						<c:if test="${param.searchCondition=='name' }"> selected="selected"
+            			</c:if>>작성자
+            		</option>
+				</select> <input type="text" name="searchKeyword" title="검색어 입력"
+					value="${param.searchKeyword}"> <input type="submit"
+					value="검색">
+			</form>
+		</div>
 		<div class="col-sm-12">
 			<table class="t_style1 mb50">
 				<colgroup>
@@ -43,7 +53,8 @@
 					<c:forEach var="qnavo" items="${list }">
 						<tr>
 							<td>${qnavo.qNo}</td>
-							<td><a href="<c:url value='/qna/countUpdate?qNo=${qnavo.qNo}'/>">
+							<td><a
+								href="<c:url value='/qna/countUpdate?qNo=${qnavo.qNo}'/>">
 									${qnavo.title} </a></td>
 							<td><fmt:formatDate value="${qnavo.regdate}"
 									pattern="yyyy-MM-dd" /></td>
