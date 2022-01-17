@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mp.cinepop.accountInsert.controller.LoginController;
+import com.mp.cinepop.common.HashingUtil;
 import com.mp.cinepop.hash.model.hashVO;
 
 @Service
@@ -17,11 +18,13 @@ public class AccountInsertServiceImpl implements AccountInsertService{
 	=LoggerFactory.getLogger(LoginController.class);
 	
 	private final AccountInsertDAO accountInsertDao;
+	private final HashingUtil hash;
 	
 	@Autowired
 	public AccountInsertServiceImpl(AccountInsertDAO accountInsertDao) {
 		super();
 		this.accountInsertDao = accountInsertDao;
+		this.hash = new HashingUtil();
 	}
 
 
@@ -61,17 +64,14 @@ public class AccountInsertServiceImpl implements AccountInsertService{
 		if((accountVo = accountInsertDao.selectByUserid(userid))==null) {	// 아이디가 없다
 			result = USERID_NONE;
 		}else {	// 아이디가 있다
-			String dbPwd = accountInsertDao.selectPwd(userid);
-			String digest = accountInsertDao.selectDigest(userid);
 			hashVO hashVo = accountInsertDao.hashCheck(accountVo.getId());
-			if(dbPwd.equals(password)) {	// 비밀번호가 일치한다
-				if(digest.equals(hashVo.getDigest())) {	// 해시값이 일치한다
-					logger.info("Impl, digest => {}", digest);
-					logger.info("Impl, hashVo => {}", hashVo);
-					logger.info("Impl, accountVo => {}", accountVo);
-					result=LOGIN_OK;
-				}
-			}else {	// 비밀번호가 다르다
+			String login_digest = hash.hashing(password, hashVo.getSalt());	// password + salt키로 digest 암호화
+			if(login_digest.equals(hashVo.getDigest())) {	// 위에서 암호화한게 기존과 일치하면 로그인 성공
+				logger.info("Impl, login_digest => {}", login_digest);
+				logger.info("Impl, hashVo => {}", hashVo);
+				logger.info("Impl, accountVo => {}", accountVo);
+				result=LOGIN_OK;
+			}else {	// 일치하지 않으면 로그인 실패
 				result=DISAGREE_PWD;
 			}
 		}
