@@ -7,7 +7,7 @@
   <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
   <style>
   	.pdImg {
-    	object-fit:scale-down ;
+    	object-fit:scale-down;
     	height: 300px;
 	}
 	.pd_subtitle{
@@ -38,6 +38,14 @@
 	.reviewRegdate{
 		font-size: 12px;
 		color:#a5a5a5;
+	}
+	.qntText{
+		float: left;
+	    padding: 0 20px;
+	    font-weight: bold;
+	    font-size: 15px;
+	    position: relative;
+    	top: 7px;
 	}
   </style>
    <script>
@@ -88,6 +96,7 @@
 	             		<li><strong>유효기간</strong><span>구매일로부터 5년</span></li>
 	             	</ul>
 					<div class="com_custom_selectbox select">
+						<div class="qntText">수량</div>
 						<select id="pdQuantity">
 							<option>1</option>
 							<option>2</option>
@@ -131,7 +140,12 @@
 		  
 		  <c:if test="${!empty reviewList }">
 		     <div class="reviewMass">
+		        <c:set var="i" value="1" />
 	          	<c:forEach var="pdReviewVo" items="${reviewList }">
+		          		<c:if test="${i!=1 }">
+		          			<hr>
+		          		</c:if>
+		          		<c:set var="i" value="${i+1 }" />
 		          		<div class="reviewId">
 		          			${pdReviewVo.id }
 		          		</div>
@@ -141,7 +155,6 @@
 		          		<div class="reviewRegdate">
 		          			${pdReviewVo.regdate }
 		          		</div>
-		          	<hr>
 	          	</c:forEach>
 		     </div>
 		  </c:if>

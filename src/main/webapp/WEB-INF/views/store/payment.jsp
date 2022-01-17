@@ -11,6 +11,12 @@
 	object-fit: scale-down;
 	height: 75px;
 }
+
+.divPdname{
+    margin: auto 0 auto 10px;
+    position: relative;
+    bottom: 3px;
+}
 </style>
 <script>
 $(function(){
@@ -128,7 +134,7 @@ $(function(){
 							<div class="product_info_img">
 								<img
 									src="<c:url value="/resources/images/store/${map['PD_IMAGENAME']} "/>">
-								<div>
+								<div class="divPdname">
 									<strong class="product_info_name">${map['PD_NAME'] }</strong>
 								</div>
 							</div>
@@ -170,6 +176,7 @@ $(function(){
 				</tr>
 			</table>
 		</div>
+		
 		<!-- <div>
     	<h3>결제수단</h3>
     	<div class="m_o_payment">
@@ -186,6 +193,7 @@ $(function(){
     		</form>
     	</div>
     </div> -->
+    
 		<div class="chk_wrap">
 			<label for="allchk"> <input type="checkbox" name="allchk"
 				id="allchk" class="option-input checkbox"> 주문정보/결제 대행 서비스 약관
