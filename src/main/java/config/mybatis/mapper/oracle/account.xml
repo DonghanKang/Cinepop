@@ -3,11 +3,6 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.mp.cinepop.account.model.AccountDAO">
-	<select id="selectPwd" parameterType="string" resultType="string">
-		select pwd from account
-		where id=#{id}
-	</select>
-	
 	<select id="selectByUserid" parameterType="string" resultType="accountVo">
 		select a.*, g.g_name
 		from account a join grade g
@@ -27,7 +22,13 @@
 	
 	<update id="updateAccount" parameterType="accountVo">
 		update account
-		set pwd=#{pwd}, postcode1=#{postcode1}, address=#{address}, detailAddress1=#{detailAddress1}, tel=#{tel}
+		set postcode1=#{postcode1}, address=#{address}, detailAddress1=#{detailAddress1}, tel=#{tel}
+		where id=#{id}
+	</update>
+	
+	<update id="updateHash" parameterType="hashVo">
+		update hash
+		set digest=#{digest}, salt=#{salt}
 		where id=#{id}
 	</update>
 </mapper>
