@@ -123,9 +123,9 @@ select * from orders;
 select * from orderDetails;
 select * from cart;
 select * from pd_category;
+select * from seat;
 
-
-create view pd_review_view
+create or replace view pd_review_view
 as
 select pr.*, a.id
 from pd_review pr join orders o
