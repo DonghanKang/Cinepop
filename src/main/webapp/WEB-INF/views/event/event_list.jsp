@@ -32,11 +32,11 @@
 			    				selected="selected"
 			    			</c:if>
 			    		>제목</option>
-			    		<option value="content"
+			    		<%-- <option value="content"
 			    			<c:if test="${param.searchCondition=='content'}">
 			    				selected="selected"
 			    			</c:if>
-			    		>내용</option>
+			    		>내용</option> --%>
 			    	</select>
 				</div>	    	
 		    	<input type="text"  name="searchKeyword" class="mr10 t_input" title="검색어 입력"
