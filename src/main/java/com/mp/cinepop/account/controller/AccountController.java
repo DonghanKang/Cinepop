@@ -1,5 +1,9 @@
 package com.mp.cinepop.account.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -58,24 +62,43 @@ public class AccountController {
 	public String edit_post(@ModelAttribute AccountVO vo, 
 			@RequestParam(value = "id", required = false) String id,
 			@RequestParam(value = "pw1", required = false) String pw1,
+			@RequestParam(value = "pw2", required = false) String pw2,
 			@RequestParam(value = "postcode1", required = false) String postcode1,
 			@RequestParam(value = "address", required = false) String address,
 			@RequestParam(value = "detailAddress1", required = false) String detailAddress1,
 			@RequestParam(value = "tel", required = false) String tel,
-			HttpSession session, Model model) {	
+			HttpSession session, HttpServletResponse response, Model model) throws IOException {	
+		response.setContentType("text/html;"
+				+ "	charset = utf-8");
+		PrintWriter out = response.getWriter();
 		id = (String) session.getAttribute("userid");
 		vo = accountService.selectByUserid(id);
 		logger.info("회원수정 처리, 파라미터 vo={}", vo);
 
-		vo.setPwd(pw1);
-		vo.setPostcode1(postcode1);
-		vo.setAddress(address);
-		vo.setDetailAddress1(detailAddress1);
-		vo.setTel(tel);
-		
-		int cnt = accountService.updateAccount(vo);
-		logger.info("회원수정 결과, cnt={}", cnt);
+		if(pw1.equals(pw2)) {
+			vo.setPwd(pw1);
+			vo.setPostcode1(postcode1);
+			vo.setAddress(address);
+			vo.setDetailAddress1(detailAddress1);
+			vo.setTel(tel);
+			int cnt = accountService.updateAccount(vo);
+			logger.info("회원수정 결과, cnt={}", cnt);
+			
+			out.print("<script>");
+			out.print("alert('"+vo.getaName()+"님 회원정보가 수정되었습니다.');");
+			out.print("location.href = '../mypage/accountDetail';");
+			out.print("</script>");
+		}else {
+			logger.info("회원수정 실패, pw1={}, pw2={}", pw1,pw2);
+			out.print("<script>");
+			out.print("alert('"+vo.getaName()+"님 회원정보가 수정이 실패되었습니다.');");
+			out.print("alert('error : 비밀번호확인 불일치');");
+			out.print("history.back(-1);");
+			out.print("</script>");
+		}
+		out.flush();
 
+		
 		return "redirect:/mypage/accountDetail";
 	}
 

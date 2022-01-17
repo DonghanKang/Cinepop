@@ -67,6 +67,9 @@
 			
 		}
     	
+    	function chkT(){
+    		open("<c:url value='/ticketing/chkTicket'/>","예매표 확인", "width=500, height=500, resizable=yes, toolbar=no, menubar=no, scrollbars=no");
+    	}
     </script>
     
     
@@ -118,6 +121,9 @@
               	  <form action="<c:url value='/home/home'/>" method="post" id = "frm1">
               	  </form>
               	  <a href = "#" onclick = "return chk_accountlogout()">로그아웃</a>
+              	  </li>
+              	  <li>
+              	  <a href = "#" onclick = "chkT()">예매내역</a>
               	  </li>
               </c:if>
               <c:if test="${!empty sessionScope.adminUserid }">

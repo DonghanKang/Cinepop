@@ -2,6 +2,7 @@ package com.mp.cinepop.ticketing.seat.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,4 +32,15 @@ public class SeatServiceImpl implements SeatService{
 	public int insertSeat(SeatVO vo) {
 		return seatDao.insertSeat(vo);
 	}
+
+	@Override
+	public List<Map<String, Object>> chkTicket(String userid) {
+		return seatDao.chkTicket(userid);
+	}
+
+	@Override
+	public Map<String, Object> chkTD(String userid, int sTNo) {
+		return seatDao.chkTD(userid, sTNo);
+	}
+	
 }

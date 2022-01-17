@@ -40,17 +40,6 @@
 		            </div>
 		        </div>
 		        <div class="input_area">
-		        <!-- 생년월일 컬럼이 없다!! -->
-		            <div class="p_title">
-		                <label>생년월일</label>
-		            </div>
-		            <div class="p_input">
-		                1997년 &nbsp;
-						6월 &nbsp;
-						16일
-		            </div>
-		        </div>
-		        <div class="input_area">
 		            <div class="p_title">
 		                <label>주소</label>
 		            </div>
