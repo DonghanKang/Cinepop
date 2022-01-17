@@ -111,6 +111,7 @@
 .close{position:absolute;top:-25px;right: 0;cursor:pointer;}
 .openPopup{cursor:pointer;}
 /*popup2*/
+#popup02 {width: 1300px; margin: 0px auto;}
 #popup02 .seat{text-align:center;}
 #popup02 .seat .seat_head{height:70px; line-height:70px;}
 #popup02 .seat .seat_head h3{ color:#fff;}
@@ -137,7 +138,7 @@ li.current{background: #ededed;color: #222;}
 /*좌석선택*/
 .dot_point{position: absolute;top: 5px;right: 30px;font-size: 13px;color: #fff;}
 .dot_point::before{content: "";display: inline-block;width: 3px;height: 3px;margin-right: 5px;border-radius: 50%;vertical-align: middle;background: #666;}
-.m_pnum{width:100%; background:#fff; padding:20px;}
+.m_pnum{width:100%; background:#fff; padding:20px;border-radius: 30px 30px 0px 0px;}
 .movie_infor{display: flex;align-items: center; justify-content: space-evenly;}
 .movie_infor .thm{width:100px; height:150px;}
 .group_infor{margin:0 -20%;}
@@ -151,8 +152,8 @@ li.current{background: #ededed;color: #222;}
 .gray_box{background:#ccc; height:50px; width:100%;}
 .gray_box h3{line-height:50px; color:#fff; letter-spacing: 15px;}
 .seat_footer{width:100%;display: flex;}
-.seat_footer .total{width:80%; padding:20px; background:#ccc; font-size:18px;} 
-.seat_footer .btn_area{width:20%; padding:20px; background:red;}
+.seat_footer .total{width:80%; padding:20px; background:#ccc; font-size:18px;border-radius: 0px 0px 0px 30px;} 
+.seat_footer .btn_area{width:20%; padding:20px; background:red;border-radius: 0px 0px 30px;}
 .seat_footer .btn_area .red_btn{background: red;border: none;outline: none;width: 100%;font-size: 18px;color: #fff;}
 
         

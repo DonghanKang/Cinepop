@@ -4,7 +4,7 @@
 
 <mapper namespace="com.mp.cinepop.ticketing.seat.model.SeatDAO">
 	<select id="lookUpSeat" parameterType="int" resultType="string">
-		select seat_no from seats
+		select seat_no from seat
 		where s_no=#{sNo}
 	</select>
 	
@@ -12,7 +12,27 @@
 		<selectKey keyProperty="sTNo" order="BEFORE" resultType="int">
 			select seat_seq.nextval from dual
 		</selectKey>
-		insert into seats(s_t_no,s_no,userid,seat_no) 
+		insert into seat(s_t_no,s_no,userid,seat_no) 
 		values(#{sTNo},#{sNo},#{userid},#{seatNo})
 	</insert>
+	
+	<select id="chkTicket" parameterType="string" resultType="map">
+		select s_t_no,image1,m_name,regdate from seat s
+		join screen_info si
+		on s.s_no=si.s_no
+		join movie m
+		on si.m_no=m.m_no
+		where userid=#{userid}
+	</select>
+	
+	<select id="chkTD" parameterType="seatVo" resultType="map">
+		select * from seat s
+		join screen_info si
+		on s.s_no=si.s_no
+		join movie m
+		on si.m_no=m.m_no
+		join theater t
+        on si.t_no=t.t_no
+		where userid=#{userid} and s_t_no=#{sTNo}
+	</select>
 </mapper>

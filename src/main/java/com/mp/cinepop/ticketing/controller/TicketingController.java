@@ -76,8 +76,23 @@ public class TicketingController {
 	
 	@RequestMapping("/payments/complete")
 	public String payments_c(HttpSession session, @ModelAttribute SeatVO vo) {
+		String userid=(String)session.getAttribute("userid");
+		vo.setUserid(userid);
 		int cnt=ss.insertSeat(vo);
 		return "redirect:/home/home";
 	}
 	
+	@RequestMapping("/chkTicket")
+	public void chkTicket(HttpSession session, Model model) {
+		String userid=(String)session.getAttribute("userid");
+		List<Map<String, Object>> list=ss.chkTicket(userid);
+		model.addAttribute("list", list);
+	}
+	
+	@RequestMapping("/chkTD")
+	public void chkTD(HttpSession session, Model model, @RequestParam int sTNo) {
+		String userid=(String)session.getAttribute("userid");
+		Map<String, Object> map=ss.chkTD(userid, sTNo);
+		model.addAttribute("map", map);
+	}
 }
