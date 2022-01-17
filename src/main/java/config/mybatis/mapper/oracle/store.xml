@@ -37,6 +37,19 @@
 		where p.PCT_NO=#{pctNo}
 	</select>
 	
+	<select id="selectFourByCategory" parameterType="string" resultType="storeVo">
+		select *
+		from
+		(
+		select p.*, pdc.pct_name, rownum as RNUM from products p join pd_category pdc
+		on p.pct_no=pdc.pct_no
+		where p.PCT_NO=#{pctNo}
+		)
+		<![CDATA[
+		where RNUM<=4
+		]]>
+	</select>
+	
 	<delete id="deleteByPdNo" parameterType="int">
 		delete from products
 		where PD_NO=#{pdNo}
