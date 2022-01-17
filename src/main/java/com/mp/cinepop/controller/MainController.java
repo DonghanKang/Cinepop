@@ -6,22 +6,45 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.mp.cinepop.common.FileUploadUtil;
+import com.mp.cinepop.store.model.StoreService;
 import com.mp.cinepop.store.model.StoreVO;
 
 @Controller
 @RequestMapping("/")
 public class MainController {
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
+	private final StoreService storeService;
+
+	@Autowired
+	public MainController(StoreService storeService) {
+		this.storeService = storeService;
+	}
+	
 	
 	@GetMapping("/home/home")
-	public void main() {
+	public void main(Model model) {
 		logger.info("메인 페이지");
+		
+//		상품리스트
+		List<StoreVO> listA01=storeService.selectFourByCategory("A01");
+		List<StoreVO> listB01=storeService.selectFourByCategory("B01");
+		List<StoreVO> listB02=storeService.selectFourByCategory("B02");
+		List<StoreVO> listB03=storeService.selectFourByCategory("B03");
+		
+		model.addAttribute("listA01",listA01);
+		model.addAttribute("listB01",listB01);
+		model.addAttribute("listB02",listB02);
+		model.addAttribute("listB03",listB03);
+		
 	}
 
 	@RequestMapping("/store/index")
