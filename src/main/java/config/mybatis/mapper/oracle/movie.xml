@@ -40,4 +40,26 @@
 		on a.ge_no = b.ge_no
 		where m_no=#{MNO}
 	</select>
+	
+	<select id="selectByNo2" parameterType="int" resultType="movieVo">
+		select a.m_no,a.m_name,a.director,a.actor,
+        (
+        select avg(sum(r.reviewgrade)) from review
+        where a.m_no = 6
+        GROUP BY r.reviewgrade
+        )
+        as reviewgrade,
+        a.story, 
+		TO_CHAR(a.s_date,'yyyy-mm-dd') s_date ,TO_CHAR(a.e_date,'yyyy-mm-dd') e_date,
+		a.ge_no,a.runtime,a.image1,a.image2,a.image3,a.videourl,
+		b.ge_name , c.id AS ID, r.regdate AS REGDATE,r.reviewcontent AS REVIEWCONTENT
+        from 
+		movie a join genre b
+		on a.ge_no = b.ge_no
+        join review r
+        on a.m_no = r.m_no
+        join account c
+        on c.ano = r.ano
+		where a.m_no=#{MNO}
+	</select>
 </mapper>
