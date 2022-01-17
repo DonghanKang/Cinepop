@@ -5,13 +5,13 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@include file="../inc/top.jsp"%>
 <script type="text/javascript">
-	$(function (){
-		$('#delete_btn').click(function (){
-			if(confirm("게시물을 삭제하시겠습니까?")){
-				self.location.href="/event/event_list";
-			}
-		});
-	});
+    $(function (){
+        $('#delete_btn').click(function (){
+            if(!confirm("게시물을 삭제하시겠습니까?")){
+                event.preventDefault();
+            }
+        });
+    });
 </script>
 <section class="module">
 	<div class="container">

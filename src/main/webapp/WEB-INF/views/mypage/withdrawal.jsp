@@ -1,14 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fnc" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@include file="../inc/top.jsp" %>
+<script type="text/javascript">
+<script type="text/javascript">
+$(function() {
+	
+	$('#withdrawal').submit(function(e) {
+		if(('#id').val().length < 1) {
+			alert('이메일을 확인해주세요');
+			$('#id').focus();
+			e.preventDefault();
+			e.stopPropagation();
+			return;
+		}
+		if($('#pwd').val() !== $('#pwd2').val()) {
+			alert('비밀번호를 확인해주세요awefawefwef');
+			$('pwd2').focus();
+			e.preventDefault();
+			e.stopPropagation();
+			return;
+		}
+		
+		if($('#pwd2').val() !== $('#pwd').val()) {
+			alert('비밀번호를 확인해주세요sdsssssssssssssssss');
+			$('pwd').focus();
+			e.preventDefault();
+			e.stopPropagation();
+			return;
+		}
+	
+	});
+</script>
+</script>
 <section class="module">
 	<div class="container">
 		<div class="row c_center">
 			<div class="col-sm-8 frm_login">
 				<h2 class="font-alt t_center">회원 탈퇴</h2>
 				<hr class="divider-w mb-10">
-				<form class="form" action="<c:url value='/mypage/withdrawal'/>" method="post">
+				<form name="withdrawal" class="form" action="<c:url value='/mypage/withdrawal'/>" method="post">
 					<div class="form-group ">
 						<input class="t_input w100" id="id" type="text" name="id"
 							placeholder="Email" />
