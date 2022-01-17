@@ -57,10 +57,10 @@
     <script src="${pageContext.request.contextPath}/resources/js/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
     	function chk_accountlogout(frm1) {
-			document.getElementById('frm1').submit();
 			
 			if(confirm("로그아웃 하시겠습니까?") == true){
-				location.herf = "/home/home";
+				location.href = "<c:url value='/logout'/>";
+				alert('로그아웃되었습니다.');
 			}else{
 				return;
 			}
@@ -115,9 +115,7 @@
               </c:if>
               <c:if test="${!empty sessionScope.userid }">
               	  <li>
-              	  <form action="<c:url value='/home/home'/>" method="post" id = "frm1">
-              	  </form>
-              	  <a href = "#" onclick = "return chk_accountlogout()">로그아웃</a>
+              	  	<a href = "#" onclick = "return chk_accountlogout()">로그아웃</a>
               	  </li>
               </c:if>
               <c:if test="${!empty sessionScope.adminUserid }">

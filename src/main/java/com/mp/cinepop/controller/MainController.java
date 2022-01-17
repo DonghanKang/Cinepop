@@ -82,19 +82,9 @@ public class MainController {
 	  logger.info("login 페이지");
   }
  
-  @RequestMapping("/test/inicis")
-  public void inicis() {
-	  logger.info("inicis테스트");
-  }
-  
 	/*
 	 * @RequestMapping("/movie/movieChart") public void index() {
 	 * logger.info("메인 페이지"); }
 	 */
-  @PostMapping("/home/home")
-	public String accountlogout(HttpSession session) {
-	  logger.info("로그아웃");
-		session.invalidate();
-		return "home/home";
-	}
+
 }
