@@ -2,6 +2,7 @@ package com.mp.cinepop.account.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,8 +18,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.mp.cinepop.account.model.AccountDAO;
 import com.mp.cinepop.account.model.AccountService;
 import com.mp.cinepop.account.model.AccountVO;
+import com.mp.cinepop.common.HashingUtil;
+import com.mp.cinepop.hash.model.hashVO;
 import com.mp.cinepop.qna.controller.QnaController;
 
 @Controller
@@ -27,10 +31,12 @@ public class AccountController {
 	private static final Logger logger = LoggerFactory.getLogger(QnaController.class);
 
 	private final AccountService accountService;
+	private final HashingUtil hash;
 
 	@Autowired
 	public AccountController(AccountService accountService) {
 		this.accountService = accountService;
+		this.hash = new HashingUtil();
 		logger.info("AccountController생성자 주입!!");
 	}
 
@@ -59,7 +65,7 @@ public class AccountController {
 	}
 
 	@PostMapping("mypage/editInfo")
-	public String edit_post(@ModelAttribute AccountVO vo, 
+	public String edit_post(@ModelAttribute AccountVO vo, @ModelAttribute hashVO hashvo,
 			@RequestParam(value = "id", required = false) String id,
 			@RequestParam(value = "pw1", required = false) String pw1,
 			@RequestParam(value = "pw2", required = false) String pw2,
@@ -67,7 +73,7 @@ public class AccountController {
 			@RequestParam(value = "address", required = false) String address,
 			@RequestParam(value = "detailAddress1", required = false) String detailAddress1,
 			@RequestParam(value = "tel", required = false) String tel,
-			HttpSession session, HttpServletResponse response, Model model) throws IOException {	
+			HttpSession session, HttpServletResponse response, Model model) throws IOException, NoSuchAlgorithmException {
 		response.setContentType("text/html;"
 				+ "	charset = utf-8");
 		PrintWriter out = response.getWriter();
@@ -82,7 +88,18 @@ public class AccountController {
 			vo.setDetailAddress1(detailAddress1);
 			vo.setTel(tel);
 			int cnt = accountService.updateAccount(vo);
-			logger.info("회원수정 결과, cnt={}", cnt);
+			
+			// 바뀐 비밀번호로 다시 암호화
+			String salt = hash.makeNewSalt();
+			hashvo.setSalt(salt);
+			String digest = hash.hashing(pw1, salt);
+			hashvo.setDigest(digest);
+			hashvo.setId(id);
+			logger.info("회원수정 진행중, 회원 파라미터 vo={}", vo);
+			logger.info("회원수정 진행중, salt={}, digest={}, hashvo={}", salt, digest, hashvo);
+			int cnt2 = accountService.updateHash(hashvo);
+			
+			logger.info("회원수정 결과, cnt={}, cnt2={}", cnt, cnt2);
 			
 			out.print("<script>");
 			out.print("alert('"+vo.getaName()+"님 회원정보가 수정되었습니다.');");
