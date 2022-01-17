@@ -8,7 +8,6 @@
 		history.back(-1);
 	}
 	$(function() {
-		make_select();
 		
 		$('#editform').click(function (){
 			$('#sample6_postcode').attr('disabled', false);
@@ -17,28 +16,6 @@
 			console.log($('#sample6_address').attr('disabled'));
 		});
 		
-		function make_select() {
-			var now = new Date(); 
-	 		var year = now.getFullYear(); 
-	 		var mon = (now.getMonth() + 1) > 9 ? ''+(now.getMonth() + 1) : '0'+(now.getMonth() + 1); 
-	 		var day = (now.getDate()) > 9 ? ''+(now.getDate()) : '0'+(now.getDate()); //년도 selectbox만들기
-	 		
-	 		for(var i = 1900 ; i <= year ; i++) { 
-	 			$('#year').append('<option value="' + i + '">' + i + '년</option>'); 
-	 		} // 월별 selectbox 만들기 
-	 		for(var i=1; i <= 12; i++) { 
-	 			var mm = i > 9 ? i : "0"+i; 
-	 			$('#month').append('<option value="' + mm + '">' + mm + '월</option>'); 
-	 		} // 일별 selectbox 만들기 
-	 		for(var i=1; i <= 31; i++) { 
-	 			var dd = i > 9 ? i : "0"+i; 
-	 			$('#day').append('<option value="' + dd + '">' + dd+ '일</option>'); 
-	 		}
-	 		
-	 		$("#year > option[value="+year+"]").attr("selected", "true"); 
-	 		$("#month > option[value="+mon+"]").attr("selected", "true"); 
-	 		$("#day > option[value="+day+"]").attr("selected", "true");
-		}
 	});
 </script>
 <section class="module">
@@ -89,22 +66,12 @@
 		        </div>
 		        <div class="input_area">
 		            <div class="p_title">
-		                <label>생년월일</label>
-		            </div>
-		            <div class="p_input">
-		                <select id="year" name="yy" class="select"></select>&nbsp; 년 &nbsp;
-						<select id="month" name="mm" class="select"></select>&nbsp; 월 &nbsp;
-						<select id="day" name="dd" class="select"></select>&nbsp; 일 &nbsp;
-		            </div>
-		        </div>
-		        <div class="input_area">
-		            <div class="p_title">
 		                <label>주소</label>
 		            </div>
 		            <div class="p_input">
-		                <input id="sample6_postcode" type="text" name="postcode1" class="t_input"  value="${vo.postcode1 }"  disabled="disabled" />
+		                <input id="sample6_postcode" type="text" name="postcode1" class="t_input" disabled="disabled" readonly="readonly" style="background-color : #f5f6fa;" value="${vo.postcode1 }"/>
 						<button type="button"  class="black_btn" onclick="sample6_execDaumPostcode()">우편번호찾기</button><br>
-						<input id="sample6_address" type="text" name="address" value="${vo.address }" required="required" disabled="disabled" class="t_input mt20"/>
+						<input id="sample6_address" type="text" name="address" required="required" disabled="disabled" class="t_input mt20" readonly="readonly" style="background-color : #f5f6fa;" value="${vo.address }"/>
 						<input id="sample6_detailAddress" type="text" name="detailAddress1" value="${vo.detailAddress1 }" class="t_input mt20"/>
 		            </div>
 		        </div>
