@@ -10,11 +10,11 @@
 	</sql>
 	
 	<insert id="userinsertQuestion" parameterType="questionAnswerVo">
-		<selectKey keyProperty="no" resultType="int" order="BEFORE">
-			select questionAnswer_seq from dual
+		<selectKey keyProperty="qno" resultType="int" order="BEFORE">
+		        select QUESTIONANSWER_SEQ.nextval from dual
 		</selectKey>
-		insert into questionAnswer(Qno,Qtitle,Qcontent,Qgroupno,Qstep,Qsortno,Qdelflag)
-		values(#{Qno},#{Qtitle},#{Qcontent},#{Qgroupno},#{Qstep},#{Qsortno},#{Qdelflag})
+		 insert into questionAnswer(Qno,Qtitle,Qcontent)
+		values(#{qno},#{Qtitle},#{Qcontent})
 	</insert>
 	
 	<select id="selectAll" parameterType="searchVo" resultType="questionAnswerVo">

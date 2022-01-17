@@ -8,4 +8,5 @@ public interface MovieService {
 	public List<MovieVO> movieSelectAll(SearchVO searchVO);
 	public int selectTotalRecord(SearchVO searachVo);
 	public MovieVO selectByNo(int MNO);
+	public MovieVO selectByNo2(int MNO);
 }

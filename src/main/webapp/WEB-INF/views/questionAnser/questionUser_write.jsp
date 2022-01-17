@@ -10,11 +10,11 @@
             <input type="hidden" id="email" name="email" value="">
                <div class="input_area">
                    <div class="p_input2">
-                       <input type="text" name="title"  class=" w100">
+                       <input type="text" name="Qtitle"  class=" w100">
                    </div>
                </div>
                <script src="../ckeditor5/ckeditor.js"></script>
-	            <textarea name="content" id="content"></textarea>
+	            <textarea name="Qcontent" id="content"></textarea>
 	            <script>
 	            	ClassicEditor
 	            		.create(document.querySelector('#content'))
