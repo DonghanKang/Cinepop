@@ -33,6 +33,23 @@
 		where RNUM>#{firstRecordIndex} 
 			and RNUM<=#{firstRecordIndex}+ #{recordCountPerPage}]]>
 	</select>
+	<select id="selectAll2" parameterType="eventVo" resultType="eventVo">
+		
+		select *
+		from
+		(
+			select rownum as RNUM, A.*
+			from
+			(
+				select title,fileName,no 
+				from event 
+				order by no desc
+			)A
+		)
+		<![CDATA[
+		where RNUM>0 
+			and RNUM<=3]]>
+	</select>
 	<select id="selectTotalRecord" parameterType="eventVo" resultType="int">
 		select count(*) from event
 		<include refid="searchWhere"></include> 

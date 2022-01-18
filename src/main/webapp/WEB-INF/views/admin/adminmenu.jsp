@@ -17,6 +17,9 @@
    function Event(){//이벤트 글 등록
       location.href="../event/event_write";
    }
+   function questionAnser(){//문의하기 글 등록
+	      location.href="../questionAnser/questionUser_write";
+	   }
 </script>
 
 

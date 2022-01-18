@@ -45,6 +45,11 @@ public class EventServiceImpl implements EventService {
 		return eventdao.deleteEvent(no);
 	}
 
+	@Override
+	public List<EventVO> selectAll2(EventVO eventvo) {
+		return eventdao.selectAll2(eventvo);
+	}
+
 	
 
 	

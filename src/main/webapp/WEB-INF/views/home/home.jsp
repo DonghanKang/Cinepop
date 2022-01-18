@@ -217,35 +217,23 @@
 	          	</div>
               </div>
             </div>
+            <style>
+            .event_post{height:248px; overflow: hidden;}
+            </style>
             <div class="row multi-columns-row post-columns">
-              <div class="col-sm-6 col-md-4 col-lg-4">
-                <div class="post mb-20">
-                  <div class="post-thumbnail"><a href="#"><img src="https://img.cgv.co.kr/WebApp/contents/eventV4/33701/16399713475320.jpg" alt="[스파이더맨: 노 웨이 홈] 스페셜 리미티드 포스터"/></a></div>
-                  <div class="post-header font-alt">
-                    <h2 class="post-title"><a href="#">[스파이더맨: 노 웨이 홈] 스페셜 리미티드 포스터</a></h2>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-md-4 col-lg-4">
-                <div class="post mb-20">
-                  <div class="post-thumbnail">
-                  <a href="#">
-                  <img src="https://img.cgv.co.kr/WebApp/contents/eventV4/33686/16396375587150.jpg" alt="[매트릭스: 리저렉션] 4DX 리미티드 포스터"/>
-                  </a>
-                  </div>
-                  <div class="post-header font-alt">
-                  	<h2 class="post-title"><a href="#">[매트릭스: 리저렉션] 4DX 리미티드 포스터</a></h2>
-                  </div>
-                  </div>
-                </div>
-              <div class="col-sm-6 col-md-4 col-lg-4">
-                <div class="post mb-20">
-                  <div class="post-thumbnail"><a href="#"><img src="https://img.cgv.co.kr/WebApp/contents/eventV4/33377/16358348681300.png" alt="[백신패스관] 운영 가이드"/></a></div>
-                  <div class="post-header font-alt">
-                    <h2 class="post-title"><a href="#">[백신패스관] 운영 가이드</a></h2>
-                    </div>
-                  </div>
-                </div>
+              <!-- 이벤트게시판 반복 -->
+              <c:forEach var="eventVo" items="${listEvent}">
+	              <div class="col-sm-6 col-md-4 col-lg-4">
+	                <div class="post mb-20">
+	                  <input type="hidden" value="${eventVo.no}">
+	                  <div class="post-thumbnail event_post"><a href="<c:url value='/event/event_Detail?no=${eventVo.no}'/>"><img src="<c:url value='/resources/images/event/${eventVo.fileName}'/>" alt="${eventVo.title }"/></a></div>
+	                  <div class="post-header font-alt">
+	                    <h2 class="post-title"><a href="<c:url value='/event/event_Detail?no=${eventVo.no}'/>">${eventVo.title }</a></h2>
+	                  </div>
+	                </div>
+	              </div>
+              </c:forEach>
+              <!--// 이벤트게시판 반복 -->
               </div>
               </div>
             </div>
