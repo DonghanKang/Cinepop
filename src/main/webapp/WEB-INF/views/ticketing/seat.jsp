@@ -54,7 +54,9 @@ $(function(){
 		    		data: {
 			    		imp_uid : rsp.imp_uid,
 			    		sNo:${vo.sNo},
-			    		seatNo:seat
+			    		seatNo:seat,
+			    		tPrice:$('.total strong').html(),
+			    		theNum:$('#result').html()
 			    		//기타 필요한 데이터가 있으면 추가 전달
 		    		}
 		    	}).done(function(data) {
@@ -72,7 +74,7 @@ $(function(){
 		    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
 		    		}
 		    	});
-		    	location.href="<c:url value='/home/home'/>";
+		    	location.href="<c:url value='/store/paymentSuccess'/>";
 		    } else {
 		        var msg = '결제에 실패하였습니다.';
 		        msg += '에러내용 : ' + rsp.error_msg;
