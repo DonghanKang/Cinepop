@@ -26,4 +26,7 @@ public class MovieServiceImpl implements MovieService{
 	public MovieVO selectByNo(int MNO) {
 		return movieDAO.selectByNo(MNO);
 	}
+	public MovieVO selectByNo2(int MNO) {
+		return movieDAO.selectByNo(MNO);
+	}
 }

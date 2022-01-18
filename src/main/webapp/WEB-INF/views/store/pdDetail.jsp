@@ -7,15 +7,46 @@
   <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
   <style>
   	.pdImg {
-    	object-fit:scale-down ;
+    	object-fit:scale-down;
     	height: 300px;
 	}
 	.pd_subtitle{
 		color:gray;
 		font-size: 80%;
 	}
-	
-	
+	.detail_wrap{
+		padding: 30px 15px;
+	}
+	.pdReview{
+		text-align: left;
+	}
+	.reviewMass{
+		margin-bottom:20px;
+		color: #464646;
+		padding:20px;
+		background: #ededed;
+		border-radius: 25px;
+	}
+	.reviewId{
+		font-weight: bold;
+		font-size: 16px;
+	}
+	.reviewContext{
+		font-size: 14px;
+		padding:5px 0;
+	}
+	.reviewRegdate{
+		font-size: 12px;
+		color:#a5a5a5;
+	}
+	.qntText{
+		float: left;
+	    padding: 0 20px;
+	    font-weight: bold;
+	    font-size: 15px;
+	    position: relative;
+    	top: 7px;
+	}
   </style>
    <script>
     	
@@ -49,7 +80,7 @@
    </script>
 <section class="module">
   <div class="container">
-    <h2>${storeVo.pdName }  <span class="pd_subtitle">/ ${pctName }</span></h2>
+    <h2>${storeVo.pdName }  <span class="pd_subtitle">/ ${storeVo.pctName }</span></h2>
     <div class="row detail_wrap">
     	<div class="mb-sm-20 wow fadeInUp" onclick="wow fadeInUp">
            <div class="store_detail">
@@ -65,6 +96,7 @@
 	             		<li><strong>유효기간</strong><span>구매일로부터 5년</span></li>
 	             	</ul>
 					<div class="com_custom_selectbox select">
+						<div class="qntText">수량</div>
 						<select id="pdQuantity">
 							<option>1</option>
 							<option>2</option>
@@ -96,6 +128,38 @@
    		<%@ include file="terms/terms_food.jsp" %>
    	</c:if>
    	
+  </div>
+  <div style="height: 50px;">
+  </div>
+  <div class="container">
+	  <span style="font-size:18px; font-weight:600; margin-bottom:20px;">상품평</span>
+	  <div class="row detail_wrap pdReview">
+		  <c:if test="${empty reviewList }">
+		  		<span>상품평이 없습니다.</span>
+		  </c:if>
+		  
+		  <c:if test="${!empty reviewList }">
+		     <div class="reviewMass">
+		        <c:set var="i" value="1" />
+	          	<c:forEach var="pdReviewVo" items="${reviewList }">
+		          		<c:if test="${i!=1 }">
+		          			<hr>
+		          		</c:if>
+		          		<c:set var="i" value="${i+1 }" />
+		          		<div class="reviewId">
+		          			${pdReviewVo.id }
+		          		</div>
+		          		<div class="reviewContext">
+		          			${pdReviewVo.review }
+		          		</div>
+		          		<div class="reviewRegdate">
+		          			${pdReviewVo.regdate }
+		          		</div>
+	          	</c:forEach>
+		     </div>
+		  </c:if>
+		  
+	  </div>
   </div>
 </section>
   <script src="../titan-master/ticketing/js/popper.js"></script>

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@include file="../inc/top.jsp" %>
 <!DOCTYPE html>
 <html lang="ko" dir="ltr">
@@ -9,6 +11,12 @@
       <style>
         video[poster]{height:100%;width:100%;}
         video::before{background: url('../../../../resources/images/video_btn.png') no-repeat;width:150px;height:150px;background-size:100%;display: block;content: '';position: absolute;top:50%;}
+      	.img_wrap img{
+      		object-fit:scale-down;
+      	}
+      	.img_wrap{
+      		width: 70px;
+      	}
       </style>
       <!--메인 비디오 배너 -->
       <section class="home-section home-full-height bg-dark-30" id="home" >
@@ -209,35 +217,23 @@
 	          	</div>
               </div>
             </div>
+            <style>
+            .event_post{height:248px; overflow: hidden;}
+            </style>
             <div class="row multi-columns-row post-columns">
-              <div class="col-sm-6 col-md-4 col-lg-4">
-                <div class="post mb-20">
-                  <div class="post-thumbnail"><a href="#"><img src="https://img.cgv.co.kr/WebApp/contents/eventV4/33701/16399713475320.jpg" alt="[스파이더맨: 노 웨이 홈] 스페셜 리미티드 포스터"/></a></div>
-                  <div class="post-header font-alt">
-                    <h2 class="post-title"><a href="#">[스파이더맨: 노 웨이 홈] 스페셜 리미티드 포스터</a></h2>
-                  </div>
-                </div>
-              </div>
-              <div class="col-sm-6 col-md-4 col-lg-4">
-                <div class="post mb-20">
-                  <div class="post-thumbnail">
-                  <a href="#">
-                  <img src="https://img.cgv.co.kr/WebApp/contents/eventV4/33686/16396375587150.jpg" alt="[매트릭스: 리저렉션] 4DX 리미티드 포스터"/>
-                  </a>
-                  </div>
-                  <div class="post-header font-alt">
-                  	<h2 class="post-title"><a href="#">[매트릭스: 리저렉션] 4DX 리미티드 포스터</a></h2>
-                  </div>
-                  </div>
-                </div>
-              <div class="col-sm-6 col-md-4 col-lg-4">
-                <div class="post mb-20">
-                  <div class="post-thumbnail"><a href="#"><img src="https://img.cgv.co.kr/WebApp/contents/eventV4/33377/16358348681300.png" alt="[백신패스관] 운영 가이드"/></a></div>
-                  <div class="post-header font-alt">
-                    <h2 class="post-title"><a href="#">[백신패스관] 운영 가이드</a></h2>
-                    </div>
-                  </div>
-                </div>
+              <!-- 이벤트게시판 반복 -->
+              <c:forEach var="eventVo" items="${listEvent}">
+	              <div class="col-sm-6 col-md-4 col-lg-4">
+	                <div class="post mb-20">
+	                  <input type="hidden" value="${eventVo.no}">
+	                  <div class="post-thumbnail event_post"><a href="<c:url value='/event/event_Detail?no=${eventVo.no}'/>"><img src="<c:url value='/resources/images/event/${eventVo.fileName}'/>" alt="${eventVo.title }"/></a></div>
+	                  <div class="post-header font-alt">
+	                    <h2 class="post-title"><a href="<c:url value='/event/event_Detail?no=${eventVo.no}'/>">${eventVo.title }</a></h2>
+	                  </div>
+	                </div>
+	              </div>
+              </c:forEach>
+              <!--// 이벤트게시판 반복 -->
               </div>
               </div>
             </div>
@@ -251,141 +247,90 @@
         			<div class="col-sm-6 col-md-3">
         				<div class="m_product_box h480">
 	        				<div class="prd_area">
-	        					<h3>기프트카드</h3>
-	        					<a class="more_btn" href="<c:url value='/store/giftCard'/>" >더보기</a>
+	        					<h3>영화관람권</h3>
+	        					<a class="more_btn" href="<c:url value='/store/pdList?pctNo=A01'/>" >더보기</a>
 	        				</div>
-	        				<a href="#" class="prd_list">
-	        					<div class="img_wrap">
-	        						<img alt="뭘 좋아할지 몰라서 기프트 카드" src="https://www.cjone.com//cjmweb/cashimg//2018/12/20181217167ba99886528">
-	        					</div>
-	        					<div class="giftcon_info_wrap">
-	        						<span>기프트 카드 A형</span>
-	        						<strong>금액충전형</strong>
-	        					</div>
-	        				</a>
-	        				<a href="#" class="prd_list">
-	        					<div class="img_wrap">
-	        						<img alt="쇼핑은니가 결제는 내가 기프트 카드" src="https://www.cjone.com/cjmweb/cashimg//2018/12/20181217167baa1322e68">
-	        					</div>
-	        					<div class="giftcon_info_wrap">
-	        						<span>기프트 카드 B형</span>
-	        						<strong>금액충전형</strong>
-	        					</div>
-	        				</a>
-	        				<a href="#" class="prd_list">
-	        					<div class="img_wrap">
-	        						<img alt="항상 나는니편 기프트 카드" src="https://www.cjone.com/cjmweb/cashimg//2018/09/20180904165a22e57f458">
-	        					</div>
-	        					<div class="giftcon_info_wrap">
-	        						<span>기프트 카드 C형</span>
-	        						<strong>금액충전형</strong>
-	        					</div>
-	        				</a>
+	        				<!-- 영화관람권 리스트 -->
+	        				<c:forEach var="vo" items="${listA01 }">
+		        				<a href="<c:url value='/store/pdDetail?pdNo=${vo.pdNo }'/>" class="prd_list">
+		        					<div class="img_wrap">
+		        						<img class="pdImg" src="<c:url value='/resources/images/store/${vo.pdImagename }'/>">
+		        					</div>
+		        					<div class="giftcon_info_wrap">
+		        						<span class="pdName">${vo.pdName }</span><br>
+		        						<strong ><fmt:formatNumber value="${vo.pdPrice }" pattern="#,###" />원</strong>
+		        					</div>
+		        				</a>
+	        				</c:forEach>
+	        				<!-- 영화관람권 리스트 -->
         				</div>
         			</div>
         			<div class="col-sm-6 col-md-3">
         				<div class="m_product_box">
 	        				<div class="prd_area">
 	        					<h3>팝콘</h3>
-	        					<a class="more_btn">더보기</a>
+	        					<a class="more_btn" href="<c:url value='/store/pdList?pctNo=B01'/>">더보기</a>
 	        				</div>
-        					<a href="#" class="prd_list">
-        					<div class="img_wrap img_wrap2">
-        						<img alt="고소팝콘 (L)" src="http://img.cgv.co.kr/GiftStore/Product/Pc/List/15463244796940.jpg">
-        					</div>
-        					<div class="giftcon_info_wrap">
-        						<span>고소팝콘 (L)</span>
-        						<strong>5,000</strong>
-        					</div>
-	        				</a>
-	        				<a href="#" class="prd_list">
-        					<div class="img_wrap img_wrap2">
-        						<img alt="달콤팝콘 (L)" src="http://img.cgv.co.kr/GiftStore/Product/Pc/List/15463244213800.jpg">
-        					</div>
-        					<div class="giftcon_info_wrap">
-        						<span>달콤팝콘 (L)</span>
-        						<strong>6,000</strong>
-        					</div>
-	        				</a>
-	        				<a href="#" class="prd_list">
-        					<div class="img_wrap img_wrap2">
-        						<img alt="더블치즈팝콘 (L)" src="http://img.cgv.co.kr/GiftStore/Product/Pc/List/15463247055100.jpg">
-        					</div>
-        					<div class="giftcon_info_wrap">
-        						<span>더블치즈팝콘 (L)</span>
-        						<strong>6,000</strong>
-        					</div>
-	        				</a>
+	        				<!-- 팝콘 리스트 -->
+        					<c:forEach var="vo" items="${listB01 }">
+		        				<a href="<c:url value='/store/pdDetail?pdNo=${vo.pdNo }'/>" class="prd_list">
+		        					<div class="img_wrap">
+		        						<img class="pdImg" src="<c:url value='/resources/images/store/${vo.pdImagename }'/>">
+		        					</div>
+		        					<div class="giftcon_info_wrap">
+		        					<!-- 긴 상품명 자르기 -->
+		        					<c:set var="pdName" value="${vo.pdName}" />
+		        					<c:if test="${fn:length(pdName)>9 }">
+		        						<c:set var="pdName" value="${fn:substring(pdName,0,9)}" />
+		        					</c:if>
+		        						<span class="pdName">${pdName }</span><br>
+		        						<strong ><fmt:formatNumber value="${vo.pdPrice }" pattern="#,###" />원</strong>
+		        					</div>
+		        				</a>
+	        				</c:forEach>
+	        				<!-- 팝콘 리스트 -->
         				</div>
         			</div>
         			<div class="col-sm-6 col-md-3">
         				<div class="m_product_box">
 	        				<div class="prd_area">
 	        					<h3>음료</h3>
-	        					<a class="more_btn">더보기</a>
+	        					<a class="more_btn" href="<c:url value='/store/pdList?pctNo=B02'/>" >더보기</a>
 	        				</div>
-	        				<a href="#" class="prd_list">
-        					<div class="img_wrap img_wrap2">
-        						<img alt="탄산음료 (M)" src="http://img.cgv.co.kr/GiftStore/Product/Pc/List/15464083668990.jpg">
-        					</div>
-        					<div class="giftcon_info_wrap">
-        						<span>탄산음료 (M)</span>
-        						<strong>2,500</strong>
-        					</div>
-	        				</a>
-	        				<a href="#" class="prd_list">
-        					<div class="img_wrap img_wrap2">
-        						<img alt="탄산음료 (L)" src="http://img.cgv.co.kr/GiftStore/Product/Pc/List/15464084826570.jpg">
-        					</div>
-        					<div class="giftcon_info_wrap">
-        						<span>탄산음료 (L)</span>
-        						<strong>3,000</strong>
-        					</div>
-	        				</a>
-	        				<a href="#" class="prd_list">
-        					<div class="img_wrap img_wrap2">
-        						<img alt="아메리카노(ICE)" src="http://img.cgv.co.kr/GiftStore/Product/Pc/List/15464105893180.jpg">
-        					</div>
-        					<div class="giftcon_info_wrap">
-        						<span>아메리카노(ICE)</span>
-        						<strong>4,000</strong>
-        					</div>
-	        				</a>
+	        				<!-- 음료 리스트 -->
+	        				<c:forEach var="vo" items="${listB02 }">
+		        				<a href="<c:url value='/store/pdDetail?pdNo=${vo.pdNo }'/>" class="prd_list">
+		        					<div class="img_wrap">
+		        						<img class="pdImg" src="<c:url value='/resources/images/store/${vo.pdImagename }'/>">
+		        					</div>
+		        					<div class="giftcon_info_wrap">
+		        						<span class="pdName">${vo.pdName }</span><br>
+		        						<strong ><fmt:formatNumber value="${vo.pdPrice }" pattern="#,###" />원</strong>
+		        					</div>
+		        				</a>
+	        				</c:forEach>
+	        				<!-- 음료 리스트 -->
         				</div>
         			</div>
         			<div class="col-sm-6 col-md-3 ">
         				<div class="m_product_box h480">
 	        				<div class="prd_area">
 	        					<h3>스낵</h3>
-	        					<a class="more_btn">더보기</a>
+	        					<a class="more_btn" href="<c:url value='/store/pdList?pctNo=B03'/>">더보기</a>
 	        				</div>
-	        				<a href="#" class="prd_list">
-	        					<div class="img_wrap">
-	        						<img alt="칠리치즈나쵸" src="http://img.cgv.co.kr/GiftStore/Product/Pc/List/15459092398190.jpg">
-	        					</div>
-	        					<div class="giftcon_info_wrap">
-	        						<span>칠리치즈나쵸</span>
-	        						<strong>4,900</strong>
-	        					</div>
-	        				</a>
-	        				<a href="#" class="prd_list">
-	        					<div class="img_wrap">
-	        						<img alt="플레인핫도그" src="http://img.cgv.co.kr/GiftStore/Product/Pc/List/15464120856450.jpg">
-	        					</div>
-	        					<div class="giftcon_info_wrap">
-	        						<span>플레인핫도그</span>
-	        						<strong>4,500</strong>
-	        					</div>
-	        				</a>
-	        				<a href="#" class="prd_list">
-	        					<div class="img_wrap">
-	        						<img alt="오징어(완제품)" src="http://img.cgv.co.kr/GiftStore/Product/Pc/List/15459089330830.jpg">
-	        					</div>
-	        					<div class="giftcon_info_wrap">
-	        						<span>오징어(완제품)</span>
-	        						<strong>3,500</strong>
-	        					</div>
-	        				</a>
+	        				<!-- 스낵 리스트 -->
+	        				<c:forEach var="vo" items="${listB03 }">
+		        				<a href="<c:url value='/store/pdDetail?pdNo=${vo.pdNo }'/>" class="prd_list">
+		        					<div class="img_wrap">
+		        						<img class="pdImg" src="<c:url value='/resources/images/store/${vo.pdImagename }'/>">
+		        					</div>
+		        					<div class="giftcon_info_wrap">
+		        						<span class="pdName">${vo.pdName }</span><br>
+		        						<strong ><fmt:formatNumber value="${vo.pdPrice }" pattern="#,###" />원</strong>
+		        					</div>
+		        				</a>
+	        				</c:forEach>
+	        				<!-- 스낵 리스트 -->
         				</div>
         			</div>
         			

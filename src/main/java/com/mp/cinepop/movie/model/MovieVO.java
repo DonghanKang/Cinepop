@@ -1,5 +1,7 @@
 package com.mp.cinepop.movie.model;
 
+import java.sql.Timestamp;
+
 public class MovieVO {
 	
 	private int MNO;
@@ -17,8 +19,31 @@ public class MovieVO {
 	private String IMAGE3;
 	private String VIDEOURL;
 	private String GENAME;
+	private String ID;
+	private Timestamp REGDATE;
+	private String REVIEWCONTENT;
 	
 	
+	
+	
+	public String getID() {
+		return ID;
+	}
+	public void setID(String iD) {
+		ID = iD;
+	}
+	public Timestamp getREGDATE() {
+		return REGDATE;
+	}
+	public void setREGDATE(Timestamp rEGDATE) {
+		REGDATE = rEGDATE;
+	}
+	public String getREVIEWCONTENT() {
+		return REVIEWCONTENT;
+	}
+	public void setREVIEWCONTENT(String rEVIEWCONTENT) {
+		REVIEWCONTENT = rEVIEWCONTENT;
+	}
 	public String getGENAME() {
 		return GENAME;
 	}

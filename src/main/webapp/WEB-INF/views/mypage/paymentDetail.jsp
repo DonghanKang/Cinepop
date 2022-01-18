@@ -23,8 +23,9 @@
           	<table class="t_style1 mb50">
           		<colgroup>
           			<col width="10%">
-          			<col width="40%">
+          			<col width="25%">
           			<col width="20%">
+          			<col width="15%">
           			<col width="15%">
           			<col width="15%">
           		</colgroup>
@@ -34,6 +35,7 @@
           			<th scope="row">상품가격</th>
           			<th scope="row">수량</th>
           			<th scope="row">QR코드보기</th>
+          			<th scope="row">상품리뷰등록</th>
           		</tr>
           		<c:if test="${!empty list }">	 
 	          		<c:forEach var="map" items="${list }">
@@ -51,8 +53,20 @@
 							</td>
 							<c:set var="qrName" value="${map['ORDER_NO']}_${map['PD_ORDER']}"/>
 
-		          			<td><input class="black_btn" type="button" value="QR코드보기" onclick="window.open('<c:url value='/mypage/showQr?qrName=${qrName }'/>', 'QR코드보기' 
-	          					,'scrollbars=no,toolbar=no,location=no,status=yes,menubar=no,resizable=no,width=550px,height=550px');"></td>
+		          			<td>
+		          				<input class="black_btn" type="button" value="QR코드보기" onclick="window.open('<c:url value='/mypage/showQr?qrName=${qrName }'/>', 'QR코드보기' 
+	          						,'scrollbars=no,toolbar=no,location=no,status=yes,menubar=no,resizable=no,width=550px,height=550px');">
+	          				</td>
+		          			<td>
+		          				<c:if test="${map['REVIEW_FLAG'] eq 'N'}">
+		          				<input class="black_btn" type="button" value="상품리뷰등록" 
+			          				onclick="window.open('<c:url value="/mypage/writePdReview?orderNo=${map['ORDER_NO']}&pdNo=${map['PD_NO']}&pdOrder=${map['PD_ORDER']}"/>', '상품평등록' 
+		          						,'scrollbars=no,toolbar=no,location=no,status=yes,menubar=no,resizable=no,width=550px,height=400px');">
+		          				</c:if>
+		          				<c:if test="${map['REVIEW_FLAG'] eq 'Y'}">
+		          					<span>이미 등록됨</span>
+		          				</c:if>
+	          				</td>
 		          		</tr>
 	          		</c:forEach>
 	          	</c:if>

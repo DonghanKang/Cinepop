@@ -54,14 +54,21 @@ public class MovieController {
 	}
 	
 	@RequestMapping("/movieDetail")
-	public String movieDetail(@RequestParam (defaultValue = "0") int MNO, Model model) {
+	public String movieDetail(@RequestParam (defaultValue = "0") int MNO,
+			@ModelAttribute MovieVO vo,Model model) {
+
 		logger.info("영화상세 페이지 파라미터 MNO={}",MNO);
-
-		MovieVO movieVo=movieService.selectByNo(MNO);
-
-		logger.info("movieVO={}",movieVo);
-		model.addAttribute("movieVo",movieVo);
-
+		logger.info("getReview={}",vo.getID());
+		
+		vo=movieService.selectByNo2(MNO);
+		/*if(movieVo.getID() == null) {
+			movieVo=movieService.selectByNo(MNO);
+			logger.info("movieVO={}",movieVo);
+			model.addAttribute("movieVo",movieVo);
+		}else {
+		*/	
+			model.addAttribute("movieVo",vo);
+		//}
 		return "movie/movieDetail";
 	}
 }

@@ -27,11 +27,11 @@ import com.mp.cinepop.common.FileUploadUtil;
 import com.mp.cinepop.common.QRUtil;
 import com.mp.cinepop.store.model.CartVO;
 import com.mp.cinepop.store.model.OrdersVO;
+import com.mp.cinepop.store.model.PdReviewVO;
 import com.mp.cinepop.store.model.StoreService;
 import com.mp.cinepop.store.model.StoreVO;
 
 @Controller
-@RequestMapping("/store")
 public class StoreController {
 	Logger logger=LoggerFactory.getLogger(StoreController.class);
 	private final StoreService storeService;
@@ -43,9 +43,9 @@ public class StoreController {
 		this.storeService = storeService;
 		this.fileUploadUtil = fileUploadUtil;
 	}
-
-	//등록, 수정
-	@GetMapping("/pdWrite")
+	
+	//스토어 상품 등록, 수정 GET
+	@GetMapping("/admin/pdWrite")
 	public String pdWrite_get(@RequestParam(defaultValue = "0") int pdNo, Model model) {
 		logger.info("상품등록 페이지, 파라미터 pdNo={}",pdNo);
 
@@ -54,10 +54,11 @@ public class StoreController {
 			model.addAttribute("storeVo",storeVo);
 		}
 
-		return "store/pdWrite";
+		return "admin/pdWrite";
 	}
 
-	@PostMapping("/pdWrite")
+	//스토어 상품 등록, 수정 POST
+	@PostMapping("/admin/pdWrite")
 	public String pdWrite_post(@ModelAttribute StoreVO storeVo, 
 			HttpServletRequest request) {
 		logger.info("상품 등록, 수정 처리, 파라미터 StoreVO={}",storeVo );
@@ -138,7 +139,7 @@ public class StoreController {
 	}
 
 
-	@RequestMapping("/pdList")
+	@RequestMapping("/store/pdList")
 	public String pdList(@RequestParam String pctNo, Model model) {
 		logger.info("카테고리별 상품리스트 페이지 파라미터 pctNo={}",pctNo);
 
@@ -151,22 +152,20 @@ public class StoreController {
 		return "store/pdList";
 	}
 
-	@GetMapping("/pdDetail")
+	@GetMapping("/store/pdDetail")
 	public String pdDetail(@RequestParam (defaultValue = "0") int pdNo, Model model) {
 		logger.info("상품디테일 페이지 파라미터 pdNo={}",pdNo);
 
 		StoreVO storeVo=storeService.selectByPdNo(pdNo);
-		String pctName=storeService.getCategoryName(storeVo.getPctNo());
-
-		logger.info("storeVo={}",storeVo);
+		List<PdReviewVO> reviewList=storeService.selectPdReviewView(pdNo);
 
 		model.addAttribute("storeVo",storeVo);
-		model.addAttribute("pctName",pctName);
+		model.addAttribute("reviewList",reviewList);
 
 		return "store/pdDetail";
 	}
 
-	@PostMapping("/payment")
+	@PostMapping("/store/payment")
 	public String payment(@ModelAttribute CartVO cartVo
 			,Model model, HttpServletRequest request) {
 		logger.info("결제처리 cartVo={}",cartVo);
@@ -229,7 +228,7 @@ public class StoreController {
 		return "redirect:/store/index";
 	}
 
-	@PostMapping("/paymentDataInput")
+	@PostMapping("/store/paymentDataInput")
 	@ResponseBody
 	public String paymentDataInput(@RequestParam(value="totalPrice")int totalPrice
 			,@RequestParam(value="pdNoList")int[] pdNoList
@@ -273,7 +272,7 @@ public class StoreController {
 		return res;
 	}
 
-	@RequestMapping("/paymentSuccess")
+	@RequestMapping("/store/paymentSuccess")
 	public void paymentSuccess() {
 		
 	}

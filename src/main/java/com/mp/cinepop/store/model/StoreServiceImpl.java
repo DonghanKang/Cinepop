@@ -41,6 +41,11 @@ public class StoreServiceImpl implements StoreService {
 	}
 
 	@Override
+	public List<StoreVO> selectFourByCategory(String pctNo) {
+		return storeDao.selectFourByCategory(pctNo);
+	}
+
+	@Override
 	public int deleteByPdNo(int pdNo) {
 		return storeDao.deleteByPdNo(pdNo);
 	}
@@ -65,7 +70,7 @@ public class StoreServiceImpl implements StoreService {
 		ordersVo.setOrderNo(orderNo);
 		
 		//Orders 테이블 insert
-		int cnt=storeDao.insertOrders(ordersVo);
+		storeDao.insertOrders(ordersVo);
 		
 		//OrderDetails테이블 insert
 		CartVO cartVo=new CartVO();
@@ -74,7 +79,7 @@ public class StoreServiceImpl implements StoreService {
 			cartVo.setCartNo(orderNo);
 			cartVo.setPdOrder(i+1);
 			
-			cnt=storeDao.insertOrderDetails(cartVo);
+			storeDao.insertOrderDetails(cartVo);
 		}
 		
 		//추가한 오더번호를 리턴
@@ -94,6 +99,19 @@ public class StoreServiceImpl implements StoreService {
 	@Override
 	public List<Map<String, Object>> selectOrderDetail(int orderNo) {
 		return storeDao.selectOrderDetail(orderNo);
+	}
+
+	@Override
+	@Transactional
+	public int insertPdReview(Map<String, Object> map) {;
+		int cnt=storeDao.insertPdReview(map);
+		cnt=storeDao.updateReviewFlag(map);
+		return cnt;
+	}
+
+	@Override
+	public List<PdReviewVO> selectPdReviewView(int pdNo) {
+		return storeDao.selectPdReviewView(pdNo);
 	}
 	
 	

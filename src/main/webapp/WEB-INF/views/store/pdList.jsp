@@ -9,6 +9,7 @@
      .team-image2{width:90%;height:180px;margin: 0px auto;}
      .team-image2 img{width:90%; margin-top:25px;  object-fit: scale-down; height: 150px;}
      .h300{height:300px;}
+     a.btn_a{margin-top: 15px;}
   </style>
 <section class="module">
   <div class="container">

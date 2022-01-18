@@ -12,15 +12,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.annotation.RequestScope;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.mp.cinepop.common.PaginationInfo;
 import com.mp.cinepop.common.SearchVO;
 import com.mp.cinepop.store.model.OrdersVO;
 import com.mp.cinepop.store.model.StoreService;
+import com.mp.cinepop.store.model.StoreVO;
 
 @Controller
 public class StoreController2 {
@@ -82,5 +86,32 @@ public class StoreController2 {
 		logger.info("QR보여주기");
 		
 		return "mypage/showQr";
+	}
+	
+	@GetMapping("/mypage/writePdReview")
+	public String writePdReview(@RequestParam int pdNo
+			, Model model) {
+		logger.info("상품평작성페이지 pdNo={},orderNo={}",pdNo);
+		
+		StoreVO storeVo=storeService.selectByPdNo(pdNo);
+		
+		model.addAttribute("storeVo",storeVo);
+		return "mypage/writePdReview";
+	}
+	
+	@PostMapping("/mypage/writePdReview")
+	public ModelAndView writePdReview(@RequestParam Map<String, Object> paramMap) {
+		logger.info("상품 리뷰 쓰기 요청 paramMap={}",paramMap);
+		String str=(String)paramMap.get("review");
+		paramMap.put("review", ((String)paramMap.get("review")).replace("\r\n", "<br>"));
+		
+		storeService.insertPdReview(paramMap);
+		
+		ModelAndView mav=new ModelAndView("/mypage/writePdReview");
+		
+		String afterSubmit="opener.document.location.reload(); self.close();";
+		mav.addObject("afterSubmit", afterSubmit);
+		
+		return mav;
 	}
 }

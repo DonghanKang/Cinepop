@@ -15,7 +15,6 @@
    <h2 class="mb50">이벤트 게시판 글쓰기</h2>
          <form name="frmWrite" action="<c:url value='/event/event_write'/>" method="post" enctype="multipart/form-data">
       		<fieldset>
-            <input type="hidden" id="email" name="email" value=""> 
                <div class="write_area">
                    <div class="write_display">
 						<div class="p_title">

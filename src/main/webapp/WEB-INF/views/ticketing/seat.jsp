@@ -20,6 +20,12 @@ $(function(){
 	});
 	
 	$('.red_btn').click(function(){
+		var c_cnt=$('input[type=checkbox]:checked').length;
+		var cnt=$('#result').html();
+		if(cnt!=c_cnt){
+			alert('인원수를 맞춰주세요');
+			return false;
+		}
 		IMP.init("imp05264117");
 		IMP.request_pay({
 		    pg : 'html5_inicis',
@@ -48,8 +54,9 @@ $(function(){
 		    		data: {
 			    		imp_uid : rsp.imp_uid,
 			    		sNo:${vo.sNo},
-			    		userid:'userid',
-			    		seatNo:seat
+			    		seatNo:seat,
+			    		tPrice:$('.total strong').html(),
+			    		theNum:$('#result').html()
 			    		//기타 필요한 데이터가 있으면 추가 전달
 		    		}
 		    	}).done(function(data) {
@@ -67,6 +74,7 @@ $(function(){
 		    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
 		    		}
 		    	});
+		    	location.href="<c:url value='/store/paymentSuccess'/>";
 		    } else {
 		        var msg = '결제에 실패하였습니다.';
 		        msg += '에러내용 : ' + rsp.error_msg;
@@ -100,7 +108,7 @@ function count(type)  {
 }
 
 </script>
-<div id="popup02">
+<div class="module" id="popup02">
 		<div class="seat">
 			<div class="seat_head">
 				<h3>인원/좌석선택</h3><span class="dot_point">인원은 최대 8명까지 선택 가능합니다.</span>
@@ -109,7 +117,7 @@ function count(type)  {
 				<div class="movie_infor">
 					<h6 class="hidden">예매 정보</h6>
 					<span class="thm">
-					<img src="https://caching.lottecinema.co.kr//Media/MovieFile/MovieImg/202112/17857_103_1.jpg">
+					<img src="<c:url value='/resources/images/movie/${vo.image1 }'/>">
 					</span>
 					<div class="group_infor">
 						<div class="bx_tit">
@@ -142,7 +150,7 @@ function count(type)  {
 				.s_uppercase{color:#fff; font-weight:600; margin-right:20px;}
 			</style>
 			<div class="select_seat">
-				<p class="colorW mt15">좌석 선택 후 결제하기 버튼을 클릭하세요</p>
+				<p class="colorW">좌석 선택 후 결제하기 버튼을 클릭하세요</p>
 				<div class="gray_box"><h3>SCREEN</h3></div>
 				<div class="seat_area">
 					<c:forEach var="i" begin="1" end="5">

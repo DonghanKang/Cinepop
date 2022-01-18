@@ -7,14 +7,14 @@
    <h2 class="mb50">1:1 문의하기</h2>
       <fieldset>
          <form name="admin_notice" action="<c:url value='/questionAnser/questionUser_write'/>" method="post" >
-            <input type="hidden" id="email" name="email" value="">
+            <input type="hidden" id="email" name="email" value="${sessionScope.userid} }">
                <div class="input_area">
                    <div class="p_input2">
-                       <input type="text" name="title"  class=" w100">
+                       <input type="text" name="Qtitle"  class=" w100">
                    </div>
                </div>
                <script src="../ckeditor5/ckeditor.js"></script>
-	            <textarea name="content" id="content"></textarea>
+	            <textarea name="Qcontent" id="content"></textarea>
 	            <script>
 	            	ClassicEditor
 	            		.create(document.querySelector('#content'))

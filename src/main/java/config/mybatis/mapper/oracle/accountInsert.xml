@@ -8,8 +8,8 @@
 		<selectKey keyProperty="aNo" resultType="int" order="BEFORE">
 			select account_seq.nextval from dual
 		</selectKey>
-		insert into account(aNo, aName,id,postcode1,address,detailAddress1,tel,pwd)
-		values(#{aNo}, #{aName},#{id},#{postcode1},#{address},#{detailAddress1},#{tel},#{pwd})
+		insert into account(aNo, aName,id,postcode1,address,detailAddress1,tel)
+		values(#{aNo}, #{aName},#{id},#{postcode1},#{address},#{detailAddress1},#{tel})
 	</insert>
 	
 	<insert id="insertHash" parameterType="hashVo">

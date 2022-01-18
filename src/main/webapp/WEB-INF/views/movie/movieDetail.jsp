@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="fm" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="../inc/top.jsp" %>
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
@@ -21,6 +22,11 @@ $(function() {
 </script>
 <style>
 .strongWidth13 strong{width: 13% !important;}
+.colorblk {color: #000 !important;}
+.w70 {width: 70%;}
+.review_wm {width: 90%; margin-left: 45px;}
+.display_inflex_review{display: inline-flex; align-items: center;flex-wrap: wrap;}
+.h_auto{height: auto !important;}
 </style>
 <section class="module">
   <div class="container">
@@ -63,51 +69,41 @@ $(function() {
 			<style>
 				.review
 			</style>
-          <div id="tab-2" class="p_cont">
+          <div id="tab-2" class="p_cont h_auto">
               <div class="cp_area">
 				<form class="form" name="coupon" action="" method="post">
-					<h4>한줄평 입력</h4>
-                	<input type="text" class="t_input " name="serialno">
-                	<button type="submit" class="black_btn" id="c_btn">쿠폰등록</button>
-                	<ul class="list_style mt20">
-	                    <li>쿠폰 번호는 숫자로 이루어져 있습니다.</li>
-						<li>쿠폰에 표기된 유효기간을 꼭 확인해주세요.</li>
-                	</ul>
+					<h4>한줄평 입력하기</h4>
+                	<input type="text" class="t_input w70" name="serialno" maxlength='30' placeholder="최대 30글자">
+                	<span class="colorblk">별점 
+                		<div class = "select display_inflex">
+                		<select>
+                			<option value="1">1</option>
+                			<option value="2">2</option>
+                			<option value="3">3</option>
+                			<option value="4">4</option>
+                			<option value="5">5</option>
+                			<option value="6">6</option>
+                			<option value="7">7</option>
+                			<option value="8">8</option>
+                			<option value="9">9</option>
+                			<option value="10">10</option>
+                		</select>
+                		</div>
+                	</span>
+                	<button type="submit" class="black_btn" id="c_btn">한줄평 등록</button>
 				</form>
              </div>
-             
              <ul class="list_style mt20">
-                 <li>사용유효기간이 지났거나 도래하지 않은 쿠폰은 사용할 수 없습니다.</li>
-                  <li>이미 사용한 쿠폰은 사용 취소하거나 사용 전으로 되돌릴 수 없습니다.</li>
+                 <li>한줄평</li>
              </ul>
-             <div class="mt20 tb_area">
-               <table  class="table1">
-                   <colgroup>
-                       <col width="25%">
-                       <col width="25%">
-                       <col width="25%">
-                       <col width="25%">
-                   </colgroup>
-                   <tr>
-                       <th scope="col">쿠폰번호</th>
-                       <th scope="col">쿠폰이름</th>
-                       <th scope="col">할인금액</th>
-                       <th scope="col">사용기한</th>
-                   </tr>
-                   <!-- <tr>
-                       <td colspan="4">사용한 쿠폰이 없습니다.</td>
-                   </tr> -->
-                  	<tr>
-                  		<td></td>
-                  		<td></td>
-                  		<td></td>
-                  		<td></td>
-                  	</tr>
-                  
-                   
-                <!--// 게시판 내용 반복 끝-->
-               </table>
-              </div>
+             <div class="display_inflex_review" id = "reviewlist">
+             	<%-- <c:forEach items="" var=""> --%>
+	             	<div class="review_wm">
+		             	<div><span>아이디 : ${movieVo.ID }</span>&nbsp;&nbsp;&nbsp;<span>날짜 : ${movieVo.REGDATE }</span></div>
+		             	<p>${movieVo.REVIEWCONTENT }</p>
+	             	</div>
+             	<%-- </c:forEach> --%>
+             </div>
           </div>
         	 <div class="t_center">
   				<a href="<c:url value='/movie/movieChart'/>" class="a_black_btn">무비차트</a>
