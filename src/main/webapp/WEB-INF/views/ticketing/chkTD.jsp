@@ -54,13 +54,13 @@ function seatList(seatNo){
 		return seat[0]+" (1명)";
 	}else{
 		for(var i=0;i<seat.length;i++){
-			if(i==seat.length-1){
-				seat1+=seat[i]
+			if(i==(seat.length-1) || i==(seat.length-2)){
+				seat1+=seat[i];
 			}else{
 				seat1+=seat[i]+",";
 			}
-			seat1+=" ("+seat.length-1+"명)";
 		}	
+		seat1+=" ("+(seat.length-1)+"명)";
 		return seat1;
 	}
 }

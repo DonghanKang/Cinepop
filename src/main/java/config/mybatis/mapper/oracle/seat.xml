@@ -35,4 +35,46 @@
         on si.t_no=t.t_no
 		where userid=#{userid} and s_t_no=#{sTNo}
 	</select>
+	
+	<insert id="insertMOrder" parameterType="map">
+		<selectKey keyProperty="orderNo" order="BEFORE" resultType="int">
+			select morders_seq.nextval from dual
+		</selectKey>
+		insert into morders(order_no,userid,s_t_no,total_price,the_num) 
+		values(#{orderNo},#{userid},#{sTNo},#{tPrice},#{theNum})
+	</insert>
+	
+	<select id="cntMOrderById" parameterType="string" resultType="int">
+		select count(*) from morders
+		where userid=#{id}
+		<if test="startDate!=null and startDate!='' 
+					and endDate!=null and endDate!=''">
+					AND ORDER_DATE BETWEEN TO_DATE(#{startDate}, 'YYYY-MM-DD') 
+					AND TO_DATE(#{endDate}, 'YYYY-MM-DD')+1
+		</if>
+	</select>
+	
+	<select id="selectMOrderById" parameterType="searchVo" resultType="map">
+		select *
+		from
+		(
+			select A.*, rownum as RNUM
+			from
+			(
+				select o.*,si.*, rownum from morders o join seat s
+				on s.s_t_no=o.s_t_no
+				join screen_info_view si
+				on s.s_no=si.s_no where o.userid=#{id}
+				<if test="startDate!=null and startDate!='' 
+					and endDate!=null and endDate!=''">
+					AND ORDER_DATE BETWEEN TO_DATE(#{startDate}, 'YYYY-MM-DD') 
+					AND TO_DATE(#{endDate}, 'YYYY-MM-DD')+1
+				</if>
+				order by order_date desc
+			) A
+		)
+		<![CDATA[
+		where RNUM>#{firstRecordIndex} and RNUM<=#{blockSize}*#{currentPage}
+		]]>
+	</select>
 </mapper>

@@ -6,6 +6,9 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.mp.cinepop.common.SearchVO;
 
 @Service
 public class SeatServiceImpl implements SeatService{
@@ -28,9 +31,15 @@ public class SeatServiceImpl implements SeatService{
 		}
 		return list;
 	}
-
-	public int insertSeat(SeatVO vo) {
-		return seatDao.insertSeat(vo);
+	
+	@Override
+	@Transactional
+	public int insertHistory(SeatVO vo,int tPrice, int theNum) {
+		int result1=seatDao.insertSeat(vo);
+		int sTNo=vo.getsTNo();
+		String userid=vo.getUserid();
+		int result2=seatDao.insertMOrder(userid, sTNo, tPrice, theNum);
+		return result1+result2;
 	}
 
 	@Override
@@ -42,5 +51,17 @@ public class SeatServiceImpl implements SeatService{
 	public Map<String, Object> chkTD(String userid, int sTNo) {
 		return seatDao.chkTD(userid, sTNo);
 	}
+
+	@Override
+	public int cntMOrderById(SearchVO vo) {
+		return seatDao.cntMOrderById(vo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectMOrderById(SearchVO vo) {
+		return seatDao.selectMOrderById(vo);
+	}
+
+	
 	
 }
