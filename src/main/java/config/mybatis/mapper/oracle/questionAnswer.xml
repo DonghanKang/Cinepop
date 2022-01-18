@@ -10,11 +10,11 @@
 	</sql>
 	
 	<insert id="userinsertQuestion" parameterType="questionAnswerVo">
-		<selectKey keyProperty="qno" resultType="int" order="BEFORE">
+		<selectKey keyProperty="Qno" resultType="int" order="BEFORE">
 		        select QUESTIONANSWER_SEQ.nextval from dual
 		</selectKey>
-		 insert into questionAnswer(Qno,Qtitle,Qcontent)
-		values(#{qno},#{Qtitle},#{Qcontent})
+		 insert into questionAnswer(Qno,Qtitle,Qcontent,email)
+		values(#{Qno},#{Qtitle},#{Qcontent}#{email})
 	</insert>
 	
 	<select id="selectAll" parameterType="searchVo" resultType="questionAnswerVo">
@@ -44,6 +44,10 @@
 		where Qno=#{Qno}
 	</select>
 	
+	<update id="updateReadCount" parameterType="int">
+		update notice set readcount=readcount+1					
+		where Qno=#{Qno}
+	</update>
 	<update id="updatequestion" parameterType="questionAnswerVo">
 		update questionAnswer
 		set Qtitle = #{Qtitle},Qcontent = #{Qcontent}
