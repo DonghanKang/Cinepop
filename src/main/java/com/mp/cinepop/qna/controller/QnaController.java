@@ -59,12 +59,15 @@ public class QnaController {
 
 		// [1] PaginationInfo 객체 생성 - 계산해줌
 		PaginationInfo pagingInfo = new PaginationInfo();
-		pagingInfo.setBlockSize(10);
-		pagingInfo.setRecordCountPerPage(10);
+		pagingInfo.setBlockSize(5);
+		pagingInfo.setRecordCountPerPage(5);
 		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
 
 		// [2] searchVo에 값 셋팅
-		searchVo.setRecordCountPerPage(10);
+		searchVo.setBlockSize(5);
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		int totalRecord = qnaService.selectTotalRecord(searchVo);
+		searchVo.setRecordCountPerPage(5);
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		logger.info("값 셋팅 후 searchVo={}", searchVo);
 
@@ -72,7 +75,6 @@ public class QnaController {
 		logger.info("전체조회 결과 list.size={}", list.size());
 
 		// [3] totalRecord 구하기
-		int totalRecord = qnaService.selectTotalRecord(searchVo);
 		pagingInfo.setTotalRecord(totalRecord);
 
 		// 3. model에 결과 저장
