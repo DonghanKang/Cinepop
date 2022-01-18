@@ -29,4 +29,9 @@ public class MovieServiceImpl implements MovieService{
 	public MovieVO selectByNo2(int MNO) {
 		return movieDAO.selectByNo(MNO);
 	}
+
+	@Override
+	public List<MovieVO> movieSelectAll2(MovieVO movieVo) {
+		return movieDAO.movieSelectAll2(movieVo);
+	}
 }
