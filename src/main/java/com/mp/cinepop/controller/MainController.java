@@ -19,6 +19,8 @@ import com.mp.cinepop.common.FileUploadUtil;
 import com.mp.cinepop.common.SearchVO;
 import com.mp.cinepop.event.model.EventService;
 import com.mp.cinepop.event.model.EventVO;
+import com.mp.cinepop.movie.model.MovieService;
+import com.mp.cinepop.movie.model.MovieVO;
 import com.mp.cinepop.store.model.StoreService;
 import com.mp.cinepop.store.model.StoreVO;
 
@@ -28,15 +30,17 @@ public class MainController {
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 	private final StoreService storeService;
 	private final EventService eventService;
+	private final MovieService movieService;
 	
 	@Autowired
-	public MainController(StoreService storeService, EventService eventService) {
+	public MainController(StoreService storeService, EventService eventService, MovieService movieService) {
 		this.storeService = storeService;
 		this.eventService = eventService;
+		this.movieService = movieService;
 	}
 
 	@GetMapping("/home/home")
-	public void main(@ModelAttribute EventVO eventvo, Model model) {
+	public void main(@ModelAttribute EventVO eventvo, @ModelAttribute MovieVO movieVo, Model model) {
 		logger.info("메인 페이지");
 		
 //		상품리스트
@@ -55,6 +59,11 @@ public class MainController {
 		logger.info("eventvo ={}",eventvo);
 		List<EventVO> listEvent=eventService.selectAll2(eventvo);
 		model.addAttribute("listEvent", listEvent);
+		
+		//무비차트 리스트
+		logger.info("moiveVo={}",movieVo);
+		List<MovieVO>listMovie=movieService.movieSelectAll2(movieVo);
+		model.addAttribute("listMovie", listMovie);
 	}
 
 	@RequestMapping("/store/index")

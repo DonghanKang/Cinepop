@@ -25,7 +25,22 @@
 		where RNUM>#{firstRecordIndex} 
 			and RNUM<=#{firstRecordIndex}+ #{recordCountPerPage}]]>
 	</select>
-	
+	<select id="movieSelectAll2" parameterType="movieVo" resultType="movieVo">
+		select *
+		from
+		(
+		    select rownum as RNUM, A.*
+		    from
+		    (
+		        select M_NO,M_NAME,IMAGE1 
+		        from movie 
+		        order by M_NO desc
+		    )A
+		)
+		<![CDATA[
+		where RNUM>0
+			and RNUM<=4]]>
+	</select>
 	<select id="selectTotalRecord" parameterType="searchVo" resultType="int">
 		select count(*) from movie
 		<include refid="searchWhere"></include>	
