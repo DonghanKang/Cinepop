@@ -16,6 +16,17 @@
 		font-family: "Roboto Condensed", sans-serif;
 		text-align: center;
 	}
+	
+	#selectType{
+		margin-bottom:20px;
+	}
+	
+	div#selectType a {
+		padding:10px;
+	    background: black;
+	    color: white;
+	    border-radius: 5px;
+	}
 </style>
 <script type="text/javascript" >
 
@@ -42,6 +53,10 @@
 				<input type="date" name="endDate" id="endDate" >
 				<input type="submit" class="black_btn search_btn"  value="검색" >
 			</form>
+	    </div>
+	    <div id='selectType'>
+		    <a href="<c:url value='/mypage/paymentHistory'/>">상품 결제내역</a>
+		    <a href="<c:url value='/ticketing/mypage/mpaymentHistory'/>">영화 결제내역</a>
 	    </div>
           <div class="col-sm-12">
           	<table class="t_style1 mb50">
