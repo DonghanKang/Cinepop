@@ -10,7 +10,6 @@
 
 <script type="text/javascript">
 $(function() {
-	make_select();
 	var chkId = false;
 	var chkpw1 = false;
 	var chkpw2 = false;
@@ -54,37 +53,6 @@ $(function() {
 		console.log($('#sample6_address').attr('disabled'));
 	});
 
-	<%-- $('#id').on('blur', function() {
-		var valEmail = $('#id').val();	
-		if(!is_validate_email(valEmail)) {
-			$('#id').next().html('이메일 형식이 잘못되었습니다.');
-			changeInvalid($('#id'));
-			return;
-		}
-			
-		var request = $.ajax({
-		url: "<%=request.getContextPath() %>/CheckEmail", //통신할 url
-		method: "POST",
-		data: { email : valEmail }, //전송할 데이타
-		dataType: "json"
-	});	 
-	
-	request.done(function( data ) {
-		if(data.result){
-			$('#email').next().html('사용할 수 없는 이메일 입니다.');
-			changeInvalid($('#email'));
-			checkedEmail = false;
-		} else{
-			changeValid($('#email'));
-			$('#emailNotice').removeClass('invalidText');
-			$('#emailNotice').addClass('validText');
-			checkedEmail = true;
-		}	
-	});	 
-	request.fail(function( jqXHR, textStatus ) {
-	  alert( "Request failed: " + textStatus );
-	});	
-	}); --%>
 	
 	$('#pwd').on('blur', function() {
 		if(!is_validate_pw($('#pwd').val())) {
@@ -131,29 +99,7 @@ $(function() {
 		return pattern.test(pwd);
 	}
 	
-	function make_select() {
-			var now = new Date(); 
-	 		var year = now.getFullYear(); 
-	 		var mon = (now.getMonth() + 1) > 9 ? ''+(now.getMonth() + 1) : '0'+(now.getMonth() + 1); 
-	 		var day = (now.getDate()) > 9 ? ''+(now.getDate()) : '0'+(now.getDate()); //년도 selectbox만들기
-	 		
-	 		for(var i = 1900 ; i <= year ; i++) { 
-	 			$('#year').append('<option value="' + i + '">' + i + '년</option>'); 
-	 		} // 월별 selectbox 만들기 
-	 		for(var i=1; i <= 12; i++) { 
-	 			var mm = i > 9 ? i : "0"+i; 
-	 			$('#month').append('<option value="' + mm + '">' + mm + '월</option>'); 
-	 		} // 일별 selectbox 만들기 
-	 		for(var i=1; i <= 31; i++) { 
-	 			var dd = i > 9 ? i : "0"+i; 
-	 			$('#day').append('<option value="' + dd + '">' + dd+ '일</option>'); 
-	 		}
-	 		
-	 		$("#year > option[value="+year+"]").attr("selected", "true"); 
-	 		$("#month > option[value="+mon+"]").attr("selected", "true"); 
-	 		$("#day > option[value="+day+"]").attr("selected", "true");
-		}
-	});
+	
 </script>
 <section class="module">
 	<div class="container">
@@ -203,23 +149,6 @@ $(function() {
 		            </div>
 		            <div class="p_input">
 		                <input id="pwd2" type="password" name="pwd2" class="t_input" required="required" /><span class="invalidText"></span>
-		            </div>
-		        </div>
-		        
-		        <div class="input_area">
-		            <div class="p_title">
-		                <label>생년월일</label>
-		            </div>
-		            <div class="p_input">
-		            	<div class="select display_inflex">
-		                	<select id="year" name="yy"></select>&nbsp; 년 &nbsp;
-		                </div>
-		                <div class="select display_inflex">
-							<select id="month" name="mm"></select>&nbsp; 월 &nbsp;
-						</div>
-						<div class="select display_inflex">
-							<select id="day" name="dd"></select>&nbsp; 일 &nbsp;
-						</div>
 		            </div>
 		        </div>
 		        <div class="input_area">

@@ -82,34 +82,41 @@ public class AccountInsertController {
 	
 	 @PostMapping("mypage/withdrawal") 
 	 public String withdrawal_post(@RequestParam
-	 String pwd, @RequestParam String id,@RequestParam String pwd2, HttpSession session,HttpServletResponse response, Model model) throws NoSuchAlgorithmException, IOException {
+	 String pwd, @RequestParam String id, @RequestParam String pwd2,
+	 HttpSession session,HttpServletResponse response, 
+	 Model model) throws NoSuchAlgorithmException, IOException {
 			/* id = (String)session.getAttribute("id"); */
 	 logger.info("hash 삭제, 파라미터 id={},pwd={}",id,pwd);
 	 
 	 int result=accountInsertService.loginCheck(id,pwd);
 	 if(result==accountInsertService.LOGIN_OK) {
-		 if(pwd.equals(pwd2)) {
-             String salt=hash.makeNewSalt();
-             String digest=hash.hashing(pwd, salt);
+		 
              int cnt =accountInsertService.deleteHash(id);
              int cnt2 =accountInsertService.withdrawAccount(id);
-             if(cnt>0 && cnt2>0) {
+             if(cnt==1 && cnt2==1) {
                 session.invalidate();
              }
              return "mypage/withdrawalfin";
-		 }else {
-			 logger.info("비밀번호 확인 불일치");
-		 }
-	 }else if (result==accountInsertService.DISAGREE_PWD || pwd.equals(pwd2)) {
-		 response.setContentType("text/html; charset=UTF-8");
-		 PrintWriter out = response.getWriter();
-		 out.print("<script>");
-		 out.print("alert('비밀번호가 일치하지 않습니다.123');");
-		 out.print("history.back(-1);");
-		 out.print("</script>");
-		 out.flush();
+		 }else if (result==accountInsertService.DISAGREE_PWD) {
+				 response.setContentType("text/html; charset=UTF-8");
+				 PrintWriter out = response.getWriter();
+				 out.print("<script>");
+				 out.print("alert('비밀번호가 일치하지 않습니다.');");
+				 out.print("history.back(-1);");
+				 out.print("</script>");
+				 out.flush();
+				 
+			 }else {
+				 response.setContentType("text/html; charset=UTF-8");
+				 PrintWriter out = response.getWriter();
+				 out.print("<script>");
+				 out.print("alert('비밀번호가 틀렸습니다.');");
+				 out.print("history.back(-1);");
+				 out.print("</script>");
+				 out.flush();
+			 }
 		 
-	 }
+	 
 	 return "mypage/withdrawal";
 	 }
 	 
