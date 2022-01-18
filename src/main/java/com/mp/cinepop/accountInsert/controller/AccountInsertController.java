@@ -85,9 +85,19 @@ public class AccountInsertController {
 	 String pwd, @RequestParam String id, @RequestParam String pwd2,
 	 HttpSession session,HttpServletResponse response, 
 	 Model model) throws NoSuchAlgorithmException, IOException {
-			/* id = (String)session.getAttribute("id"); */
-	 logger.info("hash 삭제, 파라미터 id={},pwd={}",id,pwd);
-	 
+			String userid = (String)session.getAttribute("userid");
+	 logger.info("hash 삭제, 파라미터 id={},pwd={},pwd2={}",id,pwd,pwd2);
+	 logger.info("acccount 삭제, 파라미터 userid={}",userid);
+	 if (!pwd.equals(pwd2)) {
+		 response.setContentType("text/html; charset=UTF-8");
+		 PrintWriter out = response.getWriter();
+		 out.print("<script>");
+		 out.print("alert('비밀번호가 일치하지 않습니다.');");
+		 out.print("history.back(-1);");
+		 out.print("</script>");
+		 out.flush();
+		 
+	 }else {
 	 int result=accountInsertService.loginCheck(id,pwd);
 	 if(result==accountInsertService.LOGIN_OK) {
 		 
@@ -97,16 +107,15 @@ public class AccountInsertController {
                 session.invalidate();
              }
              return "mypage/withdrawalfin";
-		 }else if (result==accountInsertService.DISAGREE_PWD) {
-				 response.setContentType("text/html; charset=UTF-8");
-				 PrintWriter out = response.getWriter();
-				 out.print("<script>");
-				 out.print("alert('비밀번호가 일치하지 않습니다.');");
-				 out.print("history.back(-1);");
-				 out.print("</script>");
-				 out.flush();
-				 
-			 }else {
+		 }else if(!id.equals(userid)) {
+			 response.setContentType("text/html; charset=UTF-8");
+			 PrintWriter out = response.getWriter();
+			 out.print("<script>");
+			 out.print("alert('아이디가 일치하지 않습니다.');");
+			 out.print("history.back(-1);");
+			 out.print("</script>");
+			 out.flush();
+		 }else {
 				 response.setContentType("text/html; charset=UTF-8");
 				 PrintWriter out = response.getWriter();
 				 out.print("<script>");
@@ -116,7 +125,7 @@ public class AccountInsertController {
 				 out.flush();
 			 }
 		 
-	 
+	 }
 	 return "mypage/withdrawal";
 	 }
 	 
