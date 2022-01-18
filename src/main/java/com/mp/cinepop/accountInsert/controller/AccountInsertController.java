@@ -47,7 +47,7 @@ public class AccountInsertController {
 	
 
 	@PostMapping("register/register")
-	   public String register_post(@ModelAttribute AccountInsertVO vo, @ModelAttribute hashVO hashvo,@RequestParam String pwd, String yy, String MM, String dd, Model model) throws NoSuchAlgorithmException {
+	   public String register_post(@ModelAttribute AccountInsertVO vo, @ModelAttribute hashVO hashvo,@RequestParam String pwd, Model model) throws NoSuchAlgorithmException {
 	      logger.info("회원가입 처리 , 파라미터 vo={}",vo);
 	      
 	   
