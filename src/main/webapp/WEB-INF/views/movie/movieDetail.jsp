@@ -63,13 +63,21 @@ $(function() {
                 <li class="tab-link p_on" data-tab="tab-1">스틸컷, 트레일러</li>
                 <li class="tab-link" data-tab="tab-2">한줄평</li>
             </ul>
-			<div id = "tab-1 p_cont">
-			
+			<div id="tab-1" class="p_cont p_on h_auto">
+				<div class="mt50">
+					<div>
+						<img alt="${movieVo.IMAGE2}" src="<c:url value='/resources/images/movie/${movieVo.IMAGE2}'/>">
+					</div>
+					<div class="mt30">
+						<img alt="${movieVo.IMAGE3}" src="<c:url value='/resources/images/movie/${movieVo.IMAGE3}'/>">
+					</div>
+					<div class="mt30">
+					<iframe width="100%" height="500" src="${movieVo.VIDEOURL}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					</div>
+					
+				</div>
 			</div>
-			<style>
-				.review
-			</style>
-          <div id="tab-2" class="p_cont h_auto">
+          <div id="tab-2" class="p_cont">
               <div class="cp_area">
 				<form class="form" name="coupon" action="" method="post">
 					<h4>한줄평 입력하기</h4>
@@ -105,7 +113,7 @@ $(function() {
              	<%-- </c:forEach> --%>
              </div>
           </div>
-        	 <div class="t_center">
+        	 <div class="t_center mt50">
   				<a href="<c:url value='/movie/movieChart'/>" class="a_black_btn">무비차트</a>
   			</div>
     	</div>
