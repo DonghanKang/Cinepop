@@ -11,7 +11,23 @@ public class QuestionAnswerVO {
     private int Qstep;
     private int Qsortno;
     private String Qdelflag;
+    private int qreadcount;
+    private String email;
     
+    
+    
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public int getQreadcount() {
+		return qreadcount;
+	}
+	public void setQreadcount(int qreadcount) {
+		this.qreadcount = qreadcount;
+	}
 	public int getQno() {
 		return Qno;
 	}
@@ -59,6 +75,12 @@ public class QuestionAnswerVO {
 	}
 	public void setQdelflag(String qdelflag) {
 		Qdelflag = qdelflag;
+	}
+	@Override
+	public String toString() {
+		return "QuestionAnswerVO [Qno=" + Qno + ", Qtitle=" + Qtitle + ", Qregdate=" + Qregdate + ", Qcontent="
+				+ Qcontent + ", Qgroupno=" + Qgroupno + ", Qstep=" + Qstep + ", Qsortno=" + Qsortno + ", Qdelflag="
+				+ Qdelflag + "]";
 	}
     
     

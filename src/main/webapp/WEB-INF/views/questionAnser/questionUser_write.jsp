@@ -6,7 +6,7 @@
    <div class="container">
    <h2 class="mb50">1:1 문의하기</h2>
       <fieldset>
-         <form name="admin_notice" action="<c:url value='/questionAnser/questionUser_write'/>" method="post" >
+         <form name="admin_notice" action="<c:url value='/questionAnser/questionUser_List'/>" method="post" >
             <input type="hidden" id="email" name="email" value="${sessionScope.userid} }">
                <div class="input_area">
                    <div class="p_input2">

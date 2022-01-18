@@ -8,7 +8,7 @@
 	src="<c:url value='/resources/js/jquery-3.6.0.min.js'/>"></script>
 <section class="module">
 	<div class="container">
-		<h2>공지사항 글목록</h2>
+		<h2>문의사항 글목록</h2>
 		<div class="searchbox">
 			<div class="select">
 				<select>
@@ -41,12 +41,12 @@
 					<!--게시판 내용 반복문 시작  -->
 					<c:forEach var="vo2" items="${list }">
 						<tr>
-							<td>${vo2.Qno }</td>
-							<td><a href="<c:url value='/questionAnser/countUpdate.do?Qno=${vo2.Qno}'/>">
-									${vo2.TITLE } </a></td>
-							<td><fmt:formatDate value="${vo2.REGDATE }"
+							<td>${vo2.qno }</td>
+							<td><a href="<c:url value='/questionAnser/questionUser_detail?Qno=${vo2.qno}'/>">
+									${vo2.qtitle } </a></td>
+							<td><fmt:formatDate value="${vo2.qregdate }"
 									pattern="yyyy-MM-dd" /></td>
-							<td>${vo2.QREADCOUNT}</td>
+							<td>${vo2.qreadcount}</td>
 						</tr>
 					</c:forEach>
 					<!--반복처리 끝  -->
@@ -58,7 +58,7 @@
 			<!-- 이전 블럭으로 이동 -->
 			<c:if test="${pagingInfo.firstPage>1 }">
 				<a
-					href="<c:url value='/questionAnser/questionUser_List.do?currentPage=${pagingInfo.firstPage-1}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">
+					href="<c:url value='/questionAnser/questionUser_List?currentPage=${pagingInfo.firstPage-1}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">
 					<img src="<c:url value='/resources/images/first.JPG'/>" alt="이전블럭">
 				</a>
 			</c:if>
@@ -72,7 +72,7 @@
 				</c:if>
 				<c:if test="${i!=pagingInfo.currentPage }">
 					<a
-						href="<c:url value='/questionAnser/questionUser_List.do?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">
+						href="<c:url value='/questionAnser/questionUser_List?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">
 						[${i }]</a>
 				</c:if>
 			</c:forEach>
@@ -80,12 +80,12 @@
 			<!-- 다음 블럭으로 이동 -->
 			<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage }">
 				<a
-					href="<c:url value='/questionAnser/questionUser_List.do?currentPage=${pagingInfo.lastPage+1}&&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">
+					href="<c:url value='/questionAnser/questionUser_List?currentPage=${pagingInfo.lastPage+1}&&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">
 					<img src="<c:url value='/resources/images/last.JPG'/>" alt="다음블럭">
 				</a>
 			</c:if>
 			<!--  페이지 번호 끝 -->
-      
+      	<a class="a_black_btn" href="<c:url value='/questionAnser/questionUser_write'/>">글등록</a>
 		</div>
 	</div>
 </section>

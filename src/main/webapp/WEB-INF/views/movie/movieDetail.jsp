@@ -97,12 +97,12 @@ $(function() {
                  <li>한줄평</li>
              </ul>
              <div class="display_inflex_review" id = "reviewlist">
-             	<%-- <c:forEach items="" var=""> --%>
+             	<c:forEach items="${list }" var="movieVo"> 
 	             	<div class="review_wm">
-		             	<div><span>아이디 : ${movieVo.ID }</span>&nbsp;&nbsp;&nbsp;<span>날짜 : ${movieVo.REGDATE }</span></div>
-		             	<p>${movieVo.REVIEWCONTENT }</p>
+		             	<div><span>아이디 : ${movieVo.id }</span>&nbsp;&nbsp;&nbsp;<span>날짜 : ${movieVo.regdate }</span></div>
+		             	<p>${movieVo.reviewcontent }</p>
 	             	</div>
-             	<%-- </c:forEach> --%>
+             	</c:forEach> 
              </div>
           </div>
         	 <div class="t_center">

@@ -90,9 +90,9 @@
               <li class="dropdown"><a href="#" data-toggle="dropdown">영화</a>
                 <ul class="dropdown-menu">
                   <li><a href="<c:url value='/movie/movieChart'/>">무비 차트</a></li>
-                  <li><a href="<c:url value='/movie/movieChart'/>">평점 차트</a></li>
+                <%--   <li><a href="<c:url value='/movie/movieChart'/>">평점 차트</a></li>
                   <li><a href="<c:url value='/movie/movieChart'/>">최신 순위</a></li>
-                  <li><a href="<c:url value='/movie/movieChart'/>">장르별 순위</a></li>
+                  <li><a href="<c:url value='/movie/movieChart'/>">장르별 순위</a></li> --%>
                 </ul>
               </li>
              
@@ -106,7 +106,7 @@
               <li class="dropdown"><a href="#" data-toggle="dropdown">고객센터</a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="../questions/questions">자주묻는질문</a></li>
-                  <li><a href="<c:url value='/questionAnser/questionUser_List.jsp'/>">1:1 문의 게시판</a></li>
+                  <li><a href="<c:url value='/questionAnser/questionUser_List'/>">1:1 문의 게시판</a></li>
                 </ul>
               </li>
               <li><a href="<c:url value='/mypage/mypageMain'/>">마이페이지</a></li>
