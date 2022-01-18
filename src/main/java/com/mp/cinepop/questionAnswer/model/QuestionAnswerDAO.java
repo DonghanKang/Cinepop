@@ -7,10 +7,11 @@ import com.mp.cinepop.common.SearchVO;
 
 @Mapper
 public interface QuestionAnswerDAO {
-	int userinsertQuestion();
+	int userinsertQuestion(QuestionAnswerVO vo);
 	public List<QuestionAnswerVO> selectAll(SearchVO searchVo);
 	int selectTotalRecord(SearchVO searchVo);
 	public QuestionAnswerVO selectByNo(int no);
 	public int updatequestion(QuestionAnswerVO vo);
 	public int deletequestion(int no);
+	int updateReadCount(int no);
 }

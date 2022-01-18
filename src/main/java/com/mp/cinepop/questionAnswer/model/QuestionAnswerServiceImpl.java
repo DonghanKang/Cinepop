@@ -17,8 +17,8 @@ public class QuestionAnswerServiceImpl implements QuestionAnswerService{
 		this.dao = dao;
 	}
 
-	public int userinsertQuestion() {
-		return dao.userinsertQuestion();
+	public int userinsertQuestion(QuestionAnswerVO vo) {
+		return dao.userinsertQuestion(vo);
 	}
 
 	public List<QuestionAnswerVO> selectAll(SearchVO searchVo) {
@@ -44,6 +44,11 @@ public class QuestionAnswerServiceImpl implements QuestionAnswerService{
 	public int deletequestion(int no) {
 		// TODO Auto-generated method stub
 		return dao.deletequestion(no);
+	}
+
+	public int updateReadCount(int no) {
+		// TODO Auto-generated method stub
+		return dao.updateReadCount(no);
 	}
 	
 }

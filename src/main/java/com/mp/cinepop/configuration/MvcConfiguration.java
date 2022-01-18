@@ -16,7 +16,7 @@ public class MvcConfiguration implements WebMvcConfigurer{
 	public void addInterceptors(InterceptorRegistry registry) {
 		
 		registry.addInterceptor(new UserLoginInterceptor())
-		.addPathPatterns("/store/payment", "/mypage/*", "/ticketing/seat");
+		.addPathPatterns("/store/payment", "/mypage/*", "/ticketing/seat","/questionAnser/questionUser_write");
 	
 		registry.addInterceptor(new AdminLoginInterceptor())
 		.addPathPatterns("/admin/*/*", "/admin/*" , "/store/pdWrite", "/store/pdDelete"
