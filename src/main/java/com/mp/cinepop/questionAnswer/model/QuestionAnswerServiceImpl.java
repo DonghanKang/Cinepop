@@ -50,5 +50,7 @@ public class QuestionAnswerServiceImpl implements QuestionAnswerService{
 		// TODO Auto-generated method stub
 		return dao.updateReadCount(no);
 	}
-	
+	public int updateReply(QuestionAnswerVO vo) {
+		return dao.updateReply(vo);
+	}
 }

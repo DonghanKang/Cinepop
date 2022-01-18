@@ -2,6 +2,8 @@ package com.mp.cinepop.questionAnswer.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mp.cinepop.common.PaginationInfo;
 import com.mp.cinepop.common.SearchVO;
+import com.mp.cinepop.event.model.EventVO;
 import com.mp.cinepop.movie.controller.MovieController;
 import com.mp.cinepop.questionAnswer.model.QuestionAnswerService;
 import com.mp.cinepop.questionAnswer.model.QuestionAnswerVO;
@@ -38,6 +41,7 @@ public class QuestionAnswerController {
 	
 	@PostMapping("questionUser_write")
 	public String question_post(@ModelAttribute QuestionAnswerVO vo) {
+		
 		int cnt = service.userinsertQuestion(vo);
 		logger.info("글쓰기 결과 = {}", cnt);
 		
@@ -45,7 +49,7 @@ public class QuestionAnswerController {
 	}
 	
 	@RequestMapping("questionUser_List")
-	public void question_list(@ModelAttribute SearchVO searchVO, Model model) {
+	public String question_list(@ModelAttribute SearchVO searchVO, Model model) {
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(10);
 		pagingInfo.setRecordCountPerPage(10);
@@ -64,16 +68,53 @@ public class QuestionAnswerController {
 
 		model.addAttribute("list", list);
 		model.addAttribute("pagingInfo", pagingInfo);
-
+		
+		return "/questionAnser/questionUser_List";
 	}
 	
-	@RequestMapping("questionAnser/countUpdate")
-	public String countUpdate(@RequestParam(defaultValue = "0") int Qno, Model model) {
-		logger.info("조회수 증가 파라미터 no={}", Qno);
-
+	
+	@GetMapping("questionUser_detail")
+	public String event_detail(@RequestParam(defaultValue = "0")int Qno, Model model) {
+		logger.info("상세보기 파라미터 no={}",Qno);
+		
 		int cnt = service.updateReadCount(Qno);
-		logger.info("조회수 증가 결과 cnt={}", cnt);
-
-		return "redirect:/questionAnser/questionUser_detail?Qno=" + Qno;
+		QuestionAnswerVO vo=service.selectByNo(Qno);
+		
+		model.addAttribute("vo",vo);
+		
+		return "questionAnser/questionUser_detail";
+	}
+	
+	@PostMapping("questionUser_detail")
+	public String event_detail_delete(@RequestParam int Qno, Model model) {
+		logger.info("문의하기 삭제");
+		int cnt=service.deletequestion(Qno);
+		
+		model.addAttribute("삭제 처리 cnt={}",cnt);
+		
+		return"questionAnser/questionUser_List";
+	}
+	
+	@GetMapping("questionUser_edit")
+	public String event_edit_get(@RequestParam (defaultValue = "0") int Qno, HttpServletRequest request,Model model) {
+		logger.info("답변화면 no={}",Qno);
+		
+		QuestionAnswerVO vo=service.selectByNo(Qno);
+		logger.info("답변화면, 조회 결과 vo={}",vo);
+		
+		
+		model.addAttribute("vo",vo);
+		
+		return "questionAnser/questionUser_edit";
+	}
+	
+	@PostMapping("questionUser_edit")
+	public String event_reply(@ModelAttribute QuestionAnswerVO vo, Model model) {
+		logger.info("답변하기");
+		int cnt=service.updateReply(vo);
+		
+		model.addAttribute("등록 처리 cnt={}",cnt);
+		
+		return"questionAnser/questionUser_detail?Qno="+vo.getQno();
 	}
 }

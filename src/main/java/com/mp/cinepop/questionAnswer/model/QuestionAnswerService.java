@@ -12,4 +12,5 @@ public interface QuestionAnswerService {
 	public int updatequestion(QuestionAnswerVO vo);
 	public int deletequestion(int no);
 	public int updateReadCount(int no);
+	public int updateReply(QuestionAnswerVO vo);
 }

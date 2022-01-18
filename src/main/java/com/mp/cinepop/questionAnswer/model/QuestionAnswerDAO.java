@@ -14,4 +14,5 @@ public interface QuestionAnswerDAO {
 	public int updatequestion(QuestionAnswerVO vo);
 	public int deletequestion(int no);
 	int updateReadCount(int no);
+	public int updateReply(QuestionAnswerVO vo);
 }
