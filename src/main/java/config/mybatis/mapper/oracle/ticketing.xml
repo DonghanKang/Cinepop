@@ -12,6 +12,7 @@
 	<select id="theaterList" parameterType="string" resultType="string">
 		select distinct t_name from screen_info_view
 		where city=#{city}
+		order by t_name
 	</select>
 	
 	<select id="dateList" parameterType="string" resultType="string">

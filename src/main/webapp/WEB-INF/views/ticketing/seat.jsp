@@ -26,11 +26,12 @@ $(function(){
 			alert('인원수를 맞춰주세요');
 			return false;
 		}
+		var rand=Math.ceil(Math.random()*100000000000);
 		IMP.init("imp05264117");
 		IMP.request_pay({
 		    pg : 'html5_inicis',
 		    pay_method : 'card',
-		    merchant_uid: "order_no_0001", // 상점에서 관리하는 주문 번호
+		    merchant_uid: rand, // 상점에서 관리하는 주문 번호
 		    name : '${vo.mName}',
 		    amount : $('.total strong').html(),
 		    buyer_email : 'iamport@siot.do',

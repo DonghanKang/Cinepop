@@ -104,7 +104,7 @@
 .movie1{padding:15px 10px;}
 .date_area .date li a, .movie_area .movie li a{display: block;}
 .active{background: url('img/check.png') no-repeat right 20px center; border:1px solid #000;}
-.grade_all{display: inline-block; width:22px; height:22px; background:limegreen; line-height: 22px; color:#fff; font-size:11px; border-radius:50%; text-align:center;}
+.grade_0{display: inline-block; width:22px; height:22px; background:limegreen; line-height: 22px; color:#fff; font-size:11px; border-radius:50%; text-align:center;}
 .grade_12{display: inline-block; width:22px; height:22px; background:#0080ff; line-height: 22px; color:#fff; font-size:11px; border-radius:50%; text-align:center;}
 .grade_15{display: inline-block; width:22px; height:22px; background:orange; line-height: 22px; color:#fff; font-size:11px; border-radius:50%; text-align:center;}
 .grade_18{display: inline-block; width:22px; height:22px; background:red; line-height: 22px; color:#fff; font-size:11px; border-radius:50%; text-align:center;}

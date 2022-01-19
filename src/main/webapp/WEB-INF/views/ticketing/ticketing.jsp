@@ -168,6 +168,9 @@
 			hour="0"+hour;
 		}
 		var minute=time%60;
+		if(minute==0 || minute<10){
+			minute="0"+minute;
+		}
 		return hour+":"+minute;
 	}
 	
