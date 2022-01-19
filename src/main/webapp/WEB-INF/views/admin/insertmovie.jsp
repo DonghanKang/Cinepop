@@ -77,14 +77,16 @@
 								<select class="" name="GE_NO">
 									 <option value="" selected disabled hidden>장르선택</option>
 									<option value="1">멜로</option>
-									<option value="2">코미디</option>
-									<option value="3">로맨틱 코미디</option>
-									<option value="4">액션</option>
-									<option value="5">스릴러</option>
-									<option value="6">미스터리</option>
-									<option value="7">공포</option>
-									<option value="8">범죄</option>
-									<option value="9">SF</option>
+									<option value="2">드라마</option>
+									<option value="3">애니메이션</option>
+									<option value="4">코미디</option>
+									<option value="5">로맨틱 코미디</option>
+									<option value="6">액션</option>
+									<option value="7">스릴러</option>
+									<option value="8">미스터리</option>
+									<option value="9">공포</option>
+									<option value="10">범죄</option>
+									<option value="11">SF</option>
 								</select>
 							</div>
 						</div>

@@ -68,7 +68,7 @@
 				<!-- 이전 블럭으로 이동 -->
 				<c:if test="${pagingInfo.firstPage>1 }">
 					<a href
-			="<c:url value='/board/list.do?currentPage=${pagingInfo.firstPage-1}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">
+			="<c:url value='/event/event_list?currentPage=${pagingInfo.firstPage-1}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">
 						<img src="<c:url value='/resources/images/first.JPG'/>" alt="이전블럭">
 					</a>	
 				</c:if>		
@@ -81,7 +81,7 @@
 					</c:if>	
 					<c:if test="${i!=pagingInfo.currentPage }">	
 							<a href
-			="<c:url value='/board/list.do?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">
+			="<c:url value='/event/event_list?currentPage=${i}&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">
 							[${i }]</a>			
 					</c:if>
 				</c:forEach>
@@ -89,7 +89,7 @@
 				<!-- 다음 블럭으로 이동 -->					
 				<c:if test="${pagingInfo.lastPage < pagingInfo.totalPage }">	
 						<a href
-			="<c:url value='/board/list.do?currentPage=${pagingInfo.lastPage+1}&&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">
+			="<c:url value='/event/event_list?currentPage=${pagingInfo.lastPage+1}&&searchCondition=${param.searchCondition}&searchKeyword=${param.searchKeyword}'/>">
 							<img src="<c:url value='/resources/images/last.JPG'/>" alt="다음블럭">
 						</a>	
 				</c:if>					
@@ -97,7 +97,7 @@
 			</div>
 			<div class="t_center mt50">
 				<c:if test="${!empty sessionScope.adminUserid }">
-				<a class="a_black_btn" href="<c:url value='event/event_write'/>">글등록</a>
+				<a class="a_black_btn" href="<c:url value='/event/event_write'/>">글등록</a>
 				</c:if>
 			</div>
 		</div>
