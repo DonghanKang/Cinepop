@@ -61,12 +61,11 @@
           <div class="col-sm-12">
           	<table class="t_style1 mb50">
           		<colgroup>
-          			<col width="16.6%">
-          			<col width="16.6%">
-          			<col width="16.6%">
-          			<col width="16.6%">
-          			<col width="16.6%">
-          			<col width="16.6%">
+          			<col width="15%">
+          			<col width="15%">
+          			<col width="40%">
+          			<col width="15%">
+          			<col width="15%">
           		</colgroup>
           		<tr>
           			<th scope="row">주문번호</th>
