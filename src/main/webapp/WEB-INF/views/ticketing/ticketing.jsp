@@ -7,6 +7,7 @@
 
 <script>
     $(function (){
+      $('.movie_area').css('display','none');
       $(".movie_area .movie li").on('click', function(){
         $(".movie_area .movie li").removeClass('active');
         $(this).addClass('active');
@@ -90,6 +91,7 @@
 <script type="text/javascript">
 	function theater(city){
 		$('.event_area').css('display','block');
+		$('.movie_area').css('display','none');
 		$.ajax({
 			url:"<c:url value='/ticketing/theaterList'/>",
 			type:"get",
@@ -112,6 +114,7 @@
 	
 	function selectDate(theater){
 		$('.event_area').css('display','none');
+		$('.movie_area').css('display','block');
 		$('.theater').removeClass('current');
 		$(theater).addClass('current');
 		$('.movie').html("");
