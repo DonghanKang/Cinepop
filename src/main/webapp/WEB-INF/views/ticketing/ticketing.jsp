@@ -188,7 +188,7 @@
           <div class="area">
 		      <ul class="tabs">
 		      		<c:forEach var="city" items="${cityList }">
-						<li class="theaterA" onclick="theater(this);">${city }</li>
+						<li class="theaterA" onclick="theater(this);">${city }</li><br>
 					</c:forEach>
 			  </ul>
 			  <ul class="tabs theaterBox">
