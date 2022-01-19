@@ -15,7 +15,7 @@
 .mr0{margin-right:0 !important;}
 .h209{height:209px;}
 .display_inflex{display: inline-flex; align-items: center;}
-.overflow{height: 523px;overflow-y: scroll;}
+.overflow{height: 523px;overflow-y: auto;}
 .c_fff{color:#fff !important;}
 /*footer*/
 .pd35{padding:35px 0 !important;}
