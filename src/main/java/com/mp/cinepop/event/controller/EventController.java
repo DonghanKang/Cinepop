@@ -87,10 +87,10 @@ public class EventController {
 		
 		PaginationInfo pagingInfo = new PaginationInfo();
 		pagingInfo.setBlockSize(10);
-		pagingInfo.setRecordCountPerPage(5);
+		pagingInfo.setRecordCountPerPage(6);
 		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
 		
-		searchVo.setRecordCountPerPage(5);
+		searchVo.setRecordCountPerPage(6);
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
 		logger.info("값 셋팅 후 seachVo={}",searchVo);
 		

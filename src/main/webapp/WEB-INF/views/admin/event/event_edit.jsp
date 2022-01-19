@@ -11,7 +11,7 @@
 		<h2>이벤트 게시판 수정</h2>
 		<form id="editform" name="update" action="<c:url value='/admin/event/event_edit'/>" method="post" enctype="multipart/form-data">
         <input type="hidden" name="no" value="${param.no}">
-		<input type="text" name="oldFileName" value="${vo.fileName}">
+		<input type="hidden" name="oldFileName" value="${vo.fileName}">
         <div class="input_area">
             <div class="p_title">
                 <label for="title">제 목</label>

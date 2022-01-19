@@ -8,7 +8,7 @@
 		<hr>
 		<div class="row">
 			<c:forEach var="movieVo" items="${list }">
-				<div class="mb-sm-20 wow fadeInUp col-sm-6 col-md-3 h300"
+				<div class="mb-sm-20 wow fadeInUp col-sm-6 col-md-3 h300 mb20"
 					onclick="wow fadeInUp">
 					<div class="team-item">
 						<div class="team-image store-list-image team-image2">
