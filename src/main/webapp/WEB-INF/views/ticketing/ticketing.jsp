@@ -203,7 +203,7 @@
 	          </ul>
         </div>
         <div class="movie_area">
-	          <ul class="movie">
+	          <ul class="movie overflow">
 	            <!-- 영화 -->
 	          </ul>
         </div>
