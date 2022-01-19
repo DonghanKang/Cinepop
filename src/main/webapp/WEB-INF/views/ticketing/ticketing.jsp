@@ -18,6 +18,22 @@
     		  $('.movie').html("");
     	  });
       });
+      
+      var image=document.getElementById("main");
+      var imageArr=["<c:url value='/resources/images/event/bg_event (1)_20220119141540044.jpg'/>",
+    	  "<c:url value='/resources/images/event/event_info2_20220119141136369.jpg'/>",
+    	  "<c:url value='/resources/images/event/151239sp_bg_event_20211229200126193.jpg'/>",
+    	  "<c:url value='/resources/images/event/16414696281130_20220119141408510.jpg'/>"];
+      var imageIdx=0;
+      
+      function changeImg(){
+    	  image.setAttribute("src",imageArr[imageIdx]);
+    	  imageIdx++;
+    	  if(imageIdx>=imageArr.length){
+    		  imageIdx=0;
+    	  }
+      }
+      setInterval(changeImg,3000);
     });
 </script>
 
@@ -73,6 +89,7 @@
 </script>
 <script type="text/javascript">
 	function theater(city){
+		$('.event_area').css('display','block');
 		$.ajax({
 			url:"<c:url value='/ticketing/theaterList'/>",
 			type:"get",
@@ -94,6 +111,7 @@
 	}
 	
 	function selectDate(theater){
+		$('.event_area').css('display','none');
 		$('.theater').removeClass('current');
 		$(theater).addClass('current');
 		$('.movie').html("");
@@ -197,6 +215,13 @@
       </div>
       <div class="movie_select">
         <div class="tit1">영화 선택</div>
+        <div class="event_area">
+	          <ul>
+	          	<a href='<c:url value='/event/event_list'/>'>
+	        <img src="<c:url value='/resources/images/event/bg_event (1)_20220119141540044.jpg'/>" id="main">
+	          	</a>
+	          </ul>
+        </div>
         <div class="date_area">
 	          <ul class="date">
 	           <!-- 날짜 -->
