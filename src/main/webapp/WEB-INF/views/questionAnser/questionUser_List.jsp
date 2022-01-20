@@ -85,8 +85,10 @@
 				</a>
 			</c:if>
 			<!--  페이지 번호 끝 -->
-      	<a class="a_black_btn" href="<c:url value='/questionAnser/questionUser_write'/>">글등록</a>
 		</div>
+		<div class="t_center mt50">
+	      	<a class="a_black_btn" href="<c:url value='/questionAnser/questionUser_write'/>">글등록</a>
+      	</div>
 	</div>
 </section>
 <%@ include file="../inc/bottom.jsp"%>
