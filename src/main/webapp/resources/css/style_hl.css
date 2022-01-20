@@ -15,7 +15,7 @@
 .mr0{margin-right:0 !important;}
 .h209{height:209px;}
 .display_inflex{display: inline-flex; align-items: center;}
-.overflow{height: 523px;overflow-y: auto;}
+.overflow{height: 595px;overflow-y: auto;}
 .c_fff{color:#fff !important;}
 /*footer*/
 .pd35{padding:35px 0 !important;}
@@ -101,6 +101,7 @@
 .movie_select{width:50%;float:left;text-align:center;}
 .date_area{width: 30%;float:left}
 .movie_area{width: 70%;float: right;}
+.event_area{width:100%; overflow:hidden; height:595px;}
 .date1{padding:15px 10px;}
 .movie1{padding:15px 10px;}
 .date_area .date li a, .movie_area .movie li a{display: block;}
