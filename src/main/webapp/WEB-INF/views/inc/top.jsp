@@ -120,9 +120,11 @@
               	  <li>
               	  	<a href = "#" onclick = "return chk_accountlogout()">로그아웃</a>
               	  </li>
+              <c:if test="${empty sessionScope.adminUserid }">
               	  <li>
               	  <a href = "#" onclick = "chkT()">예매내역</a>
               	  </li>
+              </c:if>
               </c:if>
               <c:if test="${!empty sessionScope.adminUserid }">
 	              <li><a href="<c:url value='/admin/adminmenu'/>">관리자 페이지 </a></li>
